@@ -1,0 +1,7 @@
+{
+  "name": "VishwaSetu - Your Global Language Bridge",
+  "description": "A wise and patient language teacher for Indian villagers, teaching foreign languages like French and Spanish using native Indian tongues through real-time voice interaction.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

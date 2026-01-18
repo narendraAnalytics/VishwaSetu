@@ -1,3 +1,7 @@
+npx expo install expo-navigation-bar
+npm install -D drizzle-kit @types/uuid --legacy-peer-deps
+npm install @neondatabase/serverless drizzle-orm uuid --legacy-peer-deps
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).

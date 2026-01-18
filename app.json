@@ -30,19 +30,27 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
+          "image": "./public/images/logo.png",
+          "imageWidth": 250,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#F0FFF4",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#F0FFF4"
           }
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "64e81ca3-d748-4b3e-a41d-0785985b1ee2"
+      }
+    },
+    "owner": "saasaideveloper"
   }
 }
