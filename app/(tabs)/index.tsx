@@ -138,7 +138,11 @@ export default function LandingScreen() {
         ]}
         onPress={handleJoinPress}
       >
-        <MaterialCommunityIcons name="translate" size={24} color="white" />
+        <MaterialCommunityIcons
+          name="translate"
+          size={24}
+          color={LANGUAGES[currentLanguageIndex].textColor}
+        />
         <Animated.Text
           style={[
             styles.joinButtonText,
