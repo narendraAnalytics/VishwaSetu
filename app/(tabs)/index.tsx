@@ -1,8 +1,10 @@
 import { Image } from 'expo-image';
 import * as NavigationBar from 'expo-navigation-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 // Banner images
 const BANNERS = [
@@ -16,6 +18,9 @@ export default function LandingScreen() {
   // State for current image index and pagination dots
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Router for navigation
+  const router = useRouter();
+
   // Hide navigation bar on mount
   useEffect(() => {
     NavigationBar.setVisibilityAsync('hidden');
@@ -25,6 +30,11 @@ export default function LandingScreen() {
   const transitionToNext = useCallback(() => {
     setCurrentImageIndex((prev) => (prev + 1) % 4);
   }, []);
+
+  // Handle button press - navigate to explore screen
+  const handleJoinPress = useCallback(() => {
+    router.push('/explore');
+  }, [router]);
 
   // Auto-advance carousel every 3 seconds
   useEffect(() => {
@@ -56,6 +66,12 @@ export default function LandingScreen() {
           />
         </Animated.View>
       ))}
+
+      {/* Join the World Button */}
+      <Pressable style={styles.joinButton} onPress={handleJoinPress}>
+        <MaterialCommunityIcons name="translate" size={24} color="white" />
+        <Text style={styles.joinButtonText}>Join the World</Text>
+      </Pressable>
 
       {/* Pagination dots */}
       <View style={styles.dotsContainer}>
@@ -105,5 +121,27 @@ const styles = StyleSheet.create({
   dot: {
     borderRadius: 5,
     marginHorizontal: 4,
+  },
+  joinButton: {
+    position: 'absolute',
+    bottom: 90,
+    alignSelf: 'center',
+    backgroundColor: '#10B981',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    borderRadius: 14,
+    gap: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  joinButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '600',
   },
 });
