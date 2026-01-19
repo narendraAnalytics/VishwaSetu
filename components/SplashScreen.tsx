@@ -9,6 +9,7 @@ import Animated, {
   withRepeat,
   withSpring,
   withTiming,
+  runOnJS,
 } from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get('window');
@@ -67,18 +68,36 @@ function FallingFlower({ iconName, color, delay, duration, startX }: {
   );
 }
 
-export function CustomSplashScreen() {
+export function CustomSplashScreen({
+  onFadeComplete,
+}: {
+  onFadeComplete?: () => void;
+}) {
   const logoScale = useSharedValue(0);
   const logoOpacity = useSharedValue(0);
+  const splashOpacity = useSharedValue(1);
 
   useEffect(() => {
     logoScale.value = withSpring(1, { damping: 10 });
     logoOpacity.value = withTiming(1, { duration: 800 });
-  }, []);
+
+    // Fade out after 2.5 seconds
+    setTimeout(() => {
+      splashOpacity.value = withTiming(0, { duration: 500 }, (finished) => {
+        if (finished && onFadeComplete) {
+          runOnJS(onFadeComplete)();
+        }
+      });
+    }, 2500);
+  }, [onFadeComplete]);
 
   const logoAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: logoScale.value }],
     opacity: logoOpacity.value,
+  }));
+
+  const containerAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: splashOpacity.value,
   }));
 
   // Generate flowers with random positions and speeds
@@ -92,7 +111,7 @@ export function CustomSplashScreen() {
   ];
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, containerAnimatedStyle]}>
       {/* Falling flowers background */}
       {flowers.map((flower, index) => (
         <FallingFlower
@@ -113,16 +132,21 @@ export function CustomSplashScreen() {
           contentFit="cover"
         />
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: '#F0FFF4',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1000,
   },
   logoContainer: {
     position: 'absolute',

@@ -26,26 +26,22 @@ export default function RootLayout() {
     };
 
     setTimeout(hideSplash, 500);
-
-    // Hide custom splash screen after animation (3 seconds)
-    const timer = setTimeout(() => {
-      setShowCustomSplash(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
   }, []);
 
-  if (showCustomSplash) {
-    return <CustomSplashScreen />;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar hidden={true} />
-    </ThemeProvider>
+    <>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        </Stack>
+        <StatusBar hidden={true} />
+      </ThemeProvider>
+
+      {/* Splash screen overlay */}
+      {showCustomSplash && (
+        <CustomSplashScreen onFadeComplete={() => setShowCustomSplash(false)} />
+      )}
+    </>
   );
 }
