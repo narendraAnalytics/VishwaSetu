@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "echo Backend not implemented yet. Add source files first.",
+    "build": "echo Backend build: No source files to compile",
+    "start": "echo Backend not implemented yet"
   },
   "keywords": [],
   "author": "",
