@@ -1,11 +1,12 @@
-import { View, StyleSheet } from 'react-native';
-import { useEffect, useState, useCallback } from 'react';
-import * as NavigationBar from 'expo-navigation-bar';
 import { Image } from 'expo-image';
+import * as NavigationBar from 'expo-navigation-bar';
+import { useCallback, useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 // Banner images
 const BANNERS = [
+  require('../../public/images/bannerimage.png'),
   require('../../public/images/bannerimage1.png'),
   require('../../public/images/bannerimage2.png'),
   require('../../public/images/bannerimage3.png'),
@@ -22,7 +23,7 @@ export default function LandingScreen() {
 
   // Transition to next image
   const transitionToNext = useCallback(() => {
-    setCurrentImageIndex((prev) => (prev + 1) % 3);
+    setCurrentImageIndex((prev) => (prev + 1) % 4);
   }, []);
 
   // Auto-advance carousel every 3 seconds
@@ -58,7 +59,7 @@ export default function LandingScreen() {
 
       {/* Pagination dots */}
       <View style={styles.dotsContainer}>
-        {[0, 1, 2].map((index) => (
+        {[0, 1, 2, 3].map((index) => (
           <View
             key={index}
             style={[
