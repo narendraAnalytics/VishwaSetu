@@ -1,8 +1,12 @@
 import { Image } from 'expo-image';
 import * as NavigationBar from 'expo-navigation-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { Pressable, StyleSheet, View } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
@@ -14,12 +18,32 @@ const BANNERS = [
   require('../../public/images/bannerimage3.png'),
 ];
 
+// Button language translations with vibrant colors
+const LANGUAGES = [
+  { text: 'Join the World', color: '#FFFFFF' },           // English - White
+  { text: 'Rejoignez le Monde', color: '#FFD700' },       // French - Gold
+  { text: 'Únete al Mundo', color: '#FF6B9D' },           // Spanish - Hot Pink
+  { text: 'Присоединяйтесь к Миру', color: '#87CEEB' },  // Russian - Sky Blue
+  { text: '加入世界', color: '#FFA500' },                  // Chinese - Orange
+];
+
 export default function LandingScreen() {
   // State for current image index and pagination dots
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // State for current language index
+  const [currentLanguageIndex, setCurrentLanguageIndex] = useState(0);
+
   // Router for navigation
   const router = useRouter();
+
+  // Shared value for button text fade animation
+  const textOpacity = useSharedValue(1);
+
+  // Animated style for fade transition
+  const animatedTextStyle = useAnimatedStyle(() => ({
+    opacity: textOpacity.value,
+  }));
 
   // Hide navigation bar on mount
   useEffect(() => {
@@ -44,6 +68,25 @@ export default function LandingScreen() {
 
     return () => clearInterval(interval);
   }, [transitionToNext]);
+
+  // Fade animation when language changes
+  useEffect(() => {
+    // Fade out
+    textOpacity.value = withTiming(0, { duration: 200 }, () => {
+      // After fade out completes, fade back in
+      textOpacity.value = withTiming(1, { duration: 200 });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentLanguageIndex]);
+
+  // Auto-advance button language every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLanguageIndex((prev) => (prev + 1) % 5);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -70,7 +113,15 @@ export default function LandingScreen() {
       {/* Join the World Button */}
       <Pressable style={styles.joinButton} onPress={handleJoinPress}>
         <MaterialCommunityIcons name="translate" size={24} color="white" />
-        <Text style={styles.joinButtonText}>Join the World</Text>
+        <Animated.Text
+          style={[
+            styles.joinButtonText,
+            animatedTextStyle,
+            { color: LANGUAGES[currentLanguageIndex].color },
+          ]}
+        >
+          {LANGUAGES[currentLanguageIndex].text}
+        </Animated.Text>
       </Pressable>
 
       {/* Pagination dots */}
@@ -140,7 +191,6 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   joinButtonText: {
-    color: 'white',
     fontSize: 18,
     fontWeight: '600',
   },
