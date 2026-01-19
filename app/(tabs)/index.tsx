@@ -18,13 +18,33 @@ const BANNERS = [
   require('../../public/images/bannerimage3.png'),
 ];
 
-// Button language translations with vibrant colors
+// Button language translations with pastel backgrounds and readable text
 const LANGUAGES = [
-  { text: 'Join the World', color: '#FFFFFF' },           // English - White
-  { text: 'Rejoignez le Monde', color: '#FFD700' },       // French - Gold
-  { text: 'Únete al Mundo', color: '#FF6B9D' },           // Spanish - Hot Pink
-  { text: 'Присоединяйтесь к Миру', color: '#87CEEB' },  // Russian - Sky Blue
-  { text: '加入世界', color: '#FFA500' },                  // Chinese - Orange
+  {
+    text: 'Join the World',
+    backgroundColor: '#E0F2FE',  // Light Sky Blue
+    textColor: '#0C4A6E',        // Dark Blue
+  },
+  {
+    text: 'Rejoignez le Monde',
+    backgroundColor: '#FEF3C7',  // Light Amber/Cream
+    textColor: '#92400E',        // Dark Amber/Brown
+  },
+  {
+    text: 'Únete al Mundo',
+    backgroundColor: '#FCE7F3',  // Light Pink/Rose
+    textColor: '#9F1239',        // Dark Rose/Red
+  },
+  {
+    text: 'Присоединяйтесь к Миру',
+    backgroundColor: '#EDE9FE',  // Light Lavender
+    textColor: '#5B21B6',        // Dark Purple
+  },
+  {
+    text: '加入世界',
+    backgroundColor: '#FFEDD5',  // Light Peach/Orange
+    textColor: '#C2410C',        // Dark Orange
+  },
 ];
 
 export default function LandingScreen() {
@@ -111,13 +131,19 @@ export default function LandingScreen() {
       ))}
 
       {/* Join the World Button */}
-      <Pressable style={styles.joinButton} onPress={handleJoinPress}>
+      <Pressable
+        style={[
+          styles.joinButton,
+          { backgroundColor: LANGUAGES[currentLanguageIndex].backgroundColor },
+        ]}
+        onPress={handleJoinPress}
+      >
         <MaterialCommunityIcons name="translate" size={24} color="white" />
         <Animated.Text
           style={[
             styles.joinButtonText,
             animatedTextStyle,
-            { color: LANGUAGES[currentLanguageIndex].color },
+            { color: LANGUAGES[currentLanguageIndex].textColor },
           ]}
         >
           {LANGUAGES[currentLanguageIndex].text}
@@ -177,7 +203,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 90,
     alignSelf: 'center',
-    backgroundColor: '#10B981',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
