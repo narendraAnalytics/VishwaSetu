@@ -15,12 +15,12 @@ const App: React.FC = () => {
   const [knowledgeResult, setKnowledgeResult] = useState<{ text: string, sources: GroundingSource[] } | null>(null);
   const [knowledgeQuery, setKnowledgeQuery] = useState('');
 
-  // Refs for audio and session
+  // Refs for persistent state across renders and async callbacks
+  const isActiveRef = useRef(false);
   const inputAudioContextRef = useRef<AudioContext | null>(null);
   const outputAudioContextRef = useRef<AudioContext | null>(null);
   const nextStartTimeRef = useRef<number>(0);
   const sourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
-  const sessionPromiseRef = useRef<Promise<any> | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const scriptProcessorRef = useRef<ScriptProcessorNode | null>(null);
 
@@ -28,35 +28,58 @@ const App: React.FC = () => {
     setMessages(prev => [...prev, { role, text, timestamp: new Date() }]);
   }, []);
 
-  const stopSession = () => {
+  const stopSession = useCallback(() => {
     setIsActive(false);
+    isActiveRef.current = false;
+    
+    if (scriptProcessorRef.current) {
+      scriptProcessorRef.current.onaudioprocess = null;
+      scriptProcessorRef.current.disconnect();
+      scriptProcessorRef.current = null;
+    }
+
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
     }
-    if (scriptProcessorRef.current) {
-      scriptProcessorRef.current.disconnect();
-    }
+
     if (inputAudioContextRef.current) {
-      inputAudioContextRef.current.close();
+      inputAudioContextRef.current.close().catch(console.error);
+      inputAudioContextRef.current = null;
     }
+
     if (outputAudioContextRef.current) {
-      outputAudioContextRef.current.close();
+      outputAudioContextRef.current.close().catch(console.error);
+      outputAudioContextRef.current = null;
     }
-    sourcesRef.current.forEach(s => s.stop());
+
+    sourcesRef.current.forEach(s => {
+      try { s.stop(); } catch (e) {}
+    });
     sourcesRef.current.clear();
-    sessionPromiseRef.current = null;
+    
     nextStartTimeRef.current = 0;
-  };
+    setCurrentInputText('');
+    setCurrentOutputText('');
+  }, []);
 
   const startSession = async () => {
     try {
-      setMessages([]); // Clear previous messages for a fresh start
+      if (isActiveRef.current) stopSession();
+
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
       
-      inputAudioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
-      outputAudioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
+      const inputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
+      const outputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
       
-      streamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
+      inputAudioContextRef.current = inputCtx;
+      outputAudioContextRef.current = outputCtx;
+      
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
+
+      if (inputCtx.state === 'suspended') await inputCtx.resume();
+      if (outputCtx.state === 'suspended') await outputCtx.resume();
 
       const sessionPromise = ai.live.connect({
         model: 'gemini-2.5-flash-native-audio-preview-12-2025',
@@ -71,34 +94,47 @@ const App: React.FC = () => {
         },
         callbacks: {
           onopen: () => {
-            console.log('Session Opened');
-            const source = inputAudioContextRef.current!.createMediaStreamSource(streamRef.current!);
-            scriptProcessorRef.current = inputAudioContextRef.current!.createScriptProcessor(4096, 1, 1);
+            console.log('VishwaSetu Session Connected');
+            setIsActive(true);
+            isActiveRef.current = true;
+
+            const source = inputCtx.createMediaStreamSource(stream);
+            const processor = inputCtx.createScriptProcessor(4096, 1, 1);
+            scriptProcessorRef.current = processor;
             
-            scriptProcessorRef.current.onaudioprocess = (e) => {
-              const inputData = e.inputBuffer.getChannelData(0);
-              const pcmBlob = createBlob(inputData);
-              sessionPromiseRef.current?.then(session => {
-                session.sendRealtimeInput({ media: pcmBlob });
-              });
+            processor.onaudioprocess = (e) => {
+              // Use Ref to avoid stale closure issues during long sessions
+              if (isActiveRef.current) {
+                // Ensure context hasn't been suspended by browser
+                if (inputCtx.state === 'suspended') inputCtx.resume();
+                
+                const inputData = e.inputBuffer.getChannelData(0);
+                const pcmBlob = createBlob(inputData);
+                sessionPromise.then(session => {
+                  try {
+                    session.sendRealtimeInput({ media: pcmBlob });
+                  } catch (err) {
+                    console.error("Audio pipe error:", err);
+                  }
+                }).catch(console.error);
+              }
             };
 
-            source.connect(scriptProcessorRef.current);
-            scriptProcessorRef.current.connect(inputAudioContextRef.current!.destination);
+            source.connect(processor);
+            processor.connect(inputCtx.destination);
             
-            // Send a tiny silent nudge to trigger the AI to start speaking its intro based on system instructions
+            // Initial nudge
             sessionPromise.then(session => {
               const nudge = new Float32Array(1600).fill(0);
               session.sendRealtimeInput({ media: createBlob(nudge) });
             });
-
-            setIsActive(true);
           },
           onmessage: async (message: LiveServerMessage) => {
-            // Audio data
-            const base64Audio = message.serverContent?.modelTurn?.parts[0]?.inlineData?.data;
+            const base64Audio = message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
             if (base64Audio && outputAudioContextRef.current) {
               const ctx = outputAudioContextRef.current;
+              if (ctx.state === 'suspended') await ctx.resume();
+              
               nextStartTimeRef.current = Math.max(nextStartTimeRef.current, ctx.currentTime);
               const audioBuffer = await decodeAudioData(decode(base64Audio), ctx, 24000, 1);
               const source = ctx.createBufferSource();
@@ -110,7 +146,6 @@ const App: React.FC = () => {
               source.onended = () => sourcesRef.current.delete(source);
             }
 
-            // Transcriptions
             if (message.serverContent?.inputTranscription) {
               const text = message.serverContent.inputTranscription.text;
               setCurrentInputText(prev => prev + text);
@@ -132,22 +167,31 @@ const App: React.FC = () => {
             }
 
             if (message.serverContent?.interrupted) {
-              sourcesRef.current.forEach(s => s.stop());
+              sourcesRef.current.forEach(s => {
+                try { s.stop(); } catch (e) {}
+              });
               sourcesRef.current.clear();
               nextStartTimeRef.current = 0;
             }
           },
-          onerror: (e) => console.error('Gemini Live Error:', e),
-          onclose: () => stopSession(),
+          onerror: (e) => {
+            console.error('VishwaSetu Session Error:', e);
+          },
+          onclose: (e) => {
+            console.log('VishwaSetu Session Closed');
+            stopSession();
+          },
         },
       });
-
-      sessionPromiseRef.current = sessionPromise;
     } catch (err) {
-      console.error('Failed to start session:', err);
-      alert('Could not access microphone or start session.');
+      console.error('Start failure:', err);
+      stopSession();
     }
   };
+
+  useEffect(() => {
+    return () => stopSession();
+  }, [stopSession]);
 
   const handleKnowledgeSearch = async () => {
     if (!knowledgeQuery.trim()) return;
@@ -174,7 +218,7 @@ const App: React.FC = () => {
           onClick={isActive ? stopSession : startSession}
           className={`px-8 py-3 rounded-full font-bold text-lg transition-all flex items-center gap-2 shadow-md ${
             isActive 
-              ? 'bg-red-500 hover:bg-red-600 text-white' 
+              ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
               : 'bg-orange-600 hover:bg-orange-700 text-white'
           }`}
         >
@@ -191,55 +235,59 @@ const App: React.FC = () => {
         <section className="lg:col-span-2 flex flex-col gap-6">
           <div className="bg-white rounded-2xl shadow-sm p-6 flex flex-col h-[500px] earthy-card relative">
             <h2 className="text-xl font-bold text-gray-700 mb-4 flex items-center gap-2">
-              <i className="fa-solid fa-chalkboard-user text-orange-500"></i> Classroom
+              <i className="fa-solid fa-chalkboard-user text-orange-500"></i> Live Classroom
             </h2>
             
-            <div className="flex-grow overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+            <div className="flex-grow overflow-y-auto space-y-4 pr-2 custom-scrollbar flex flex-col">
               {messages.length === 0 && !isActive && (
                 <div className="flex justify-center items-center h-full text-center p-8 text-gray-400">
-                  <div>
+                  <div className="max-w-xs">
                     <i className="fa-solid fa-microphone-lines text-4xl mb-4 block opacity-20"></i>
-                    <p>Click "Start Learning" to begin your lesson with VishwaSetu.</p>
-                    <p className="text-xs mt-2 uppercase tracking-widest font-bold text-gray-300">Wise & Patient Teacher</p>
+                    <p className="text-lg">Namaste! Click "Start Learning" to talk with your wise teacher, VishwaSetu.</p>
+                    <p className="text-sm mt-4 text-orange-400 italic">"Learning a new tongue is like opening a new window to the world."</p>
                   </div>
                 </div>
               )}
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] p-4 rounded-2xl shadow-sm ${
+                  <div className={`max-w-[85%] p-4 rounded-2xl shadow-sm ${
                     msg.role === 'user' 
                       ? 'bg-orange-50 text-gray-800 rounded-tr-none border-l-4 border-orange-500' 
                       : 'bg-gray-50 text-gray-800 rounded-tl-none border-r-4 border-gray-400'
                   }`}>
-                    <p className="text-sm font-bold uppercase tracking-wider mb-1 opacity-60">
-                      {msg.role === 'user' ? 'You' : 'VishwaSetu'}
-                    </p>
-                    <p className="text-lg leading-relaxed">{msg.text}</p>
+                    <div className="flex justify-between items-center mb-1">
+                      <p className="text-[10px] font-bold uppercase tracking-widest opacity-50">
+                        {msg.role === 'user' ? 'Student' : 'VishwaSetu'}
+                      </p>
+                    </div>
+                    <p className="text-lg leading-relaxed whitespace-pre-wrap">{msg.text}</p>
                   </div>
                 </div>
               ))}
               
-              {/* Real-time streams */}
               {currentInputText && (
-                <div className="flex justify-end opacity-70 italic">
-                  <div className="bg-orange-50 p-3 rounded-2xl border-l-4 border-orange-300">
-                    {currentInputText}...
+                <div className="flex justify-end opacity-60">
+                  <div className="bg-orange-100/50 p-3 rounded-2xl border-l-4 border-orange-300">
+                    <p className="text-xs uppercase font-bold opacity-40 mb-1">Listening...</p>
+                    {currentInputText}
                   </div>
                 </div>
               )}
               {currentOutputText && (
-                <div className="flex justify-start opacity-70 italic">
-                  <div className="bg-gray-50 p-3 rounded-2xl border-r-4 border-gray-300">
-                    VishwaSetu is speaking...
+                <div className="flex justify-start opacity-60">
+                  <div className="bg-gray-100/50 p-3 rounded-2xl border-r-4 border-gray-300">
+                    <p className="text-xs uppercase font-bold opacity-40 mb-1">Speaking...</p>
+                    {currentOutputText}
                   </div>
                 </div>
               )}
+              <div id="anchor" className="h-2"></div>
             </div>
 
             {isActive && (
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none">
-                <div className="pulse-ring w-4 h-4 bg-orange-500 rounded-full"></div>
-                <span className="text-orange-600 font-bold bg-white/80 px-2 py-1 rounded shadow-sm">Listening...</span>
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white px-6 py-2 rounded-full shadow-lg border border-orange-100">
+                <div className="pulse-ring w-3 h-3 bg-orange-500 rounded-full"></div>
+                <span className="text-orange-600 font-bold text-sm tracking-wide">CLASS IS LIVE</span>
               </div>
             )}
           </div>
@@ -249,80 +297,96 @@ const App: React.FC = () => {
         <aside className="flex flex-col gap-6">
           <div className="bg-white rounded-2xl shadow-sm p-6 earthy-card">
             <h2 className="text-xl font-bold text-gray-700 mb-4 flex items-center gap-2">
-              <i className="fa-solid fa-book-open text-orange-500"></i> Knowledge Hub
+              <i className="fa-solid fa-book-open text-orange-500"></i> Cultural Hub
             </h2>
-            <p className="text-sm text-gray-600 mb-4">
-              Ask about the history or culture of the languages you're learning!
+            <p className="text-sm text-gray-600 mb-4 italic">
+              "To know a language, you must also know the hearts of the people who speak it."
             </p>
             <div className="flex flex-col gap-2">
               <input
                 type="text"
-                placeholder="e.g. Tell me about French food"
-                className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Ask about culture, food, or customs..."
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 bg-gray-50/50"
                 value={knowledgeQuery}
                 onChange={(e) => setKnowledgeQuery(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleKnowledgeSearch()}
               />
               <button
                 onClick={handleKnowledgeSearch}
                 disabled={isKnowledgeLoading}
-                className="w-full bg-gray-800 text-white py-2 rounded-xl font-bold hover:bg-gray-900 disabled:opacity-50 transition-all"
+                className="w-full bg-gray-800 text-white py-3 rounded-xl font-bold hover:bg-gray-900 disabled:opacity-50 transition-all shadow-md"
               >
-                {isKnowledgeLoading ? 'Searching...' : 'Ask Knowledge Hub'}
+                {isKnowledgeLoading ? 'Consulting scrolls...' : 'Search Library'}
               </button>
             </div>
 
             {knowledgeResult && (
-              <div className="mt-6 p-4 bg-orange-50 rounded-xl border border-orange-100 overflow-hidden">
-                <h3 className="font-bold text-orange-800 mb-2">Discovery:</h3>
-                <p className="text-sm text-gray-800 mb-4 leading-relaxed line-clamp-6 hover:line-clamp-none cursor-pointer">
+              <div className="mt-6 p-4 bg-orange-50 rounded-xl border border-orange-100 overflow-hidden animate-in fade-in slide-in-from-bottom-2">
+                <h3 className="font-bold text-orange-800 mb-2 flex items-center gap-2">
+                  <i className="fa-solid fa-lightbulb"></i> Wisdom Shared:
+                </h3>
+                <p className="text-sm text-gray-800 mb-4 leading-relaxed">
                   {knowledgeResult.text}
                 </p>
                 {knowledgeResult.sources.length > 0 && (
-                  <div className="space-y-1">
-                    <p className="text-[10px] font-bold text-gray-400 uppercase">Sources:</p>
-                    {knowledgeResult.sources.map((src, i) => (
-                      <a 
-                        key={i} 
-                        href={src.uri} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="block text-xs text-orange-600 hover:underline truncate"
-                      >
-                        {src.title}
-                      </a>
-                    ))}
+                  <div className="pt-3 border-t border-orange-200">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase mb-2">Paths to more knowledge:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {knowledgeResult.sources.map((src, i) => (
+                        <a 
+                          key={i} 
+                          href={src.uri} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-block text-[10px] bg-white border border-orange-200 px-2 py-1 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white transition-colors max-w-full truncate"
+                          title={src.title}
+                        >
+                          {src.title}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
             )}
           </div>
 
-          <div className="bg-gray-800 rounded-2xl p-6 text-white shadow-xl">
-            <h3 className="font-bold mb-4 flex items-center gap-2">
-              <i className="fa-solid fa-star text-yellow-400"></i> Learning Goals
+          <div className="bg-gray-800 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full -mr-12 -mt-12"></div>
+            <h3 className="font-bold mb-4 flex items-center gap-2 relative z-10">
+              <i className="fa-solid fa-scroll text-yellow-400"></i> Your Journey
             </h3>
-            <ul className="space-y-3 text-sm opacity-90">
-              <li className="flex items-center gap-2">
-                <i className="fa-solid fa-check-circle text-green-400"></i> Set Native Language
-              </li>
-              <li className="flex items-center gap-2">
-                <i className="fa-solid fa-check-circle text-green-400"></i> Pick Target Language
-              </li>
-              <li className="flex items-center gap-2">
-                <i className="fa-solid fa-circle text-gray-500"></i> Basic Greetings
-              </li>
-              <li className="flex items-center gap-2">
-                <i className="fa-solid fa-circle text-gray-500"></i> Daily Needs (Water, Food)
-              </li>
+            <ul className="space-y-4 text-sm relative z-10">
+              {[
+                { label: 'Set Native Language', done: messages.length > 0 },
+                { label: 'Pick Target Language', done: messages.length > 2 },
+                { label: 'Learn Survival Phrases', done: false },
+                { label: 'Job-Specific Training', done: false },
+                { label: 'Roleplay Ready', done: false }
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-center gap-3">
+                  {item.done ? (
+                    <i className="fa-solid fa-circle-check text-green-400 text-lg"></i>
+                  ) : (
+                    <div className="w-5 h-5 rounded-full border-2 border-gray-600 flex items-center justify-center text-[10px] font-bold text-gray-500">
+                      {idx + 1}
+                    </div>
+                  )}
+                  <span className={item.done ? 'text-white font-medium' : 'text-gray-400'}>{item.label}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </aside>
       </main>
 
       {/* Footer Instructions */}
-      <footer className="text-center text-gray-500 text-sm mt-auto pb-4">
-        <p>&copy; 2024 VishwaSetu. Connecting villages through wisdom and words.</p>
-        <p className="mt-1">Powered by Gemini 2.5 Live & Gemini 3 Search Grounding</p>
+      <footer className="text-center text-gray-500 text-xs mt-auto pb-4 pt-8 border-t border-orange-100">
+        <p>&copy; 2024 VishwaSetu Project. Teaching the world one village at a time.</p>
+        <p className="mt-2 flex items-center justify-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+          System Online & Active
+        </p>
       </footer>
     </div>
   );
