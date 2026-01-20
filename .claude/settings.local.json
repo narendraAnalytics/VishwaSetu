@@ -4,7 +4,8 @@
       "Bash(if exist .cursorrules dir .cursorrules /b)",
       "Bash(if exist .githubcopilot-instructions.md type .githubcopilot-instructions.md)",
       "Bash(dir:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(ls:*)"
     ]
   }
 }

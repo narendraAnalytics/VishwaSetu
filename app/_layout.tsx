@@ -4,9 +4,13 @@ import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { CustomSplashScreen } from '@/components/SplashScreen';
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
 // Prevent auto-hide of native splash screen
 SplashScreen.preventAutoHideAsync();
@@ -29,10 +33,11 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
         </Stack>
         <StatusBar hidden={true} />
@@ -42,6 +47,6 @@ export default function RootLayout() {
       {showCustomSplash && (
         <CustomSplashScreen onFadeComplete={() => setShowCustomSplash(false)} />
       )}
-    </>
+    </ClerkProvider>
   );
 }

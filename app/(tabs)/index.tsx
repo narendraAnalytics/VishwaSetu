@@ -9,6 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useAuth } from '@clerk/clerk-expo';
 
 // Banner images
 const BANNERS = [
@@ -57,6 +58,9 @@ export default function LandingScreen() {
   // Router for navigation
   const router = useRouter();
 
+  // Auth check
+  const { isSignedIn } = useAuth();
+
   // Shared value for button text fade animation
   const textOpacity = useSharedValue(1);
 
@@ -70,14 +74,21 @@ export default function LandingScreen() {
     NavigationBar.setVisibilityAsync('hidden');
   }, []);
 
+  // Redirect authenticated users to home
+  useEffect(() => {
+    if (isSignedIn) {
+      router.replace('/(tabs)/home');
+    }
+  }, [isSignedIn]);
+
   // Transition to next image
   const transitionToNext = useCallback(() => {
     setCurrentImageIndex((prev) => (prev + 1) % 4);
   }, []);
 
-  // Handle button press - navigate to explore screen
+  // Handle button press - navigate to sign-in screen
   const handleJoinPress = useCallback(() => {
-    router.push('/explore');
+    router.push('/(auth)/sign-in');
   }, [router]);
 
   // Auto-advance carousel every 3 seconds
