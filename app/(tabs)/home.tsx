@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
-import { useUser, useAuth } from '@clerk/clerk-expo';
-import { useRouter } from 'expo-router';
+import { useAuth, useUser } from '@clerk/clerk-expo';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as NavigationBar from 'expo-navigation-bar';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   const { isSignedIn, user, isLoaded } = useUser();
@@ -15,26 +15,24 @@ export default function HomeScreen() {
     NavigationBar.setVisibilityAsync('hidden');
   }, []);
 
-  if (!isLoaded) {
+  // Handle redirection in useEffect to avoid render warnings
+  useEffect(() => {
+    if (isLoaded && !isSignedIn && !isSigningOut) {
+      router.replace('/(tabs)');
+    }
+  }, [isLoaded, isSignedIn, isSigningOut, router]);
+
+  if (!isLoaded || isSigningOut) {
     return (
       <View style={styles.container}>
-        <Text style={styles.loadingText}>Loading...</Text>
+        <Text style={styles.loadingText}>
+          {isSigningOut ? 'Signing out...' : 'Loading...'}
+        </Text>
       </View>
     );
   }
 
-  // During sign-out, show a loading state
-  if (isSigningOut) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.loadingText}>Signing out...</Text>
-      </View>
-    );
-  }
-
-  // After sign-out completes and auth state updates, redirect to sign-in
   if (!isSignedIn) {
-    router.replace('/(auth)/sign-in');
     return null;
   }
 

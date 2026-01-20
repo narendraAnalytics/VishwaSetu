@@ -1,22 +1,30 @@
-import { View, Text, StyleSheet, Alert, ScrollView, Image } from 'react-native';
-import { useOAuth } from '@clerk/clerk-expo';
-import * as WebBrowser from 'expo-web-browser';
-import * as Linking from 'expo-linking';
-import { useRouter, Link } from 'expo-router';
-import { useState, useEffect } from 'react';
 import { OAuthButton } from '@/components/auth/OAuthButton';
 import { UsernameModal } from '@/components/auth/UsernameModal';
+import { useAuth, useOAuth, useSignUp } from '@clerk/clerk-expo';
+import * as Linking from 'expo-linking';
+import { Link, useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
+import { useEffect, useState } from 'react';
+import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 WebBrowser.maybeCompleteAuthSession();
 
 export default function SignUpScreen() {
   const router = useRouter();
+  const { isSignedIn, isLoaded: isAuthLoaded } = useAuth();
+  const { signUp, isLoaded: isSignUpLoaded, setActive: setSignUpActive } = useSignUp();
   const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
-  const [oauthSignUpData, setOAuthSignUpData] = useState<any>(null);
-  const [oauthSetActive, setOAuthSetActive] = useState<any>(null);
+  const [oauthSetActive, setOauthSetActive] = useState<any>(null);
   const [oauthUsername, setOAuthUsername] = useState('');
   const [showUsernameModal, setShowUsernameModal] = useState(false);
   const [usernameLoading, setUsernameLoading] = useState(false);
+
+  // Redirect if already signed in
+  useEffect(() => {
+    if (isAuthLoaded && isSignedIn) {
+      router.replace('/(tabs)/home');
+    }
+  }, [isAuthLoaded, isSignedIn]);
 
   const { startOAuthFlow: startGoogleOAuth } = useOAuth({ strategy: 'oauth_google' });
   const { startOAuthFlow: startGitHubOAuth } = useOAuth({ strategy: 'oauth_github' });
@@ -34,31 +42,28 @@ export default function SignUpScreen() {
   ) => {
     try {
       setLoadingProvider(provider);
-      const { createdSessionId, signUp, setActive } = await startOAuthFlow({
-        redirectUrl: Linking.createURL('/(tabs)/home', { scheme: 'vishwasetu' }),
+      const { createdSessionId, signUp: oauthSignUp, setActive } = await startOAuthFlow({
+        redirectUrl: Linking.createURL('/(auth)/sign-up', { scheme: 'vishwasetu' }),
       });
 
       console.log('OAuth Response:', {
         hasCreatedSessionId: !!createdSessionId,
-        hasSignUp: !!signUp,
+        hasSignUp: !!oauthSignUp,
       });
 
-      // NEW USER: If signUp exists, this is a first-time sign-up
-      // ALWAYS show username modal for new users
-      if (signUp) {
-        console.log('NEW USER DETECTED - Showing username modal');
-        setOAuthSignUpData(signUp);
-        setOAuthSetActive(setActive);
-        setShowUsernameModal(true);
+      // EXISTING USER: If createdSessionId exists, they are logged in
+      if (createdSessionId && setActive) {
+        console.log('EXISTING USER DETECTED - Activating session');
+        await setActive({ session: createdSessionId });
+        router.replace('/(tabs)/home');
         return;
       }
 
-      // EXISTING USER: If createdSessionId exists but no signUp
-      // This is a returning user signing in
-      if (createdSessionId) {
-        console.log('EXISTING USER DETECTED - Signing in directly');
-        await setActive!({ session: createdSessionId });
-        router.replace('/(tabs)/home');
+      // NEW USER: If no session but signUp exists, they need to complete profile
+      if (oauthSignUp) {
+        console.log('NEW USER DETECTED - Showing username modal');
+        setOauthSetActive(() => setActive);
+        setShowUsernameModal(true);
         return;
       }
 
@@ -72,25 +77,61 @@ export default function SignUpScreen() {
   };
 
   const completeOAuthSignUp = async () => {
-    if (!oauthSignUpData || !oauthUsername.trim()) return;
+    if (!isSignUpLoaded || !signUp || !oauthUsername.trim()) {
+      Alert.alert('Error', 'Sign-up session not found. Please try again.');
+      return;
+    }
 
     try {
       setUsernameLoading(true);
-      const result = await oauthSignUpData.update({
+      console.log('Attempting to update username:', oauthUsername.trim());
+
+      const result = await signUp.update({
         username: oauthUsername.trim(),
       });
 
-      if (result.status === 'complete' && result.createdSessionId) {
-        await oauthSetActive!({ session: result.createdSessionId });
-        setShowUsernameModal(false);
-        router.replace('/(tabs)/home');
+      console.log('Update result status:', result.status);
+      console.log('Update result session:', result.createdSessionId);
+      console.log('Main signUp hook status:', signUp.status);
+      console.log('Main signUp hook session:', signUp.createdSessionId);
+
+      // Check for completion in either the result or the main hook
+      const isComplete = result.status === 'complete' || signUp.status === 'complete';
+      const sessionId = result.createdSessionId || signUp.createdSessionId;
+
+      if (isComplete && sessionId) {
+        console.log('Sign-up complete. Activating session:', sessionId);
+
+        // Use the most reliable setActive function
+        const activeFn = oauthSetActive || setSignUpActive;
+
+        if (activeFn) {
+          await activeFn({ session: sessionId });
+          setShowUsernameModal(false);
+          router.replace('/(tabs)/home');
+        } else {
+          console.error('No setActive function available');
+          Alert.alert('Success', 'Profile created! Please sign in now.');
+          setShowUsernameModal(false);
+          router.replace('/(auth)/sign-in');
+        }
+      } else {
+        const finalStatus = result.status || signUp.status;
+        console.log('Sign-up incomplete. Final Status:', finalStatus);
+
+        Alert.alert(
+          'Incomplete Profile',
+          `Status: ${finalStatus || 'unknown'}. Please try again.`
+        );
       }
     } catch (err: any) {
       console.error('Username update error:', err);
+      const errorMessage = err.errors?.[0]?.message || 'Failed to save username. Please try again.';
+
       if (err.errors?.[0]?.code === 'form_identifier_exists') {
         Alert.alert('Username Taken', 'Please choose a different username.');
       } else {
-        Alert.alert('Error', 'Failed to save username. Please try again.');
+        Alert.alert('Error', errorMessage);
       }
     } finally {
       setUsernameLoading(false);
@@ -100,8 +141,6 @@ export default function SignUpScreen() {
   const handleCancelUsername = () => {
     setShowUsernameModal(false);
     setOAuthUsername('');
-    setOAuthSignUpData(null);
-    setOAuthSetActive(null);
   };
 
   return (
@@ -136,8 +175,10 @@ export default function SignUpScreen() {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already have an account? </Text>
-          <Link href="/(auth)/sign-in">
-            <Text style={styles.linkText}>Sign in</Text>
+          <Link href="/(auth)/sign-in" asChild>
+            <Pressable>
+              <Text style={styles.linkText}>Sign in</Text>
+            </Pressable>
           </Link>
         </View>
       </ScrollView>
