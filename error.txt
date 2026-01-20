@@ -1,0 +1,145 @@
+Running "npm ci --include=dev" in /home/expo/workingdir/build directory
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @clerk/clerk-js@5.120.0
+npm warn Found: react@19.1.0
+npm warn node_modules/react
+npm warn   react@"19.1.0" from the root project
+npm warn   76 more (@clerk/clerk-expo, @emotion/react, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/clerk-js@5.120.0
+npm warn node_modules/@clerk/clerk-expo/node_modules/@clerk/clerk-js
+npm warn   @clerk/clerk-js@"^5.120.0" from @clerk/clerk-expo@2.19.18
+npm warn   node_modules/@clerk/clerk-expo
+npm warn
+npm warn Conflicting peer dependency: react@19.2.3
+npm warn node_modules/react
+npm warn   peer react@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/clerk-js@5.120.0
+npm warn   node_modules/@clerk/clerk-expo/node_modules/@clerk/clerk-js
+npm warn     @clerk/clerk-js@"^5.120.0" from @clerk/clerk-expo@2.19.18
+npm warn     node_modules/@clerk/clerk-expo
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @clerk/clerk-js@5.120.0
+npm warn Found: react-dom@19.1.0
+npm warn node_modules/react-dom
+npm warn   react-dom@"19.1.0" from the root project
+npm warn   19 more (@clerk/clerk-expo, @expo/metro-runtime, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react-dom@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/clerk-js@5.120.0
+npm warn node_modules/@clerk/clerk-expo/node_modules/@clerk/clerk-js
+npm warn   @clerk/clerk-js@"^5.120.0" from @clerk/clerk-expo@2.19.18
+npm warn   node_modules/@clerk/clerk-expo
+npm warn
+npm warn Conflicting peer dependency: react-dom@19.2.3
+npm warn node_modules/react-dom
+npm warn   peer react-dom@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/clerk-js@5.120.0
+npm warn   node_modules/@clerk/clerk-expo/node_modules/@clerk/clerk-js
+npm warn     @clerk/clerk-js@"^5.120.0" from @clerk/clerk-expo@2.19.18
+npm warn     node_modules/@clerk/clerk-expo
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @clerk/clerk-react@5.59.4
+npm warn Found: react@19.1.0
+npm warn node_modules/react
+npm warn   react@"19.1.0" from the root project
+npm warn   76 more (@clerk/clerk-expo, @emotion/react, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/clerk-react@5.59.4
+npm warn node_modules/@clerk/clerk-expo/node_modules/@clerk/clerk-react
+npm warn   @clerk/clerk-react@"^5.59.4" from @clerk/clerk-expo@2.19.18
+npm warn   node_modules/@clerk/clerk-expo
+npm warn
+npm warn Conflicting peer dependency: react@19.2.3
+npm warn node_modules/react
+npm warn   peer react@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/clerk-react@5.59.4
+npm warn   node_modules/@clerk/clerk-expo/node_modules/@clerk/clerk-react
+npm warn     @clerk/clerk-react@"^5.59.4" from @clerk/clerk-expo@2.19.18
+npm warn     node_modules/@clerk/clerk-expo
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @clerk/clerk-react@5.59.4
+npm warn Found: react-dom@19.1.0
+npm warn node_modules/react-dom
+npm warn   react-dom@"19.1.0" from the root project
+npm warn   19 more (@clerk/clerk-expo, @expo/metro-runtime, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react-dom@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/clerk-react@5.59.4
+npm warn node_modules/@clerk/clerk-expo/node_modules/@clerk/clerk-react
+npm warn   @clerk/clerk-react@"^5.59.4" from @clerk/clerk-expo@2.19.18
+npm warn   node_modules/@clerk/clerk-expo
+npm warn
+npm warn Conflicting peer dependency: react-dom@19.2.3
+npm warn node_modules/react-dom
+npm warn   peer react-dom@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/clerk-react@5.59.4
+npm warn   node_modules/@clerk/clerk-expo/node_modules/@clerk/clerk-react
+npm warn     @clerk/clerk-react@"^5.59.4" from @clerk/clerk-expo@2.19.18
+npm warn     node_modules/@clerk/clerk-expo
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @clerk/shared@3.43.0
+npm warn Found: react@19.1.0
+npm warn node_modules/react
+npm warn   react@"19.1.0" from the root project
+npm warn   76 more (@clerk/clerk-expo, @emotion/react, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peerOptional react@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/shared@3.43.0
+npm warn node_modules/@clerk/clerk-expo/node_modules/@clerk/shared
+npm warn   @clerk/shared@"^3.43.0" from @clerk/clerk-expo@2.19.18
+npm warn   node_modules/@clerk/clerk-expo
+npm warn   2 more (@clerk/clerk-js, @clerk/clerk-react)
+npm warn
+npm warn Conflicting peer dependency: react@19.2.3
+npm warn node_modules/react
+npm warn   peerOptional react@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/shared@3.43.0
+npm warn   node_modules/@clerk/clerk-expo/node_modules/@clerk/shared
+npm warn     @clerk/shared@"^3.43.0" from @clerk/clerk-expo@2.19.18
+npm warn     node_modules/@clerk/clerk-expo
+npm warn     2 more (@clerk/clerk-js, @clerk/clerk-react)
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @clerk/shared@3.43.0
+npm warn Found: react-dom@19.1.0
+npm warn node_modules/react-dom
+npm warn   react-dom@"19.1.0" from the root project
+npm warn   19 more (@clerk/clerk-expo, @expo/metro-runtime, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peerOptional react-dom@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/shared@3.43.0
+npm warn node_modules/@clerk/clerk-expo/node_modules/@clerk/shared
+npm warn   @clerk/shared@"^3.43.0" from @clerk/clerk-expo@2.19.18
+npm warn   node_modules/@clerk/clerk-expo
+npm warn   2 more (@clerk/clerk-js, @clerk/clerk-react)
+npm warn
+npm warn Conflicting peer dependency: react-dom@19.2.3
+npm warn node_modules/react-dom
+npm warn   peerOptional react-dom@"^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0" from @clerk/shared@3.43.0
+npm warn   node_modules/@clerk/clerk-expo/node_modules/@clerk/shared
+npm warn     @clerk/shared@"^3.43.0" from @clerk/clerk-expo@2.19.18
+npm warn     node_modules/@clerk/clerk-expo
+npm warn     2 more (@clerk/clerk-js, @clerk/clerk-react)
+npm error code EUSAGE
+npm error
+npm error `npm ci` can only install packages when your package.json and package-lock.json or npm-shrinkwrap.json are in sync. Please update your lock file with `npm install` before continuing.
+npm error
+npm error Missing: react@19.2.3 from lock file
+npm error Missing: react-dom@19.2.3 from lock file
+npm error Missing: scheduler@0.27.0 from lock file
+npm error
+npm error Clean install a project
+npm error
+npm error Usage:
+npm error npm ci
+npm error
+npm error Options:
+npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+npm error [--no-bin-links] [--no-fund] [--dry-run]
+npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+npm error [-ws|--workspaces] [--include-workspace-root] [--install-links]
+npm error
+npm error aliases: clean-install, ic, install-clean, isntall-clean
+npm error
+npm error Run "npm help ci" for more info
+npm error A complete log of this run can be found in: /home/expo/.npm/_logs/2026-01-20T11_08_04_063Z-debug-0.log
