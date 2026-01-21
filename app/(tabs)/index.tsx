@@ -1,15 +1,17 @@
+import { useAuth, useUser } from '@clerk/clerk-expo';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import * as NavigationBar from 'expo-navigation-bar';
+import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
+  withRepeat,
+  withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import { useAuth, useUser } from '@clerk/clerk-expo';
 
 // Banner images
 const BANNERS = [
@@ -65,9 +67,19 @@ export default function LandingScreen() {
   // Shared value for button text fade animation
   const textOpacity = useSharedValue(1);
 
+  // Shared values for welcome message animation
+  const welcomeOpacity = useSharedValue(0);
+  const welcomeTranslateX = useSharedValue(-50);
+
   // Animated style for fade transition
   const animatedTextStyle = useAnimatedStyle(() => ({
     opacity: textOpacity.value,
+  }));
+
+  // Animated style for welcome message
+  const welcomeAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: welcomeOpacity.value,
+    transform: [{ translateX: welcomeTranslateX.value }],
   }));
 
   // Hide navigation bar on mount
@@ -75,6 +87,34 @@ export default function LandingScreen() {
     NavigationBar.setVisibilityAsync('hidden');
   }, []);
 
+  // Animate welcome message when user signs in (repeats 3 times, then stays visible)
+  useEffect(() => {
+    if (isSignedIn) {
+      // Repeat slide in/out 2 times, then final slide in (stays visible)
+      welcomeOpacity.value = withSequence(
+        withRepeat(
+          withTiming(1, { duration: 600 }),
+          2, // repeat 2 times (in/out/in/out = 4 phases)
+          true // reverse (fade out after fade in)
+        ),
+        withTiming(1, { duration: 600 }) // final fade in (stays)
+      );
+
+      welcomeTranslateX.value = withSequence(
+        withRepeat(
+          withTiming(0, { duration: 600 }),
+          2, // repeat 2 times (in/out/in/out = 4 phases)
+          true // reverse (slide back after slide in)
+        ),
+        withTiming(0, { duration: 600 }) // final slide in (stays)
+      );
+    } else {
+      // Reset animation when user signs out
+      welcomeOpacity.value = 0;
+      welcomeTranslateX.value = -50;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSignedIn]);
 
   // Transition to next image
   const transitionToNext = useCallback(() => {
@@ -154,11 +194,11 @@ export default function LandingScreen() {
 
       {/* Welcome Message - Center Left (only when authenticated) */}
       {isSignedIn && (
-        <View style={styles.welcomeContainer}>
+        <Animated.View style={[styles.welcomeContainer, welcomeAnimatedStyle]}>
           <Text style={styles.welcomeText}>
             Welcome {user?.username || user?.firstName || 'Learner'}!
           </Text>
-        </View>
+        </Animated.View>
       )}
 
       {/* Join the World Button */}
@@ -271,7 +311,7 @@ const styles = StyleSheet.create({
   welcomeContainer: {
     position: 'absolute',
     left: 20,
-    top: '45%',
+    top: '35%',
     backgroundColor: 'rgba(16, 185, 129, 0.9)',
     paddingHorizontal: 20,
     paddingVertical: 12,
@@ -286,6 +326,6 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: '#F0FFF4',  // Fresh Mint - matches app background
   },
 });

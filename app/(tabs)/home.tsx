@@ -1,9 +1,10 @@
 import { useUser } from '@clerk/clerk-expo';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Image } from 'expo-image';
 import * as NavigationBar from 'expo-navigation-bar';
 import { useRouter } from 'expo-router';
 import { useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   const { isSignedIn, user, isLoaded } = useUser();
@@ -37,11 +38,22 @@ export default function HomeScreen() {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <View style={styles.avatarContainer}>
-        <View style={styles.avatar}>
-          <Text style={styles.avatarText}>{initials}</Text>
-        </View>
-      </View>
+      <Pressable
+        style={styles.avatarContainer}
+        onPress={() => router.push('/(tabs)/profile')}
+      >
+        {user?.imageUrl ? (
+          <Image
+            source={{ uri: user.imageUrl }}
+            style={styles.avatar}
+            contentFit="cover"
+          />
+        ) : (
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>{initials}</Text>
+          </View>
+        )}
+      </Pressable>
 
       <View style={styles.featuresContainer}>
         <Text style={styles.featuresTitle}>Explore Features</Text>
