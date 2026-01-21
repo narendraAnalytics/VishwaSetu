@@ -8,6 +8,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
   withTiming,
 } from 'react-native-reanimated';
 
@@ -64,23 +65,17 @@ export default function HomeScreen() {
   // Trigger staggered entrance animations for feature icons
   useEffect(() => {
     if (isSignedIn) {
-      // Icon 1 - starts immediately
+      // Reset all icons to invisible/scaled down
+      icon1Scale.value = 0;
+      icon2Scale.value = 0;
+      icon3Scale.value = 0;
+      icon4Scale.value = 0;
+
+      // Trigger staggered animations using withDelay
       icon1Scale.value = withTiming(1, { duration: 400 });
-
-      // Icon 2 - starts after 150ms
-      setTimeout(() => {
-        icon2Scale.value = withTiming(1, { duration: 400 });
-      }, 150);
-
-      // Icon 3 - starts after 300ms
-      setTimeout(() => {
-        icon3Scale.value = withTiming(1, { duration: 400 });
-      }, 300);
-
-      // Icon 4 - starts after 450ms
-      setTimeout(() => {
-        icon4Scale.value = withTiming(1, { duration: 400 });
-      }, 450);
+      icon2Scale.value = withDelay(150, withTiming(1, { duration: 400 }));
+      icon3Scale.value = withDelay(300, withTiming(1, { duration: 400 }));
+      icon4Scale.value = withDelay(450, withTiming(1, { duration: 400 }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn]);
@@ -215,10 +210,18 @@ export default function HomeScreen() {
         </View>
       </ScrollView>
 
-      {/* Auto-hiding Home Icon */}
-      <Animated.View style={[styles.homeIconContainer, homeIconAnimatedStyle]}>
-        <Pressable style={styles.homeIcon} onPress={handleHomePress}>
+      {/* Auto-hiding Navigation Icons */}
+      <Animated.View style={[styles.iconsContainer, homeIconAnimatedStyle]}>
+        <Pressable style={styles.iconButton} onPress={handleHomePress}>
           <Ionicons name="home" size={28} color="#FFFFFF" />
+        </Pressable>
+
+        <Pressable style={styles.iconButton}>
+          <MaterialCommunityIcons name="clock-outline" size={28} color="#FFFFFF" />
+        </Pressable>
+
+        <Pressable style={styles.iconButton}>
+          <MaterialCommunityIcons name="phone" size={28} color="#FFFFFF" />
         </Pressable>
       </Animated.View>
     </View>
@@ -307,13 +310,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F0FFF4',
   },
-  homeIconContainer: {
+  iconsContainer: {
     position: 'absolute',
     bottom: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 20,
     alignSelf: 'center',
     zIndex: 100,
   },
-  homeIcon: {
+  iconButton: {
     width: 60,
     height: 60,
     borderRadius: 30,
