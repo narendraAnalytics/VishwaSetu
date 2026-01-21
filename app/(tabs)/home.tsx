@@ -1,15 +1,13 @@
-import { useAuth, useUser } from '@clerk/clerk-expo';
+import { useUser } from '@clerk/clerk-expo';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as NavigationBar from 'expo-navigation-bar';
 import { useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useEffect } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   const { isSignedIn, user, isLoaded } = useUser();
-  const { signOut } = useAuth();
   const router = useRouter();
-  const [isSigningOut, setIsSigningOut] = useState(false);
 
   useEffect(() => {
     NavigationBar.setVisibilityAsync('hidden');
@@ -17,17 +15,15 @@ export default function HomeScreen() {
 
   // Handle redirection in useEffect to avoid render warnings
   useEffect(() => {
-    if (isLoaded && !isSignedIn && !isSigningOut) {
+    if (isLoaded && !isSignedIn) {
       router.replace('/(tabs)');
     }
-  }, [isLoaded, isSignedIn, isSigningOut, router]);
+  }, [isLoaded, isSignedIn, router]);
 
-  if (!isLoaded || isSigningOut) {
+  if (!isLoaded) {
     return (
       <View style={styles.container}>
-        <Text style={styles.loadingText}>
-          {isSigningOut ? 'Signing out...' : 'Loading...'}
-        </Text>
+        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
@@ -39,32 +35,8 @@ export default function HomeScreen() {
   const username = user?.username || user?.firstName || 'Learner';
   const initials = username.substring(0, 2).toUpperCase();
 
-  const handleSignOut = async () => {
-    try {
-      setIsSigningOut(true);
-      await signOut();
-      // Wait a moment for Clerk to update, then reset flag to trigger redirect
-      setTimeout(() => {
-        setIsSigningOut(false);
-      }, 100);
-    } catch (err) {
-      console.error('Sign out error:', err);
-      setIsSigningOut(false);
-    }
-  };
-
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.welcomeText}>Welcome {username}!</Text>
-        </View>
-        <Pressable style={styles.signOutButton} onPress={handleSignOut}>
-          <MaterialCommunityIcons name="logout" size={24} color="#10B981" />
-          <Text style={styles.signOutText}>Sign Out</Text>
-        </Pressable>
-      </View>
-
       <View style={styles.avatarContainer}>
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>{initials}</Text>
@@ -136,31 +108,6 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingHorizontal: 20,
     paddingBottom: 40,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  welcomeText: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#11181C',
-  },
-  signOutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-    borderRadius: 8,
-  },
-  signOutText: {
-    color: '#10B981',
-    fontSize: 16,
-    fontWeight: '600',
   },
   loadingText: {
     fontSize: 18,

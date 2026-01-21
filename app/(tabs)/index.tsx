@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import * as NavigationBar from 'expo-navigation-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -9,7 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { useAuth } from '@clerk/clerk-expo';
+import { useAuth, useUser } from '@clerk/clerk-expo';
 
 // Banner images
 const BANNERS = [
@@ -59,7 +59,8 @@ export default function LandingScreen() {
   const router = useRouter();
 
   // Auth check
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, signOut } = useAuth();
+  const { user } = useUser();
 
   // Shared value for button text fade animation
   const textOpacity = useSharedValue(1);
@@ -74,22 +75,25 @@ export default function LandingScreen() {
     NavigationBar.setVisibilityAsync('hidden');
   }, []);
 
-  // Redirect authenticated users to home
-  useEffect(() => {
-    if (isSignedIn) {
-      router.replace('/(tabs)/home');
-    }
-  }, [isSignedIn]);
 
   // Transition to next image
   const transitionToNext = useCallback(() => {
     setCurrentImageIndex((prev) => (prev + 1) % 4);
   }, []);
 
-  // Handle button press - navigate to sign-in screen
+  // Handle button press - navigate to dashboard if signed in, else to sign-in
   const handleJoinPress = useCallback(() => {
-    router.push('/(auth)/sign-in');
-  }, [router]);
+    if (isSignedIn) {
+      router.push('/(tabs)/home');
+    } else {
+      router.push('/(auth)/sign-in');
+    }
+  }, [router, isSignedIn]);
+
+  // Handle sign out
+  const handleSignOut = useCallback(async () => {
+    await signOut();
+  }, [signOut]);
 
   // Auto-advance carousel every 3 seconds
   useEffect(() => {
@@ -140,6 +144,22 @@ export default function LandingScreen() {
           />
         </Animated.View>
       ))}
+
+      {/* Sign Out Button - Top Right (only when authenticated) */}
+      {isSignedIn && (
+        <Pressable style={styles.signOutButton} onPress={handleSignOut}>
+          <MaterialCommunityIcons name="logout" size={28} color="#FFFFFF" />
+        </Pressable>
+      )}
+
+      {/* Welcome Message - Center Left (only when authenticated) */}
+      {isSignedIn && (
+        <View style={styles.welcomeContainer}>
+          <Text style={styles.welcomeText}>
+            Welcome {user?.username || user?.firstName || 'Learner'}!
+          </Text>
+        </View>
+      )}
 
       {/* Join the World Button */}
       <Pressable
@@ -233,5 +253,39 @@ const styles = StyleSheet.create({
   joinButtonText: {
     fontSize: 18,
     fontWeight: '600',
+  },
+  signOutButton: {
+    position: 'absolute',
+    top: 60,
+    right: 20,
+    backgroundColor: '#10B981',
+    padding: 12,
+    borderRadius: 50,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+    zIndex: 10,
+  },
+  welcomeContainer: {
+    position: 'absolute',
+    left: 20,
+    top: '45%',
+    backgroundColor: 'rgba(16, 185, 129, 0.9)',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+    zIndex: 10,
+  },
+  welcomeText: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#FFFFFF',
   },
 });

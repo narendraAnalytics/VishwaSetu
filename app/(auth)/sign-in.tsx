@@ -28,7 +28,7 @@ export default function SignInScreen() {
   // Redirect if already signed in
   useEffect(() => {
     if (isAuthLoaded && isSignedIn) {
-      router.replace('/(tabs)/home');
+      router.replace('/(tabs)');
     }
   }, [isAuthLoaded, isSignedIn]);
 
@@ -46,7 +46,7 @@ export default function SignInScreen() {
       if (createdSessionId && setActive) {
         console.log('EXISTING USER DETECTED - Activating session');
         await setActive({ session: createdSessionId });
-        router.replace('/(tabs)/home');
+        router.replace('/(tabs)');
         return;
       }
 
@@ -60,7 +60,7 @@ export default function SignInScreen() {
     } catch (err: any) {
       console.error(`OAuth error (${provider}):`, err);
       if (err.code === 'session_exists') {
-        router.replace('/(tabs)/home');
+        router.replace('/(tabs)');
       } else {
         Alert.alert('Sign In Failed', 'Please try again or use a different method.');
       }
@@ -101,7 +101,7 @@ export default function SignInScreen() {
         if (activeFn) {
           await activeFn({ session: sessionId });
           setShowUsernameModal(false);
-          router.replace('/(tabs)/home');
+          router.replace('/(tabs)');
         } else {
           console.error('No setActive function available');
           Alert.alert('Success', 'Profile created! Please sign in now.');
