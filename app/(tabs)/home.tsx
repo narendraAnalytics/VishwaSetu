@@ -1,14 +1,29 @@
 import { useUser } from '@clerk/clerk-expo';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import * as NavigationBar from 'expo-navigation-bar';
 import { useRouter } from 'expo-router';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 export default function HomeScreen() {
   const { isSignedIn, user, isLoaded } = useUser();
   const router = useRouter();
+
+  // Auto-hide home icon state
+  const homeIconVisible = useSharedValue(0); // 0 = hidden, 1 = visible
+  const hideTimerRef = useRef<number | null>(null);
+
+  // Feature icon animations (staggered entrance)
+  const icon1Scale = useSharedValue(0);
+  const icon2Scale = useSharedValue(0);
+  const icon3Scale = useSharedValue(0);
+  const icon4Scale = useSharedValue(0);
 
   useEffect(() => {
     NavigationBar.setVisibilityAsync('hidden');
@@ -20,6 +35,93 @@ export default function HomeScreen() {
       router.replace('/(tabs)');
     }
   }, [isLoaded, isSignedIn, router]);
+
+  // Show icon on touch
+  const handleTouchStart = useCallback(() => {
+    // Show icon
+    homeIconVisible.value = withTiming(1, { duration: 300 });
+
+    // Clear existing timer
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+    }
+
+    // Set new auto-hide timer (3 seconds)
+    hideTimerRef.current = setTimeout(() => {
+      homeIconVisible.value = withTiming(0, { duration: 300 });
+    }, 3000);
+  }, []);
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Trigger staggered entrance animations for feature icons
+  useEffect(() => {
+    if (isSignedIn) {
+      // Icon 1 - starts immediately
+      icon1Scale.value = withTiming(1, { duration: 400 });
+
+      // Icon 2 - starts after 150ms
+      setTimeout(() => {
+        icon2Scale.value = withTiming(1, { duration: 400 });
+      }, 150);
+
+      // Icon 3 - starts after 300ms
+      setTimeout(() => {
+        icon3Scale.value = withTiming(1, { duration: 400 });
+      }, 300);
+
+      // Icon 4 - starts after 450ms
+      setTimeout(() => {
+        icon4Scale.value = withTiming(1, { duration: 400 });
+      }, 450);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSignedIn]);
+
+  // Animated style for home icon
+  const homeIconAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: homeIconVisible.value,
+    transform: [
+      {
+        translateY: withTiming(homeIconVisible.value === 1 ? 0 : 60, {
+          duration: 300,
+        }),
+      },
+    ],
+  }));
+
+  // Animated styles for feature icons (scale + opacity)
+  const icon1AnimatedStyle = useAnimatedStyle(() => ({
+    opacity: icon1Scale.value,
+    transform: [{ scale: icon1Scale.value }],
+  }));
+
+  const icon2AnimatedStyle = useAnimatedStyle(() => ({
+    opacity: icon2Scale.value,
+    transform: [{ scale: icon2Scale.value }],
+  }));
+
+  const icon3AnimatedStyle = useAnimatedStyle(() => ({
+    opacity: icon3Scale.value,
+    transform: [{ scale: icon3Scale.value }],
+  }));
+
+  const icon4AnimatedStyle = useAnimatedStyle(() => ({
+    opacity: icon4Scale.value,
+    transform: [{ scale: icon4Scale.value }],
+  }));
+
+  // Navigate to landing page
+  const handleHomePress = useCallback(() => {
+    router.push('/(tabs)');
+  }, [router]);
 
   if (!isLoaded) {
     return (
@@ -37,76 +139,89 @@ export default function HomeScreen() {
   const initials = username.substring(0, 2).toUpperCase();
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <Pressable
-        style={styles.avatarContainer}
-        onPress={() => router.push('/(tabs)/profile')}
+    <View style={styles.wrapper}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        onTouchStart={handleTouchStart}
       >
-        {user?.imageUrl ? (
-          <Image
-            source={{ uri: user.imageUrl }}
-            style={styles.avatar}
-            contentFit="cover"
-          />
-        ) : (
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>{initials}</Text>
-          </View>
-        )}
-      </Pressable>
+        <Pressable
+          style={styles.avatarContainer}
+          onPress={() => router.push('/(tabs)/profile')}
+        >
+          {user?.imageUrl ? (
+            <Image
+              source={{ uri: user.imageUrl }}
+              style={styles.avatar}
+              contentFit="cover"
+            />
+          ) : (
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>{initials}</Text>
+            </View>
+          )}
+        </Pressable>
 
-      <View style={styles.featuresContainer}>
-        <Text style={styles.featuresTitle}>Explore Features</Text>
+        <View style={styles.featuresContainer}>
+          <Text style={styles.featuresTitle}>Explore Features</Text>
 
-        <View style={styles.featureCard}>
-          <View style={styles.featureIconContainer}>
-            <MaterialCommunityIcons name="google-classroom" size={32} color="#10B981" />
+          <View style={styles.featureCard}>
+            <Animated.View style={[styles.featureIconContainer, icon1AnimatedStyle]}>
+              <MaterialCommunityIcons name="google-classroom" size={32} color="#10B981" />
+            </Animated.View>
+            <View style={styles.featureContent}>
+              <Text style={styles.featureTitle}>Live Classroom</Text>
+              <Text style={styles.featureDescription}>
+                Real-time voice interaction for job-specific language learning
+              </Text>
+            </View>
           </View>
-          <View style={styles.featureContent}>
-            <Text style={styles.featureTitle}>Live Classroom</Text>
-            <Text style={styles.featureDescription}>
-              Real-time voice interaction for job-specific language learning
-            </Text>
+
+          <View style={styles.featureCard}>
+            <Animated.View style={[styles.featureIconContainer, icon2AnimatedStyle]}>
+              <MaterialCommunityIcons name="earth" size={32} color="#10B981" />
+            </Animated.View>
+            <View style={styles.featureContent}>
+              <Text style={styles.featureTitle}>Cultural Knowledge Hub</Text>
+              <Text style={styles.featureDescription}>
+                Learn workplace norms and cultural etiquette for your destination
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.featureCard}>
+            <Animated.View style={[styles.featureIconContainer, icon3AnimatedStyle]}>
+              <MaterialCommunityIcons name="camera" size={32} color="#10B981" />
+            </Animated.View>
+            <View style={styles.featureContent}>
+              <Text style={styles.featureTitle}>Visual Sign Bridge</Text>
+              <Text style={styles.featureDescription}>
+                Camera-based translation for signs, manuals, and labels
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.featureCard}>
+            <Animated.View style={[styles.featureIconContainer, icon4AnimatedStyle]}>
+              <MaterialCommunityIcons name="alert-circle" size={32} color="#10B981" />
+            </Animated.View>
+            <View style={styles.featureContent}>
+              <Text style={styles.featureTitle}>Emergency Quick-Help</Text>
+              <Text style={styles.featureDescription}>
+                Critical phrases for safety and urgent situations
+              </Text>
+            </View>
           </View>
         </View>
+      </ScrollView>
 
-        <View style={styles.featureCard}>
-          <View style={styles.featureIconContainer}>
-            <MaterialCommunityIcons name="earth" size={32} color="#10B981" />
-          </View>
-          <View style={styles.featureContent}>
-            <Text style={styles.featureTitle}>Cultural Knowledge Hub</Text>
-            <Text style={styles.featureDescription}>
-              Learn workplace norms and cultural etiquette for your destination
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.featureCard}>
-          <View style={styles.featureIconContainer}>
-            <MaterialCommunityIcons name="camera" size={32} color="#10B981" />
-          </View>
-          <View style={styles.featureContent}>
-            <Text style={styles.featureTitle}>Visual Sign Bridge</Text>
-            <Text style={styles.featureDescription}>
-              Camera-based translation for signs, manuals, and labels
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.featureCard}>
-          <View style={styles.featureIconContainer}>
-            <MaterialCommunityIcons name="alert-circle" size={32} color="#10B981" />
-          </View>
-          <View style={styles.featureContent}>
-            <Text style={styles.featureTitle}>Emergency Quick-Help</Text>
-            <Text style={styles.featureDescription}>
-              Critical phrases for safety and urgent situations
-            </Text>
-          </View>
-        </View>
-      </View>
-    </ScrollView>
+      {/* Auto-hiding Home Icon */}
+      <Animated.View style={[styles.homeIconContainer, homeIconAnimatedStyle]}>
+        <Pressable style={styles.homeIcon} onPress={handleHomePress}>
+          <Ionicons name="home" size={28} color="#FFFFFF" />
+        </Pressable>
+      </Animated.View>
+    </View>
   );
 }
 
@@ -151,12 +266,12 @@ const styles = StyleSheet.create({
   featuresTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#11181C',
+    color: '#10B981',
     marginBottom: 8,
   },
   featureCard: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F9FFFB',
     borderRadius: 16,
     padding: 16,
     shadowColor: '#000',
@@ -180,12 +295,35 @@ const styles = StyleSheet.create({
   featureTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#11181C',
+    color: '#10B981',
     marginBottom: 4,
   },
   featureDescription: {
     fontSize: 14,
     color: '#687076',
     lineHeight: 20,
+  },
+  wrapper: {
+    flex: 1,
+    backgroundColor: '#F0FFF4',
+  },
+  homeIconContainer: {
+    position: 'absolute',
+    bottom: 30,
+    alignSelf: 'center',
+    zIndex: 100,
+  },
+  homeIcon: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#10B981',  // Emerald Green
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
   },
 });
