@@ -12,6 +12,13 @@ export default function TabLayout() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="classroom"
+        options={{
+          headerShown: false,
+          presentation: 'card'
+        }}
+      />
+      <Stack.Screen
         name="profile"
         options={{
           headerShown: false,

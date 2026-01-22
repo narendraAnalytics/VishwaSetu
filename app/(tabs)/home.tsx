@@ -160,7 +160,10 @@ export default function HomeScreen() {
         <View style={styles.featuresContainer}>
           <Text style={styles.featuresTitle}>Explore Features</Text>
 
-          <View style={styles.featureCard}>
+          <Pressable
+            style={styles.featureCard}
+            onPress={() => router.push('/(tabs)/classroom')}
+          >
             <Animated.View style={[styles.featureIconContainer, icon1AnimatedStyle]}>
               <MaterialCommunityIcons name="google-classroom" size={32} color="#10B981" />
             </Animated.View>
@@ -170,7 +173,7 @@ export default function HomeScreen() {
                 Real-time voice interaction for job-specific language learning
               </Text>
             </View>
-          </View>
+          </Pressable>
 
           <View style={styles.featureCard}>
             <Animated.View style={[styles.featureIconContainer, icon2AnimatedStyle]}>

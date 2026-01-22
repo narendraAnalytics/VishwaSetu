@@ -5,7 +5,10 @@
       "Bash(if exist .githubcopilot-instructions.md type .githubcopilot-instructions.md)",
       "Bash(dir:*)",
       "Bash(cat:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(node:*)",
+      "WebSearch"
     ]
   }
 }
