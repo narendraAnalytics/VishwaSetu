@@ -468,9 +468,11 @@ The app is now ready for content implementation, user authentication, and the co
 ## Session 2: Full-Screen Splash Screen Enhancement - January 18, 2026
 
 ### Overview
+
 This session focused on enhancing the splash screen to display a full-screen image (`splashscreen.png`) that covers the entire screen from top to bottom with no gaps, creating an immersive experience. The falling flowers animation was retained while the image animations were removed.
 
 **Main Objectives Accomplished:**
+
 1. ✅ Replaced logo.png with splashscreen.png (full vertical image)
 2. ✅ Fixed image loading issues (7.4MB compression problem)
 3. ✅ Implemented true edge-to-edge full-screen display
@@ -482,30 +484,37 @@ This session focused on enhancing the splash screen to display a full-screen ima
 ### Changes Made
 
 #### 1. Image Asset Change
+
 **Status:** ✅ Complete
 
 **Change:**
+
 - Replaced `@/public/images/logo.png` (282KB, landscape 300x200) with `../public/images/splashscreen.png` (portrait, full-screen design)
 - Updated image path from path alias `@/` to relative path `../` (required for `require()` with static assets)
 
 **Files Modified:**
+
 - `components/SplashScreen.tsx:111` - Image source path
 
 **Issue Encountered:**
+
 - Initial image file was 7.4MB, causing loading failures
 - Solution: User compressed the image to manageable size
 
 ---
 
 #### 2. Full-Screen Image Implementation
+
 **Status:** ✅ Complete
 
 **Changes:**
+
 - Changed image dimensions from fixed `250x450` to full screen using `width: '100%', height: '100%'`
 - Changed `contentFit` from `"contain"` to `"cover"` for true edge-to-edge fill
 - Implemented absolute positioning with `top: 0, left: 0, right: 0, bottom: 0`
 
 **Key Code Pattern:**
+
 ```typescript
 // Container - anchors to all edges
 logoContainer: {
@@ -531,15 +540,18 @@ logo: {
 ```
 
 **Files Modified:**
+
 - `components/SplashScreen.tsx:109-115` - Image container and component
 - `components/SplashScreen.tsx:127-137` - Styles (logoContainer, logo)
 
 ---
 
 #### 3. Animation Removal
+
 **Status:** ✅ Complete
 
 **What was removed:**
+
 - Fade-in animation (opacity 0 → 1, 800ms duration)
 - Spring scale animation (scale 0 → 1, damping: 10)
 - `Animated.View` wrapper replaced with plain `View`
@@ -548,6 +560,7 @@ logo: {
 Animations were not suited for the full-screen portrait image - the scale/fade effects didn't enhance the user experience.
 
 **Before:**
+
 ```typescript
 <Animated.View style={logoAnimatedStyle}>
   <Image ... />
@@ -555,6 +568,7 @@ Animations were not suited for the full-screen portrait image - the scale/fade e
 ```
 
 **After:**
+
 ```typescript
 <View style={styles.logoContainer}>
   <Image ... />
@@ -562,6 +576,7 @@ Animations were not suited for the full-screen portrait image - the scale/fade e
 ```
 
 **Files Modified:**
+
 - `components/SplashScreen.tsx:109-115` - Removed Animated.View wrapper
 
 **Note:** Animation setup code (lines 71-82) remains in file but is unused - can be safely removed in future cleanup.
@@ -571,9 +586,11 @@ Animations were not suited for the full-screen portrait image - the scale/fade e
 #### 4. Gap Fixes (Top & Bottom)
 
 ##### Issue 1: Top Gap
+
 **Problem:** Container's `justifyContent: 'center'` was centering the image, creating gap at top.
 
 **Solution:** Added absolute positioning to image container
+
 ```typescript
 logoContainer: {
   position: 'absolute',
@@ -584,9 +601,11 @@ logoContainer: {
 ```
 
 ##### Issue 2: Bottom Gap
+
 **Problem:** Using `Dimensions.get('window')` which doesn't capture true full screen height in edge-to-edge mode.
 
 **Solution:** Changed from explicit width/height to edge anchoring
+
 ```typescript
 // Before (caused gap)
 logoContainer: {
@@ -604,6 +623,7 @@ logoContainer: {
 ```
 
 **Why this works:**
+
 - `top: 0, left: 0, right: 0, bottom: 0` anchors to all edges of parent
 - Parent container has `flex: 1`, filling entire screen
 - No dependency on `Dimensions.get('window')` which may not capture full screen in edge-to-edge mode
@@ -615,6 +635,7 @@ logoContainer: {
 #### Problem: Image not visible (only flowers showing)
 
 **Possible Causes:**
+
 1. **Path alias issue** - `@/` doesn't work with `require()` for static assets
    - Solution: Use relative path `../public/images/`
 
@@ -625,6 +646,7 @@ logoContainer: {
    - Solution: Remove animations or ensure they execute
 
 **Debug Steps:**
+
 ```typescript
 // Add to Image component
 onLoad={() => console.log('✅ Image loaded')}
@@ -645,6 +667,7 @@ style={{ borderWidth: 3, borderColor: 'red', backgroundColor: 'yellow' }}
 **Cause:** `Dimensions.get('window')` doesn't capture full screen height
 
 **Solution:** Use edge anchoring instead:
+
 ```typescript
 position: 'absolute',
 top: 0,
@@ -660,6 +683,7 @@ bottom: 0,
 **File:** `components/SplashScreen.tsx`
 
 **Complete working pattern:**
+
 ```typescript
 export function CustomSplashScreen() {
   const flowers = [
@@ -715,12 +739,14 @@ const styles = StyleSheet.create({
 ### Files Modified
 
 **Modified:**
+
 1. `components/SplashScreen.tsx:111` - Changed image source from logo.png to splashscreen.png
 2. `components/SplashScreen.tsx:109-115` - Replaced Animated.View with plain View
 3. `components/SplashScreen.tsx:113` - Changed contentFit from "contain" to "cover"
 4. `components/SplashScreen.tsx:127-137` - Updated logoContainer and logo styles
 
 **Image Assets:**
+
 - `public/images/splashscreen.png` - User compressed to optimal size
 
 ---
@@ -728,6 +754,7 @@ const styles = StyleSheet.create({
 ### Key Learnings - Reusable for Landing Page
 
 #### Pattern 1: Edge-to-Edge Full-Screen Images
+
 ```typescript
 // Container pattern
 imageContainer: {
@@ -749,6 +776,7 @@ image: {
 ```
 
 **Use this pattern for:**
+
 - Landing page background images
 - Full-screen hero sections
 - Immersive onboarding screens
@@ -756,6 +784,7 @@ image: {
 #### Pattern 2: Avoiding Dimension Issues
 
 **Don't use:**
+
 ```typescript
 // Can cause gaps in edge-to-edge mode
 const { width, height } = Dimensions.get('window');
@@ -764,6 +793,7 @@ height: height,
 ```
 
 **Use instead:**
+
 ```typescript
 // Anchors to all edges reliably
 top: 0,
@@ -780,6 +810,7 @@ bottom: 0,
    - `"cover"` - Fill entire area (may crop)
    - `"contain"` - Show full image (may leave gaps)
 4. **Add error handling during development**:
+
    ```typescript
    onLoad={() => console.log('Loaded')}
    onError={(error) => console.error(error)}
@@ -790,16 +821,19 @@ bottom: 0,
 ### Technical Notes
 
 **Why `Dimensions.get('window')` failed:**
+
 - In edge-to-edge mode with hidden navigation bar, `window` dimensions may not reflect true screen size
 - Android's edge-to-edge mode can cause discrepancies between window and actual screen dimensions
 - Solution: Use CSS-like edge anchoring (`top/left/right/bottom: 0`) which is more reliable
 
 **contentFit modes:**
+
 - `"cover"` - Scales image to fill container, maintains aspect ratio, crops if needed
 - `"contain"` - Scales image to fit inside container, maintains aspect ratio, may show container background
 - `"fill"` - Stretches image to fill container, may distort aspect ratio
 
 **Z-index considerations:**
+
 - Falling flowers use `position: 'absolute'`
 - Image also uses `position: 'absolute'`
 - Order in JSX determines stacking (flowers rendered first, so they appear on top)
@@ -810,6 +844,7 @@ bottom: 0,
 ### Session Summary
 
 **What We Accomplished:**
+
 - Full-screen immersive splash screen with VishwaSetu artwork
 - Edge-to-edge display with zero gaps (top or bottom)
 - Falling flowers animation preserved
@@ -826,3 +861,21 @@ The patterns and techniques can now be applied to create a similar full-screen e
 ---
 
 *Session 2 completed: January 18, 2026*
+
+Changes Made ✅
+
+  1. Frontend - Micro-Chunking (hooks/useClassroom.ts)
+
+- Line 151: Changed recording duration from 3000ms → 200ms
+- Line 209: Changed loop interval from 3000ms → 200ms
+- Now records and sends audio every 200ms instead of every 3 seconds!
+
+  1. Backend - Accept Small Chunks (backend/src/routes/classroom.ts)
+
+- Lines 152-160: Removed minimum size validation
+- Now accepts small 200ms chunks without skipping them
+
+  1. Backend - Allow Small Audio (backend/src/services/audioUtils.ts)
+
+- Line 43: Reduced MIN_AUDIO_SIZE from 1000 → 100 bytes
+- FFmpeg now processes small 200ms chunks without returning silence

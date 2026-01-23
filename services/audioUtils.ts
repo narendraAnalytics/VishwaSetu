@@ -13,11 +13,37 @@
  * @returns Base64 encoded WAV audio with proper headers
  */
 export function pcmToWav(base64Pcm: string, sampleRate: number, channels: number = 1): string {
+    console.log(`[AUDIO] pcmToWav called - input length: ${base64Pcm?.length || 0}, sampleRate: ${sampleRate}, channels: ${channels}`);
+
+    // Validate inputs
+    if (!base64Pcm || base64Pcm.length === 0) {
+        throw new Error('Empty PCM data provided to pcmToWav');
+    }
+
+    if (sampleRate <= 0 || channels <= 0) {
+        throw new Error(`Invalid audio parameters: sampleRate=${sampleRate}, channels=${channels}`);
+    }
+
     // Decode base64 to bytes
-    const binaryString = atob(base64Pcm);
-    const pcmBytes = new Uint8Array(binaryString.length);
+    let binaryString: string;
+    try {
+        binaryString = atob(base64Pcm);
+    } catch (e) {
+        throw new Error('Invalid base64 PCM data');
+    }
+
+    let pcmBytes = new Uint8Array(binaryString.length);
     for (let i = 0; i < binaryString.length; i++) {
         pcmBytes[i] = binaryString.charCodeAt(i);
+    }
+
+    // Validate PCM data size (must be even for 16-bit samples)
+    if (pcmBytes.length % 2 !== 0) {
+        console.warn(`[AUDIO] PCM data has odd length (${pcmBytes.length} bytes), padding with zero`);
+        const paddedBytes = new Uint8Array(pcmBytes.length + 1);
+        paddedBytes.set(pcmBytes);
+        paddedBytes[pcmBytes.length] = 0;
+        pcmBytes = paddedBytes;
     }
 
     // Create WAV header (44 bytes)
@@ -50,6 +76,8 @@ export function pcmToWav(base64Pcm: string, sampleRate: number, channels: number
     const wavBytes = new Uint8Array(44 + pcmBytes.length);
     wavBytes.set(new Uint8Array(wavHeader), 0);
     wavBytes.set(pcmBytes, 44);
+
+    console.log(`[AUDIO] Created WAV: ${wavBytes.length} bytes (${pcmBytes.length} PCM + 44 header), ${sampleRate}Hz, ${channels}ch`);
 
     // Encode to base64
     let binary = '';

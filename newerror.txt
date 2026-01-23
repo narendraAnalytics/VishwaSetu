@@ -1,1053 +1,169 @@
- LOG  Connecting to SSE: http://192.168.1.6:3000/api/classroom/session/ee3a4cf0-b7d5-4080-8530-635d1b3880cd/events
- LOG  [FRONTEND] Started continuous recording
- LOG  [FRONTEND] Event [sse_connected]: {"sessionId": "ee3a4cf0-b7d5-4080-8530-635d1b3880cd", "timestamp": 1769064602541}
- LOG  [FRONTEND] SSE Connected Event
- LOG  [FRONTEND] Event [status]: {"connected": true}
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-d25207a9-a4eb-4862-ac9c-232a392ae312.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-1a7d1c2b-09b7-4f2a-af57-bdb775d1353d.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-c624f249-90d0-41fa-9630-9363a7ef54f9.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (16572 bytes)
- LOG  [FRONTEND] Uploaded audio chunk (25312 bytes)
- LOG  [FRONTEND] Uploaded audio chunk (8768 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-7b8b17e5-5006-4c7d-a10d-e036d9afc2a7.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (32612 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-ed5b66c8-babb-4e25-b0cb-11e363af48aa.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (41460 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-378a3508-e4e5-4b46-b2cb-2cab31776a37.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (49696 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-caa3bb54-87d8-4b96-a048-275a543fd3e5.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (57584 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-76076921-060a-44d4-bacb-e265171362cc.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (66168 bytes)
- LOG  [FRONTEND] Uploaded audio chunk (74528 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-32c1de7b-4825-413f-97fa-baf7a99207bb.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-20d5af52-3187-4eb9-98a9-5559d47db61a.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (82328 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-64e6f893-9ebc-4fc7-a9aa-dc99f69e4b15.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (90872 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-2cf1f673-495c-4ee9-bb37-7978ab085a0a.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (99420 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-042d3b14-0093-41d1-989c-9fb99c0531a2.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (107784 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-ff3d47b5-532e-4a45-8815-d5a1f7c8e594.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (115776 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-fd0e97e2-b2d6-40c5-aeef-008ac7ed93f5.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (123768 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-ad371d21-6495-4d8e-8b1e-bda76ed025ae.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (132188 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-40c0e62c-6d8f-411c-bced-b218cc25d7e7.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (139916 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-5d67f8a6-d115-40b3-91b9-bd1095ade764.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (148460 bytes)
- LOG  [FRONTEND] Uploaded audio chunk (156632 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-c896d1d5-4738-46d1-92fe-ddc24a13cc2d.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-cb1f8d94-698b-4aa6-a526-cdb1282ed6ae.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (164808 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-c09dc8a8-3f53-45e8-8b53-db3afc24bac3.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (173464 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-b76e5d58-1bc7-41e6-ad98-5e214148e219.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (181152 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-0bc06c82-0413-4f20-b287-87668a332e0a.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (190068 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\U LOG  [FRONTEND] Uploaded audio chunk (173464 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-b76e5d58-1bc7-41e6-ad98-5e214148e219.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (181152 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-0bc06c82-0413-4f20-b287-87668a332e0a.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (190068 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-93ec5f90-be80-4691-a698-af2aebc9a5ec.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (173464 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-b76e5d58-1bc7-41e6-ad98-5e214148e219.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (181152 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-0bc06c82-0413-4f20-b287-87668a332e0a.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (190068 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-93ec5f90-be80-4691-a698-af2aebc9a5ec.pcm.
-"}
- LOG  [FRONTEND] Uploaded audio chunk (181152 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-0bc06c82-0413-4f20-b287-87668a332e0a.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (190068 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-0bc06c82-0413-4f20-b287-87668a332e0a.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (190068 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\U LOG  [FRONTEND] Uploaded audio chunk (190068 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\U LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-93ec5f90-be80-4691-a698-af2aebc9a5ec.pcm.
-Error opening output files: Invalid argument
-"}
- LOG  [FRONTEND] Uploaded audio chunk (197872 bytes)
- LOG  [FRONTEND] Event [error]: {"message": "FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:\\Users\\ES\\AppData\\Local\\Temp\\vishwa-output-b34d9beb-1e42-4a69-ae46-6262a1d8481b.pcm.
-Error opening output files: Invalid argument
-"}
+frontend :
+
+ LOG  [FRONTEND] audioChunk handler - data type: string length: 2560
+ LOG  [FRONTEND] Queue before push: 295 isPlayingRef: true
+ LOG  [FRONTEND] Queue after push: 296
+ LOG  [FRONTEND] playNextAudioChunk skipped - isPlaying: true, queueLength: 296
+ LOG  [FRONTEND] Event [audioChunk]: {"audioData": "7//w/+//8f/u/+7/8P/u//D/7f/x//L/8P/y/+3/8//u//D/8P/u/+//6//s/+3/6v/t/+j/8f/q/+7/8f/x/+7/7f/t/+z/7f/t/+3/7//s/+3/7P/t/+r/7P/u/+n/6v/m/+r/7//p/+j/6v/p/+v/6v/p/+v/5P/q/+n/7P/q/+r/7f/q/+z/6f/q/+f/6//r/+n/7f/r/+z/7P/u/+v/7//t/+7/6//t/+v/6//u/+z/8//w/+3/7//v//H/7//x//D/8f/w//H/8f/y//L/8v/x//H/8f/z//L/9P/0//T/8//z//T/8//0//P/9P/0//P/9P/z//T/9P/z//b/8f/q//f/+P/1//j/9//5//f/+f/5//r/+f/6//r/+v/6//v/+v/7//j/+//6//r/+f/6//v/+//6//n/+//6//r/+//7//v//P/6//z/+//+//z/9P/7//n/+//8//v//P/9//3/+//8//z/+//8//z//P/5//3/9//7//z//f/+//7//v/////////9//j/AAABAP7/AAD8//7/+//9/wAAAwD//wEAAQD+/wEA/v///wAA/P8CAAAA/v////3//////wQAAAAAAP7//v8BAP///v8BAAAAAwD/////AAAFAAQAAQAFAAMABQADAAIABgAHAAcACAAEAAcABwAGAAkAAwAJAAoACQAHAAYACgAIAAwABwAIAAsABwAFAAUABgALAAgACwAGAAoABQAKAAoABwAKAAoACAAJAAcADAAMAA4ADQAPAA4ADAANAAwADQAMABEAFAAMAA8ADgAPABAADwARABEAEgAUABMADwARABAADwAPABAAEAAPABAADQAQABEAEgARABQAEwASABMABwAOABAAEAAOAA4AEAAOAA8ADgAPAA0ADgAMAA0ADAAOAAwADQALAAwADAAJAAoACgALAAkACwAJAAoACQAKAAkACQAGAAkABgAJAAQADAAKAPn/AgD+/wAA/v/+//7//v/9//3//P/8//z//P/8//v/+//8//3/+//7//z/+//8//v/+//7//v/+//7//z/+//6//v/+v/6//v/+v/5//n//f/8//r//P/6//v//P/7//v/+v/9//r//P/7//z/+v/9//v/+//+//z//v/8//7/+//9//v/+//6//3////7//3//P/+//////8BAAIA+//6//7//P8CAP7/AAAAAP//AwACAAEAAQABAAMAAgAEAAAAAgAEAAQAAwACAAQAAwADAAMAAwADAAcACQAEAAYABwAHAAcABAAHAAYACAACAAEABAAEAAYAAgAFAAQABwAGAAMACQAKAAkACQAJAAgABwAKAAcACAAIAAwACQAIAAoACQAMAAoADAAJAAsADwAKAA8ADAANABIADQATAAgABQALAA4ADAAPAA0ADwAOAAkAEQAPAA0ACgAKAAsACQALAAgADQAJABEACgAMAA0ACgAMAAsACwAJAA0ACAAKAAkACwAKAAkACwAFAAsADQAJAAkACAAKAAgACAAIAAYABwAJAAYABwAIAAgACAAIAAgABgAHAAYABwAHAAgABwAGAAcABwAGAAcABgAGAAUABwAGAAYABgAIAAYACwAMAP//AgABAAEAAQABAAAAAAAAAAAAAAAAAAAA//8AAAAA/////////////////////////////////////////////////////////////////////////////////////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "mimeType": "audio/pcm;rate=24000"}
+ LOG  [FRONTEND] audioChunk handler - data type: string length: 2560
+ LOG  [FRONTEND] Queue before push: 296 isPlayingRef: true
+ LOG  [FRONTEND] Queue after push: 297
+ LOG  [FRONTEND] playNextAudioChunk skipped - isPlaying: true, queueLength: 297
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
+ LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
+ LOG  [FRONTEND] playNextAudioChunk started - queue length: 297
+ LOG  [FRONTEND] Converting PCM to WAV - input length: 2560
+ LOG  [AUDIO] pcmToWav called - input length: 2560, sampleRate: 24000, channels: 1
+ LOG  [AUDIO] Created WAV: 1964 bytes (1920 PCM + 44 header), 24000Hz, 1ch
+ LOG  [FRONTEND] WAV conversion successful - output length: 2620
+ LOG  [FRONTEND] Created audio file instance: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142794786.wav
+ LOG  [FRONTEND] Decoded WAV to bytes: 1964
+ LOG  [FRONTEND] Writing audio file...
+ LOG  [FRONTEND] Audio file written
+ LOG  [FRONTEND] Playing audio: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142794786.wav (1964 bytes)
+ LOG  [FRONTEND] Creating audio player...
+ LOG  [FRONTEND] Audio player created
+ LOG  [FRONTEND] Starting audio playback...
+ LOG  [FRONTEND] Audio playback started
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9140 bytes, format: m4a, fileSize: 6854
+ LOG  [FRONTEND] Sent complete audio chunk (9140 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Event [turnComplete]: {"timestamp": 1769142801485}
+ LOG  [FRONTEND] Sending audio chunk: 12460 bytes, format: m4a, fileSize: 9343
+ LOG  [FRONTEND] Sent complete audio chunk (12460 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
+ LOG  [FRONTEND] playNextAudioChunk started - queue length: 296
+ LOG  [FRONTEND] Converting PCM to WAV - input length: 2560
+ LOG  [AUDIO] pcmToWav called - input length: 2560, sampleRate: 24000, channels: 1
+ LOG  [AUDIO] Created WAV: 1964 bytes (1920 PCM + 44 header), 24000Hz, 1ch
+ LOG  [FRONTEND] WAV conversion successful - output length: 2620
+ LOG  [FRONTEND] Created audio file instance: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142804805.wav
+ LOG  [FRONTEND] Decoded WAV to bytes: 1964
+ LOG  [FRONTEND] Writing audio file...
+ LOG  [FRONTEND] Audio file written
+ LOG  [FRONTEND] Playing audio: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142804805.wav (1964 bytes)
+ LOG  [FRONTEND] Creating audio player...
+ LOG  [FRONTEND] Audio player created
+ LOG  [FRONTEND] Starting audio playback...
+ LOG  [FRONTEND] Audio playback started
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
+ LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
+ LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
+ LOG  [FRONTEND] playNextAudioChunk started - queue length: 295
+ LOG  [FRONTEND] Converting PCM to WAV - input length: 2560
+ LOG  [AUDIO] pcmToWav called - input length: 2560, sampleRate: 24000, channels: 1
+ LOG  [AUDIO] Created WAV: 1964 bytes (1920 PCM + 44 header), 24000Hz, 1ch
+ LOG  [FRONTEND] WAV conversion successful - output length: 2620
+ LOG  [FRONTEND] Created audio file instance: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142814811.wav
+ LOG  [FRONTEND] Decoded WAV to bytes: 1964
+ LOG  [FRONTEND] Writing audio file...
+ LOG  [FRONTEND] Audio file written
+ LOG  [FRONTEND] Playing audio: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142814811.wav (1964 bytes)
+ LOG  [FRONTEND] Creating audio player...
+ LOG  [FRONTEND] Audio player created
+ LOG  [FRONTEND] Starting audio playback...
+ LOG  [FRONTEND] Audio playback started
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Sending audio chunk: 9984 bytes, format: m4a, fileSize: 7488
+ LOG  [FRONTEND] Sent complete audio chunk (9984 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
+ LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
+ LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
+ LOG  [FRONTEND] playNextAudioChunk started - queue length: 294
+ LOG  [FRONTEND] Converting PCM to WAV - input length: 2560
+ LOG  [AUDIO] pcmToWav called - input length: 2560, sampleRate: 24000, channels: 1
+ LOG  [AUDIO] Created WAV: 1964 bytes (1920 PCM + 44 header), 24000Hz, 1ch
+ LOG  [FRONTEND] WAV conversion successful - output length: 2620
+ LOG  [FRONTEND] Created audio file instance: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142824841.wav
+ LOG  [FRONTEND] Decoded WAV to bytes: 1964
+ LOG  [FRONTEND] Writing audio file...
+ LOG  [FRONTEND] Audio file written
+ LOG  [FRONTEND] Playing audio: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142824841.wav (1964 bytes)
+ LOG  [FRONTEND] Creating audio player...
+ LOG  [FRONTEND] Audio player created
+ LOG  [FRONTEND] Starting audio playback...
+ LOG  [FRONTEND] Audio playback started
+ LOG  [FRONTEND] Sending audio chunk: 9140 bytes, format: m4a, fileSize: 6854
+ LOG  [FRONTEND] Sent complete audio chunk (9140 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9220 bytes, format: m4a, fileSize: 6914
+ LOG  [FRONTEND] Sent complete audio chunk (9220 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9140 bytes, format: m4a, fileSize: 6854
+ LOG  [FRONTEND] Sent complete audio chunk (9140 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
+ LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
+ LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
+ LOG  [FRONTEND] Started 500ms audio chunk
  LOG  [FRONTEND] Event [status]: {"connected": false}
  LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
+ LOG  [FRONTEND] playNextAudioChunk skipped - isPlaying: false, queueLength: 0
  LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
  LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
  LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
  LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
  LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
 
- backend error :
-
-
- [dotenv@17.2.3] injecting env (4) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
-✅ VishwaSetu Backend running on http://localhost:3000
-📡 Health check: http://localhost:3000/health
-🧪 Test Gemini: http://localhost:3000/api/test-gemini
-[SESSION 5629dabd-de20-4659-a4b5-3952f9169bcf] Created new session
-[SESSION 5629dabd-de20-4659-a4b5-3952f9169bcf] Creating new Gemini Live connection
-🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
-✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
-[BACKEND] Broadcasting SSE event: status       
-📤 [BACKEND] Sending initial audio nudge...    
-[BACKEND] Cannot send audio: Session not active
-📥 [BACKEND] Message from Gemini: {"setupComplete":{}}...
-[AUDIO] Converting 7132 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-374649b4-da39-40e3-9e29-ddff31d61fd6.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-374649b4-da39-40e3-9e29-ddff31d61fd6.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-374649b4-da39-40e3-9e29-ddff31d61fd6.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-374649b4-da39-40e3-9e29-ddff31d61fd6.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 12756 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-9b229c22-2729-4a98-8e35-c0d74b6c7f88.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-9b229c22-2729-4a98-8e35-c0d74b6c7f88.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-9b229c22-2729-4a98-8e35-c0d74b6c7f88.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-9b229c22-2729-4a98-8e35-c0d74b6c7f88.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 19114 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-90a541cc-d83e-4126-bef0-f7516b1015e5.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-90a541cc-d83e-4126-bef0-f7516b1015e5.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-90a541cc-d83e-4126-bef0-f7516b1015e5.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-90a541cc-d83e-4126-bef0-f7516b1015e5.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 25245 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-fa74b2a2-dc6c-4c62-85fe-6751f65045e9.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-fa74b2a2-dc6c-4c62-85fe-6751f65045e9.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-fa74b2a2-dc6c-4c62-85fe-6751f65045e9.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-fa74b2a2-dc6c-4c62-85fe-6751f65045e9.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 31421 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-d8b7a726-6b8e-45ad-a48b-8178b4166842.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-d8b7a726-6b8e-45ad-a48b-8178b4166842.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-d8b7a726-6b8e-45ad-a48b-8178b4166842.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-d8b7a726-6b8e-45ad-a48b-8178b4166842.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 38147 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-b6bf9724-214b-4123-bfe9-62ea255e47d7.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-b6bf9724-214b-4123-bfe9-62ea255e47d7.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-b6bf9724-214b-4123-bfe9-62ea255e47d7.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-b6bf9724-214b-4123-bfe9-62ea255e47d7.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 43650 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-51ec2474-898e-400a-a2af-aaa2f15686b5.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-51ec2474-898e-400a-a2af-aaa2f15686b5.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-51ec2474-898e-400a-a2af-aaa2f15686b5.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-51ec2474-898e-400a-a2af-aaa2f15686b5.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 50043 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-d33fb8b9-26d5-428b-9f36-175ccc84a1e1.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-d33fb8b9-26d5-428b-9f36-175ccc84a1e1.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-d33fb8b9-26d5-428b-9f36-175ccc84a1e1.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-d33fb8b9-26d5-428b-9f36-175ccc84a1e1.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 56173 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-4935530c-ff38-425e-bcb5-229f4c5900ca.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-4935530c-ff38-425e-bcb5-229f4c5900ca.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-4935530c-ff38-425e-bcb5-229f4c5900ca.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-4935530c-ff38-425e-bcb5-229f4c5900ca.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 62303 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-9e99ab99-b877-4538-adba-aae9ab0c60f1.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-9e99ab99-b877-4538-adba-aae9ab0c60f1.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-9e99ab99-b877-4538-adba-aae9ab0c60f1.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-9e99ab99-b877-4538-adba-aae9ab0c60f1.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 68433 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-7995d6bc-bb03-4ab5-a3d9-45fce8060328.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-7995d6bc-bb03-4ab5-a3d9-45fce8060328.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-7995d6bc-bb03-4ab5-a3d9-45fce8060328.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-7995d6bc-bb03-4ab5-a3d9-45fce8060328.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 74563 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-0179dd5f-caaa-4505-960f-be6aa44b806b.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0179dd5f-caaa-4505-960f-be6aa44b806b.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0179dd5f-caaa-4505-960f-be6aa44b806b.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0179dd5f-caaa-4505-960f-be6aa44b806b.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 80693 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-2589699c-c1d5-4e0f-aef9-e2954e624963.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-2589699c-c1d5-4e0f-aef9-e2954e624963.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-2589699c-c1d5-4e0f-aef9-e2954e624963.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-2589699c-c1d5-4e0f-aef9-e2954e624963.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 86835 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-bdabb5ce-5eab-4bf4-a822-6a2214eea86b.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-bdabb5ce-5eab-4bf4-a822-6a2214eea86b.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-bdabb5ce-5eab-4bf4-a822-6a2214eea86b.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-bdabb5ce-5eab-4bf4-a822-6a2214eea86b.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 93232 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-ff541943-0921-4ede-b159-d8c55f0b6d44.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-ff541943-0921-4ede-b159-d8c55f0b6d44.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-ff541943-0921-4ede-b159-d8c55f0b6d44.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-ff541943-0921-4ede-b159-d8c55f0b6d44.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 99362 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-99d552ed-ece5-4b85-82be-4021d6bcd40a.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-99d552ed-ece5-4b85-82be-4021d6bcd40a.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-99d552ed-ece5-4b85-82be-4021d6bcd40a.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-99d552ed-ece5-4b85-82be-4021d6bcd40a.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 105492 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-dd3cb4cf-7c83-4446-9942-ccea828d1194.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-dd3cb4cf-7c83-4446-9942-ccea828d1194.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-dd3cb4cf-7c83-4446-9942-ccea828d1194.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-dd3cb4cf-7c83-4446-9942-ccea828d1194.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 111901 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-cfa7135a-aecc-452f-9e65-b89ce671ca96.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-cfa7135a-aecc-452f-9e65-b89ce671ca96.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-cfa7135a-aecc-452f-9e65-b89ce671ca96.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-cfa7135a-aecc-452f-9e65-b89ce671ca96.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 118182 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-dd7df4c1-e383-4084-8b55-9172a4eb3d38.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-dd7df4c1-e383-4084-8b55-9172a4eb3d38.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-dd7df4c1-e383-4084-8b55-9172a4eb3d38.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-dd7df4c1-e383-4084-8b55-9172a4eb3d38.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 124161 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-09f7c38e-a0d8-4452-a09c-63a902118d34.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-09f7c38e-a0d8-4452-a09c-63a902118d34.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-09f7c38e-a0d8-4452-a09c-63a902118d34.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-09f7c38e-a0d8-4452-a09c-63a902118d34.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 130570 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-254ae7c5-4df7-4741-96c4-8b818ba626af.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-254ae7c5-4df7-4741-96c4-8b818ba626af.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-254ae7c5-4df7-4741-96c4-8b818ba626af.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-254ae7c5-4df7-4741-96c4-8b818ba626af.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 136752 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-4b649e0c-3560-4395-9153-91f3b46fe448.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-4b649e0c-3560-4395-9153-91f3b46fe448.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-4b649e0c-3560-4395-9153-91f3b46fe448.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-4b649e0c-3560-4395-9153-91f3b46fe448.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 142907 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-bbeabc8d-49d5-409e-9eeb-d0e1134b6832.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-bbeabc8d-49d5-409e-9eeb-d0e1134b6832.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-bbeabc8d-49d5-409e-9eeb-d0e1134b6832.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-bbeabc8d-49d5-409e-9eeb-d0e1134b6832.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 149396 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-affc4c34-ab31-4e54-8315-a83e1087820e.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-affc4c34-ab31-4e54-8315-a83e1087820e.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-affc4c34-ab31-4e54-8315-a83e1087820e.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-affc4c34-ab31-4e54-8315-a83e1087820e.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 155748 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-5965b27b-26af-4b99-b347-707cfe08f11b.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-5965b27b-26af-4b99-b347-707cfe08f11b.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-5965b27b-26af-4b99-b347-707cfe08f11b.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-5965b27b-26af-4b99-b347-707cfe08f11b.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 161503 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-db4272d7-f895-48ec-8dee-b9374a1adc0a.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-db4272d7-f895-48ec-8dee-b9374a1adc0a.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-db4272d7-f895-48ec-8dee-b9374a1adc0a.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-db4272d7-f895-48ec-8dee-b9374a1adc0a.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 167629 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-0ea11cc2-b86f-4a81-9649-c8df16fac58a.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0ea11cc2-b86f-4a81-9649-c8df16fac58a.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0ea11cc2-b86f-4a81-9649-c8df16fac58a.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0ea11cc2-b86f-4a81-9649-c8df16fac58a.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 173759 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-f696a695-5677-4968-a0fa-f35a4610a7af.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-f696a695-5677-4968-a0fa-f35a4610a7af.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-f696a695-5677-4968-a0fa-f35a4610a7af.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-f696a695-5677-4968-a0fa-f35a4610a7af.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 179889 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-0850adbe-b7a3-4e2e-8285-b67cb9bc37b2.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0850adbe-b7a3-4e2e-8285-b67cb9bc37b2.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0850adbe-b7a3-4e2e-8285-b67cb9bc37b2.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-0850adbe-b7a3-4e2e-8285-b67cb9bc37b2.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 186019 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-79780397-6287-4292-87ea-73baca0bfbd8.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-79780397-6287-4292-87ea-73baca0bfbd8.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-79780397-6287-4292-87ea-73baca0bfbd8.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-79780397-6287-4292-87ea-73baca0bfbd8.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 192428 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-5cf4cd1c-c19f-45d7-9f9e-eae4c8a97349.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-5cf4cd1c-c19f-45d7-9f9e-eae4c8a97349.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-5cf4cd1c-c19f-45d7-9f9e-eae4c8a97349.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-5cf4cd1c-c19f-45d7-9f9e-eae4c8a97349.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 198836 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-a8d0b877-56ab-4fdb-ba93-4e6a52c42cb5.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-a8d0b877-56ab-4fdb-ba93-4e6a52c42cb5.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-a8d0b877-56ab-4fdb-ba93-4e6a52c42cb5.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-a8d0b877-56ab-4fdb-ba93-4e6a52c42cb5.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 205201 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-63f35fd3-df8a-4542-aba4-2568adfbf938.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-63f35fd3-df8a-4542-aba4-2568adfbf938.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-63f35fd3-df8a-4542-aba4-2568adfbf938.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-63f35fd3-df8a-4542-aba4-2568adfbf938.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 211097 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-f5b4618a-b69d-4617-a522-22f294088337.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-f5b4618a-b69d-4617-a522-22f294088337.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-f5b4618a-b69d-4617-a522-22f294088337.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-f5b4618a-b69d-4617-a522-22f294088337.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 217227 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-04c80fa2-1bb0-4927-b84f-7603347306f8.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-04c80fa2-1bb0-4927-b84f-7603347306f8.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-04c80fa2-1bb0-4927-b84f-7603347306f8.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-04c80fa2-1bb0-4927-b84f-7603347306f8.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 223357 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-a0506eb5-fbbd-4d5d-9b20-61ea3a686b89.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-a0506eb5-fbbd-4d5d-9b20-61ea3a686b89.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-a0506eb5-fbbd-4d5d-9b20-61ea3a686b89.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-a0506eb5-fbbd-4d5d-9b20-61ea3a686b89.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO] Converting 228448 bytes from aac to PCM...
-[AUDIO] Wrote temp input file: C:/Users/ES/AppData/Local/Temp/vishwa-input-e751994b-e18e-445d-820d-6798dbfc0cb1.aac
-[FFMPEG] Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-e751994b-e18e-445d-820d-6798dbfc0cb1.pcm.
-[FFMPEG] Error opening output files: Invalid argument
-[FFMPEG ERROR] Error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-e751994b-e18e-445d-820d-6798dbfc0cb1.pcm.
-Error opening output files: Invalid argument
-
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:22)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
-[AUDIO PROCESSING ERROR] Error: FFmpeg conversion error: ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/AppData/Local/Temp/vishwa-output-e751994b-e18e-445d-820d-6798dbfc0cb1.pcm.
-Error opening output files: Invalid argument
-
-    at FfmpegCommand.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\src\services\audioUtils.ts:73:18)
-    at FfmpegCommand.emit (node:events:518:28)
-    at FfmpegCommand.emit (node:domain:489:12)
-    at emitEnd (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:422:16)
-    at endCB (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:543:13)
-    at handleExit (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:168:11)
-    at ChildProcess.<anonymous> (C:\Users\ES\Desktop\2025\vishwasetu\backend\node_modules\fluent-ffmpeg\lib\processor.js:180:11)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess.emit (node:domain:489:12)
-    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
+ backend :
+
+ [AUDIO] Conversion finished. Output size: 10402 bytes
+[BACKEND] Sending 10402 bytes of PCM to Gemini...
+[SESSION 33fee41f-0fbb-45df-b666-e1a14cc6e986] Sent 10402 PCM bytes to Gemini
+[SESSION 33fee41f-0fbb-45df-b666-e1a14cc6e986] Received 3510 bytes of m4a audio
+[AUDIO] Converting 3510 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:\Users\ES\Desktop\2025\vishwasetu\backend\temp\in-e4097337.m4a (3510 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:\Users\ES\Desktop\2025\vishwasetu\backend\temp\in-e4097337.m4a 
+-y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-e4097337.pcm
+[AUDIO] Conversion finished. Output size: 744 bytes
+[BACKEND] Sending 744 bytes of PCM to Gemini...
+[SESSION 33fee41f-0fbb-45df-b666-e1a14cc6e986] Sent 744 PCM bytes to Gemini
 [BACKEND] Disconnecting Gemini Live session...
 [BACKEND] Broadcasting SSE event: status
 ✅ [BACKEND] Gemini session disconnected successfully

@@ -5,13 +5,11 @@ import { GeminiLiveSession } from '../services/geminiLiveService';
 
 const router = Router();
 
-// Enhanced session data structure
+// Session data structure
 interface SessionData {
     session: GeminiLiveSession;
     clients: any[];
     lastActivity: number;       // Timestamp of last activity
-    audioBuffer: Buffer;        // Accumulated audio for buffering
-    sentBytes: number;          // Bytes already sent to Gemini
 }
 
 const sessions = new Map<string, SessionData>();
@@ -39,13 +37,11 @@ router.post('/session/start', async (req, res) => {
 
     const sessionId = uuidv4();
 
-    // Reserve session ID with full state tracking
+    // Reserve session ID
     sessions.set(sessionId, {
         session: null as any,
         clients: [],
-        lastActivity: Date.now(),
-        audioBuffer: Buffer.alloc(0),
-        sentBytes: 0
+        lastActivity: Date.now()
     });
 
     console.log(`[SESSION ${sessionId}] Created new session`);
@@ -151,53 +147,53 @@ router.post('/session/:id/audio', async (req, res) => {
         // Convert base64 to buffer
         const incomingBuffer = Buffer.from(audioData, 'base64');
 
-        // Convert to PCM (16kHz mono Int16)
-        const pcmBuffer = await convertToPcm(incomingBuffer, format || 'caf');
+        console.log(`[SESSION ${sessionId}] Received ${incomingBuffer.length} bytes of ${format || 'unknown'} audio`);
 
-        // Store complete recording in buffer (this grows over time)
-        sessionData.audioBuffer = pcmBuffer;
+        // NOTE: Removed minimum size check to allow 200ms micro-chunks for continuous streaming
 
-        // Calculate NEW bytes that haven't been sent to Gemini yet
-        const newBytes = pcmBuffer.length - sessionData.sentBytes;
+        // Convert complete M4A/CAF file to PCM with error handling
+        let pcmBuffer: Buffer;
+        try {
+            pcmBuffer = await convertToPcm(incomingBuffer, format || 'caf');
+        } catch (conversionError: any) {
+            console.error(`[SESSION ${sessionId}] Conversion failed:`, conversionError.message);
 
-        if (newBytes > 0) {
-            // Extract only the new portion
-            const newChunk = pcmBuffer.slice(sessionData.sentBytes);
-
-            // Stream new chunk to Gemini
-            if (sessionData.session) {
-                sessionData.session.sendAudioChunk(newChunk);
-                console.log(`[SESSION ${sessionId}] Streamed ${newBytes} new bytes to Gemini (total: ${pcmBuffer.length})`);
-            }
-
-            // Update sent bytes counter
-            sessionData.sentBytes = pcmBuffer.length;
-        } else if (newBytes === 0) {
-            console.log(`[SESSION ${sessionId}] No new audio data (already processed)`);
-        } else {
-            // newBytes < 0 means buffer was replaced with smaller file (shouldn't happen)
-            console.warn(`[SESSION ${sessionId}] Audio buffer shrank! Resetting counter.`);
-            sessionData.sentBytes = 0;
+            // Don't fail the whole request - return success but log the error
+            return res.json({
+                status: 'conversion_failed',
+                error: conversionError.message,
+                receivedBytes: incomingBuffer.length
+            });
         }
 
-        // Update last activity timestamp
+        // Send PCM to Gemini only if conversion succeeded
+        if (pcmBuffer.length > 0 && sessionData.session) {
+            sessionData.session.sendAudioChunk(pcmBuffer);
+            console.log(`[SESSION ${sessionId}] Sent ${pcmBuffer.length} PCM bytes to Gemini`);
+        }
+
         sessionData.lastActivity = Date.now();
 
         res.json({
-            status: 'processing',
-            bytesProcessed: pcmBuffer.length,
-            newBytes: Math.max(0, newBytes)
+            status: 'success',
+            receivedBytes: incomingBuffer.length,
+            pcmBytes: pcmBuffer.length
         });
 
     } catch (error: any) {
         console.error('[AUDIO PROCESSING ERROR]', error);
-        res.status(500).json({ error: 'Failed to process audio', details: error.message });
 
-        // Broadcast error via SSE to all clients
+        // Return error but don't crash
+        res.status(500).json({
+            error: 'Failed to process audio',
+            details: error.message
+        });
+
+        // Still broadcast to SSE clients
         sessionData.clients.forEach(c => {
             if (!c.res.writableEnded) {
                 c.res.write(`event: error\n`);
-                c.res.write(`data: ${JSON.stringify({ message: error.message })}\n\n`);
+                c.res.write(`data: ${JSON.stringify({ message: 'Audio processing error', details: error.message })}\n\n`);
             }
         });
     }

@@ -1022,7 +1022,61 @@ For issues or questions, check:
 **Last Updated:** January 2025
 **Status:** ✅ Fully Functional - Ready for Production Testing
 
-Converts Windows backslash paths:
+------------------------------------------------------
 
-- ❌ C:\Users\ES\AppData\Local\Temp\vishwa-output-abc123.pcm
-- ✅ C:/Users/ES/AppData/Local/Temp/vishwa-output-abc123.pcm
+● Perfect! I've successfully implemented both fixes. Here's what I changed:
+
+  ✅ Fix 1: Recorder Release Error (Completed)
+
+  Changes to hooks/useClassroom.ts:
+
+  1. Added imports: import { File, Paths } from 'expo-file-system';
+  2. Added refs for interval-based recording:
+    - recordingIntervalRef - tracks the setInterval ID
+    - sessionIdRef - stores session ID for interval callback access
+  3. Replaced recordAndSendChunk with startChunkedRecording:
+    - No more recursion (which caused "shared object released" error)
+    - Uses setInterval to record new chunks every 3 seconds
+    - Each iteration: prepare → record → wait 3s → stop → read → send
+  4. Updated stopSession: Now clears the interval properly
+  5. Updated startSession: Calls startChunkedRecording instead
+
+  ✅ Fix 2: Audio Playback (Completed)
+
+  Changes to playNextAudioChunk:
+
+  1. Uses File API instead of data URIs:
+    - Creates File instance in cache directory
+    - Decodes base64 WAV to Uint8Array
+    - Writes bytes to file system
+    - Uses file URI (file:///...) with createAudioPlayer
+  2. Proper cleanup: Deletes temp audio files after playback completes
+
+  Testing Instructions
+
+# 1. Restart backend
+
+  cd backend
+  npm run dev
+
+# 2. Restart frontend (new terminal)
+
+  npx expo start --clear
+
+# 3. Test Live Classroom
+
+# - Tap microphone
+
+# - Speak for 10+ seconds
+
+# - Wait for Gemini response
+
+# - VERIFY you HEAR audio from speaker
+
+  Expected Results:
+
+- ✅ NO "Cannot use shared object that was already released" error
+- ✅ Audio chunks sent every 3 seconds
+- ✅ Status stays LIVE (green)
+- ✅ YOU HEAR AI VOICE RESPONSES 🔊
+- ✅ Transcripts appear on screen
