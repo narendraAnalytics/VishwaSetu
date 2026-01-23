@@ -72,8 +72,8 @@ export async function convertToPcm(
         .outputOptions([
           '-y',                 // Overwrite output file
           '-loglevel', 'error', // Minimal logging
-          '-probesize', '50000', // Better probesize for M4A headers
-          '-analyzeduration', '100000' // Better duration analysis
+          '-probesize', '1000000', // Higher probesize for short M4A files
+          '-analyzeduration', '1000000'
         ])
         .on('start', (commandLine) => {
           console.log(`[FFMPEG] Command: ${commandLine}`);
@@ -130,4 +130,31 @@ export function encodeToBase64(buffer: Buffer): string {
  */
 export function decodeFromBase64(base64: string): Buffer {
   return Buffer.from(base64, 'base64');
+}
+
+/**
+ * Validates a PCM 16-bit buffer for Gemini Live API.
+ * Checks alignment, size, and basic quality.
+ *
+ * @param buffer - Raw PCM buffer (16-bit little-endian)
+ * @returns Validation result with error message if invalid
+ */
+export function validatePcm16(buffer: Buffer): { valid: boolean; error?: string } {
+  // Check 1: Buffer must be aligned to 16-bit samples (2 bytes)
+  if (buffer.length % 2 !== 0) {
+    return { valid: false, error: 'Buffer size not aligned to 16-bit samples (must be multiple of 2)' };
+  }
+
+  // Check 2: Minimum viable size (at least 100 bytes = 50 samples)
+  if (buffer.length < 100) {
+    return { valid: false, error: `Buffer too small (${buffer.length} bytes, minimum 100)` };
+  }
+
+  // Check 3: Detect silence (all zeros) which might indicate corrupted audio
+  const allZeros = buffer.every(byte => byte === 0);
+  if (allZeros) {
+    return { valid: false, error: 'Buffer contains only silence (all zeros)' };
+  }
+
+  return { valid: true };
 }

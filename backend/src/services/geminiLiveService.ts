@@ -20,30 +20,51 @@ export class GeminiLiveSession {
       this.session = await this.ai.live.connect({
         model: model,
         config: {
-          responseModalities: [Modality.AUDIO],
+          // ⭐ Response modalities - both text and audio
+          responseModalities: [Modality.TEXT, Modality.AUDIO],
+
+          // ⭐ CORRECT: Generation fields DIRECTLY on config (not nested)
+          temperature: 0.8,          // Controls randomness in output generation
+          maxOutputTokens: 1024,     // Maximum number of tokens the model can generate
+          topP: 0.95,                // Nucleus sampling parameter for diversity control
+          topK: 40,                  // Limits token selection to top K candidates
+
+          // Voice configuration
           speechConfig: {
             voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
           },
+
+          // System instruction
           systemInstruction: SYSTEM_INSTRUCTION,
-          inputAudioTranscription: {},
-          outputAudioTranscription: {},
+
+          // ⭐ Transcription configs
+          inputAudioTranscription: { model: 'default' },
+          outputAudioTranscription: { model: 'default' },
         },
         callbacks: {
           onopen: () => {
             console.log(`✅ [BACKEND] Gemini Live Session Connected (${model})`);
             this.onEvent('status', { connected: true });
 
-            // Initial nudge to trigger greeting
-            console.log('📤 [BACKEND] Sending initial audio nudge...');
-            const nudge = new Int16Array(1600).fill(0);
-            this.sendAudioChunk(Buffer.from(nudge.buffer));
+            // Initial nudge to trigger greeting - ensure this.session is ready
+            setTimeout(() => {
+              if (this.session) {
+                console.log('📤 [BACKEND] Sending initial audio nudge...');
+                const nudge = new Int16Array(1600).fill(0);
+                this.sendAudioChunk(Buffer.from(nudge.buffer));
+              }
+            }, 500);
           },
           onmessage: (message: LiveServerMessage) => {
-            console.log('📥 [BACKEND] Message from Gemini:', JSON.stringify(message).substring(0, 100) + '...');
+            // ⭐ Detailed logging to see full message structure
+            console.log('📥 [BACKEND] Full Gemini message:', JSON.stringify(message, null, 2));
 
+            // 🔊 Audio output from Gemini (PCM 24kHz)
             if (message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data) {
+              const audioData = message.serverContent.modelTurn.parts[0].inlineData.data;
+              console.log(`🔊 [BACKEND] Gemini audio chunk received: ${audioData.length} base64 chars (~${Math.floor(audioData.length * 0.75)} bytes PCM)`);
               this.onEvent('audioChunk', {
-                audioData: message.serverContent.modelTurn.parts[0].inlineData.data,
+                audioData,
                 mimeType: 'audio/pcm;rate=24000'
               });
             }

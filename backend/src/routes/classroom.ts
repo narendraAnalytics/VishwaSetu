@@ -10,6 +10,7 @@ interface SessionData {
     session: GeminiLiveSession;
     clients: any[];
     lastActivity: number;       // Timestamp of last activity
+    lastSentBytes?: number;     // Tracks bytes already sent to Gemini in current recording
 }
 
 const sessions = new Map<string, SessionData>();
@@ -37,11 +38,11 @@ router.post('/session/start', async (req, res) => {
 
     const sessionId = uuidv4();
 
-    // Reserve session ID
     sessions.set(sessionId, {
         session: null as any,
         clients: [],
-        lastActivity: Date.now()
+        lastActivity: Date.now(),
+        lastSentBytes: 0,
     });
 
     console.log(`[SESSION ${sessionId}] Created new session`);
@@ -151,25 +152,50 @@ router.post('/session/:id/audio', async (req, res) => {
 
         // NOTE: Removed minimum size check to allow 200ms micro-chunks for continuous streaming
 
-        // Convert complete M4A/CAF file to PCM with error handling
         let pcmBuffer: Buffer;
-        try {
-            pcmBuffer = await convertToPcm(incomingBuffer, format || 'caf');
-        } catch (conversionError: any) {
-            console.error(`[SESSION ${sessionId}] Conversion failed:`, conversionError.message);
 
-            // Don't fail the whole request - return success but log the error
-            return res.json({
-                status: 'conversion_failed',
-                error: conversionError.message,
-                receivedBytes: incomingBuffer.length
-            });
+        // DUAL-MODE: Support both PCM (direct) and M4A/CAF (conversion) formats
+        if (format === 'pcm') {
+            // ✅ Direct PCM path (no conversion)
+            console.log(`[SESSION ${sessionId}] PCM DIRECT MODE: Received ${incomingBuffer.length} bytes of raw PCM`);
+
+            // Validate PCM buffer
+            if (incomingBuffer.length % 2 !== 0) {
+                console.warn(`[SESSION ${sessionId}] ⚠️ PCM buffer size ${incomingBuffer.length} is not aligned to 16-bit samples`);
+            }
+
+            if (incomingBuffer.length < 100) {
+                console.error(`[SESSION ${sessionId}] ❌ PCM buffer too small: ${incomingBuffer.length} bytes`);
+                return res.status(400).json({ error: 'PCM buffer too small (minimum 100 bytes)' });
+            }
+
+            // Use buffer directly (no conversion)
+            pcmBuffer = incomingBuffer;
+            console.log(`[SESSION ${sessionId}] ✅ PCM validation passed: ${pcmBuffer.length} bytes`);
+
+        } else {
+            // 🔄 FFmpeg conversion path (M4A/CAF → PCM)
+            try {
+                console.log(`[SESSION ${sessionId}] FFMPEG MODE: Starting conversion of ${incomingBuffer.length} bytes...`);
+                pcmBuffer = await convertToPcm(incomingBuffer, format || 'caf');
+                console.log(`[SESSION ${sessionId}] ✅ Conversion successful: ${pcmBuffer?.length || 0} PCM bytes produced`);
+            } catch (conversionError: any) {
+                console.error(`[SESSION ${sessionId}] ❌ Conversion failed:`, conversionError.message);
+
+                // Return error but don't fail the whole request
+                return res.json({
+                    status: 'conversion_failed',
+                    error: conversionError.message,
+                    receivedBytes: incomingBuffer.length
+                });
+            }
         }
 
-        // Send PCM to Gemini only if conversion succeeded
+        // Send PCM to Gemini (works for both direct and converted PCM)
         if (pcmBuffer.length > 0 && sessionData.session) {
+            const mode = format === 'pcm' ? 'DIRECT' : 'CONVERTED';
+            console.log(`[SESSION ${sessionId}] 📤 Sending ${mode} PCM buffer (${pcmBuffer.length} bytes) to Gemini`);
             sessionData.session.sendAudioChunk(pcmBuffer);
-            console.log(`[SESSION ${sessionId}] Sent ${pcmBuffer.length} PCM bytes to Gemini`);
         }
 
         sessionData.lastActivity = Date.now();

@@ -9,7 +9,10 @@
       "Bash(ffmpeg:*)",
       "Bash(node:*)",
       "WebSearch",
-      "Bash(xargs cat:*)"
+      "Bash(xargs cat:*)",
+      "mcp__ide__getDiagnostics",
+      "WebFetch(domain:googleapis.github.io)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }

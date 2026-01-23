@@ -1,170 +1,106 @@
-frontend :
+● ✅ Implementation Complete - Stage 1 & 2
 
- LOG  [FRONTEND] audioChunk handler - data type: string length: 2560
- LOG  [FRONTEND] Queue before push: 295 isPlayingRef: true
- LOG  [FRONTEND] Queue after push: 296
- LOG  [FRONTEND] playNextAudioChunk skipped - isPlaying: true, queueLength: 296
- LOG  [FRONTEND] Event [audioChunk]: {"audioData": "7//w/+//8f/u/+7/8P/u//D/7f/x//L/8P/y/+3/8//u//D/8P/u/+//6//s/+3/6v/t/+j/8f/q/+7/8f/x/+7/7f/t/+z/7f/t/+3/7//s/+3/7P/t/+r/7P/u/+n/6v/m/+r/7//p/+j/6v/p/+v/6v/p/+v/5P/q/+n/7P/q/+r/7f/q/+z/6f/q/+f/6//r/+n/7f/r/+z/7P/u/+v/7//t/+7/6//t/+v/6//u/+z/8//w/+3/7//v//H/7//x//D/8f/w//H/8f/y//L/8v/x//H/8f/z//L/9P/0//T/8//z//T/8//0//P/9P/0//P/9P/z//T/9P/z//b/8f/q//f/+P/1//j/9//5//f/+f/5//r/+f/6//r/+v/6//v/+v/7//j/+//6//r/+f/6//v/+//6//n/+//6//r/+//7//v//P/6//z/+//+//z/9P/7//n/+//8//v//P/9//3/+//8//z/+//8//z//P/5//3/9//7//z//f/+//7//v/////////9//j/AAABAP7/AAD8//7/+//9/wAAAwD//wEAAQD+/wEA/v///wAA/P8CAAAA/v////3//////wQAAAAAAP7//v8BAP///v8BAAAAAwD/////AAAFAAQAAQAFAAMABQADAAIABgAHAAcACAAEAAcABwAGAAkAAwAJAAoACQAHAAYACgAIAAwABwAIAAsABwAFAAUABgALAAgACwAGAAoABQAKAAoABwAKAAoACAAJAAcADAAMAA4ADQAPAA4ADAANAAwADQAMABEAFAAMAA8ADgAPABAADwARABEAEgAUABMADwARABAADwAPABAAEAAPABAADQAQABEAEgARABQAEwASABMABwAOABAAEAAOAA4AEAAOAA8ADgAPAA0ADgAMAA0ADAAOAAwADQALAAwADAAJAAoACgALAAkACwAJAAoACQAKAAkACQAGAAkABgAJAAQADAAKAPn/AgD+/wAA/v/+//7//v/9//3//P/8//z//P/8//v/+//8//3/+//7//z/+//8//v/+//7//v/+//7//z/+//6//v/+v/6//v/+v/5//n//f/8//r//P/6//v//P/7//v/+v/9//r//P/7//z/+v/9//v/+//+//z//v/8//7/+//9//v/+//6//3////7//3//P/+//////8BAAIA+//6//7//P8CAP7/AAAAAP//AwACAAEAAQABAAMAAgAEAAAAAgAEAAQAAwACAAQAAwADAAMAAwADAAcACQAEAAYABwAHAAcABAAHAAYACAACAAEABAAEAAYAAgAFAAQABwAGAAMACQAKAAkACQAJAAgABwAKAAcACAAIAAwACQAIAAoACQAMAAoADAAJAAsADwAKAA8ADAANABIADQATAAgABQALAA4ADAAPAA0ADwAOAAkAEQAPAA0ACgAKAAsACQALAAgADQAJABEACgAMAA0ACgAMAAsACwAJAA0ACAAKAAkACwAKAAkACwAFAAsADQAJAAkACAAKAAgACAAIAAYABwAJAAYABwAIAAgACAAIAAgABgAHAAYABwAHAAgABwAGAAcABwAGAAcABgAGAAUABwAGAAYABgAIAAYACwAMAP//AgABAAEAAQABAAAAAAAAAAAAAAAAAAAA//8AAAAA/////////////////////////////////////////////////////////////////////////////////////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "mimeType": "audio/pcm;rate=24000"}
- LOG  [FRONTEND] audioChunk handler - data type: string length: 2560
- LOG  [FRONTEND] Queue before push: 296 isPlayingRef: true
- LOG  [FRONTEND] Queue after push: 297
- LOG  [FRONTEND] playNextAudioChunk skipped - isPlaying: true, queueLength: 297
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
- LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
- LOG  [FRONTEND] playNextAudioChunk started - queue length: 297
- LOG  [FRONTEND] Converting PCM to WAV - input length: 2560
- LOG  [AUDIO] pcmToWav called - input length: 2560, sampleRate: 24000, channels: 1
- LOG  [AUDIO] Created WAV: 1964 bytes (1920 PCM + 44 header), 24000Hz, 1ch
- LOG  [FRONTEND] WAV conversion successful - output length: 2620
- LOG  [FRONTEND] Created audio file instance: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142794786.wav
- LOG  [FRONTEND] Decoded WAV to bytes: 1964
- LOG  [FRONTEND] Writing audio file...
- LOG  [FRONTEND] Audio file written
- LOG  [FRONTEND] Playing audio: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142794786.wav (1964 bytes)
- LOG  [FRONTEND] Creating audio player...
- LOG  [FRONTEND] Audio player created
- LOG  [FRONTEND] Starting audio playback...
- LOG  [FRONTEND] Audio playback started
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9140 bytes, format: m4a, fileSize: 6854
- LOG  [FRONTEND] Sent complete audio chunk (9140 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Event [turnComplete]: {"timestamp": 1769142801485}
- LOG  [FRONTEND] Sending audio chunk: 12460 bytes, format: m4a, fileSize: 9343
- LOG  [FRONTEND] Sent complete audio chunk (12460 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
- LOG  [FRONTEND] playNextAudioChunk started - queue length: 296
- LOG  [FRONTEND] Converting PCM to WAV - input length: 2560
- LOG  [AUDIO] pcmToWav called - input length: 2560, sampleRate: 24000, channels: 1
- LOG  [AUDIO] Created WAV: 1964 bytes (1920 PCM + 44 header), 24000Hz, 1ch
- LOG  [FRONTEND] WAV conversion successful - output length: 2620
- LOG  [FRONTEND] Created audio file instance: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142804805.wav
- LOG  [FRONTEND] Decoded WAV to bytes: 1964
- LOG  [FRONTEND] Writing audio file...
- LOG  [FRONTEND] Audio file written
- LOG  [FRONTEND] Playing audio: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142804805.wav (1964 bytes)
- LOG  [FRONTEND] Creating audio player...
- LOG  [FRONTEND] Audio player created
- LOG  [FRONTEND] Starting audio playback...
- LOG  [FRONTEND] Audio playback started
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
- LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
- LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
- LOG  [FRONTEND] playNextAudioChunk started - queue length: 295
- LOG  [FRONTEND] Converting PCM to WAV - input length: 2560
- LOG  [AUDIO] pcmToWav called - input length: 2560, sampleRate: 24000, channels: 1
- LOG  [AUDIO] Created WAV: 1964 bytes (1920 PCM + 44 header), 24000Hz, 1ch
- LOG  [FRONTEND] WAV conversion successful - output length: 2620
- LOG  [FRONTEND] Created audio file instance: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142814811.wav
- LOG  [FRONTEND] Decoded WAV to bytes: 1964
- LOG  [FRONTEND] Writing audio file...
- LOG  [FRONTEND] Audio file written
- LOG  [FRONTEND] Playing audio: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142814811.wav (1964 bytes)
- LOG  [FRONTEND] Creating audio player...
- LOG  [FRONTEND] Audio player created
- LOG  [FRONTEND] Starting audio playback...
- LOG  [FRONTEND] Audio playback started
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Sending audio chunk: 9984 bytes, format: m4a, fileSize: 7488
- LOG  [FRONTEND] Sent complete audio chunk (9984 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
- LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9884 bytes, format: m4a, fileSize: 7411
- LOG  [FRONTEND] Sent complete audio chunk (9884 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
- LOG  [FRONTEND] playNextAudioChunk started - queue length: 294
- LOG  [FRONTEND] Converting PCM to WAV - input length: 2560
- LOG  [AUDIO] pcmToWav called - input length: 2560, sampleRate: 24000, channels: 1
- LOG  [AUDIO] Created WAV: 1964 bytes (1920 PCM + 44 header), 24000Hz, 1ch
- LOG  [FRONTEND] WAV conversion successful - output length: 2620
- LOG  [FRONTEND] Created audio file instance: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142824841.wav
- LOG  [FRONTEND] Decoded WAV to bytes: 1964
- LOG  [FRONTEND] Writing audio file...
- LOG  [FRONTEND] Audio file written
- LOG  [FRONTEND] Playing audio: file:///data/user/0/host.exp.exponent/cache/vishwa-audio-1769142824841.wav (1964 bytes)
- LOG  [FRONTEND] Creating audio player...
- LOG  [FRONTEND] Audio player created
- LOG  [FRONTEND] Starting audio playback...
- LOG  [FRONTEND] Audio playback started
- LOG  [FRONTEND] Sending audio chunk: 9140 bytes, format: m4a, fileSize: 6854
- LOG  [FRONTEND] Sent complete audio chunk (9140 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9220 bytes, format: m4a, fileSize: 6914
- LOG  [FRONTEND] Sent complete audio chunk (9220 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9140 bytes, format: m4a, fileSize: 6854
- LOG  [FRONTEND] Sent complete audio chunk (9140 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Sending audio chunk: 9512 bytes, format: m4a, fileSize: 7132
- LOG  [FRONTEND] Sent complete audio chunk (9512 bytes)
- LOG  [FRONTEND] Started 500ms audio chunk
- LOG  [FRONTEND] Event [status]: {"connected": false}
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- WARN  [FRONTEND] Playback timeout - forcing reset of isPlayingRef
- LOG  [FRONTEND] playNextAudioChunk skipped - isPlaying: false, queueLength: 0
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
- LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+  I've successfully implemented the critical fixes for VishwaSetu AI voice. Here's what was done:
 
- backend :
+  Stage 1: Backend Dual-Mode Support ✅
 
- [AUDIO] Conversion finished. Output size: 10402 bytes
-[BACKEND] Sending 10402 bytes of PCM to Gemini...
-[SESSION 33fee41f-0fbb-45df-b666-e1a14cc6e986] Sent 10402 PCM bytes to Gemini
-[SESSION 33fee41f-0fbb-45df-b666-e1a14cc6e986] Received 3510 bytes of m4a audio
-[AUDIO] Converting 3510 bytes from m4a to PCM...
-[AUDIO] Wrote temp input file: C:\Users\ES\Desktop\2025\vishwasetu\backend\temp\in-e4097337.m4a (3510 bytes)
-[FFMPEG] Command: ffmpeg -f mp4 -i C:\Users\ES\Desktop\2025\vishwasetu\backend\temp\in-e4097337.m4a 
--y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-e4097337.pcm
-[AUDIO] Conversion finished. Output size: 744 bytes
-[BACKEND] Sending 744 bytes of PCM to Gemini...
-[SESSION 33fee41f-0fbb-45df-b666-e1a14cc6e986] Sent 744 PCM bytes to Gemini
-[BACKEND] Disconnecting Gemini Live session...
-[BACKEND] Broadcasting SSE event: status
-✅ [BACKEND] Gemini session disconnected successfully
-📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+  1. PCM Passthrough Mode (backend/src/routes/classroom.ts:151-182)
+  - Added dual-mode audio handling:
+    - format === 'pcm' → Direct passthrough (no FFmpeg)
+    - format === 'm4a'/'caf' → FFmpeg conversion (fallback)
+  - Added PCM validation (alignment, size checks)
+  - Enhanced logging with emojis for easy tracking
+
+  2. Enhanced Debug Logging (backend/src/services/geminiLiveService.ts:48-54)
+  - Added detailed logging when Gemini sends audio chunks
+  - Shows base64 length and estimated PCM bytes
+  - Easier to verify Gemini is actually responding
+
+  3. SSE Broadcasting (Already Working)
+  - Verified the onEvent callback broadcasts all events generically
+  - audioChunk events will automatically reach frontend
+
+  4. PCM Validation Utility (backend/src/services/audioUtils.ts:136-158)
+  - New validatePcm16() function
+  - Checks: 16-bit alignment, minimum size, silence detection
+  - Provides clear error messages for debugging
+
+  Stage 2: Frontend 16kHz Recording ✅
+
+  5. Gemini-Optimized Recording Preset (hooks/useClassroom.ts:1-50)
+  - Created GEMINI_RECORDING_PRESET with:
+    - Sample rate: 16kHz (matches Gemini's expected input)
+    - Channels: Mono
+    - Format: M4A/AAC (platform-native)
+  - Platform-specific configurations for Android/iOS/Web
+  - Should reduce file sizes by ~30%
+  - Eliminates resampling corruption (the main issue)
+
+  ---
+  🧪 Testing Instructions
+
+  Now you need to test the implementation:
+
+  1. Restart the Backend
+
+  cd backend
+  npm run dev
+
+  2. Restart the Frontend
+
+  npm start
+
+  3. Test the Live Classroom
+
+  1. Open the app and navigate to the Classroom screen
+  2. Start a session and speak into the microphone
+  3. Watch the backend logs carefully
+
+  4. Expected Backend Log Output
+
+  Before (Broken):
+  [SESSION xxx] Received 10784 bytes of m4a audio
+  [AUDIO] Converting 10784 bytes from m4a to PCM...
+  [AUDIO] Conversion finished. Output size: 20062 bytes
+  📥 [BACKEND] Message from Gemini: {"setupComplete":{}}...
+  (NO AUDIO, NO TRANSCRIPTS)
+
+  After (Fixed):
+  [SESSION xxx] Received 8000 bytes of m4a audio  ← Smaller files!
+  [AUDIO] Converting 8000 bytes from m4a to PCM...
+  [AUDIO] Conversion finished. Output size: 19200 bytes
+  📥 [BACKEND] Message from Gemini: {"setupComplete":{}}...
+  📥 [BACKEND] Message from Gemini: {"serverContent":{"inputTranscription":...
+  🔊 [BACKEND] Gemini audio chunk received: 15000 base64 chars (~11250 bytes PCM)  ← NEW!
+  [BACKEND] Broadcasting SSE event: audioChunk  ← NEW!
+  📥 [BACKEND] Message from Gemini: {"serverContent":{"outputTranscription":...
+
+  5. Expected Frontend Log Output
+
+  Look for these new logs:
+  LOG [FRONTEND] Event [audioChunk]: {"audioData":"...","mimeType":"audio/pcm;rate=24000"}
+  LOG [FRONTEND] PCM buffer size: 15360 bytes - triggering playback
+  LOG [FRONTEND] Converting PCM to WAV...
+  LOG [FRONTEND] Playing audio file: file:///.../vishwa-audio-123456.wav
+
+  6. Success Criteria
+
+  ✅ PRIMARY GOAL: You hear Vishwa speaking back (AI voice)
+  ✅ Backend logs show 🔊 Gemini audio chunk received
+  ✅ Frontend logs show Event [audioChunk] and Playing audio file
+  ✅ Both input and output transcripts appear
+  ✅ Smaller M4A file sizes (~8KB vs ~11KB per chunk)
+
+  ---
+  🚨 If It Still Doesn't Work
+
+  If Gemini is still silent after this:
+
+  1. Check file sizes: Are M4A chunks smaller now (~8KB instead of ~11KB)?
+    - If YES → 16kHz recording is working
+    - If NO → expo-audio might not support 16kHz (rare)
+  2. Check FFmpeg output: Look for the conversion quality in logs
+    - The conversion should be faster and produce consistent ~19-20KB PCM
+  3. Manual PCM test: Try sending a synthetic 16kHz PCM file via Postman to test backend dual-mode
+
+  Let me know what you see in the logs, and we can troubleshoot from there!

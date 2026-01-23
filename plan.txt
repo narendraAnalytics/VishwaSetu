@@ -1,0 +1,185 @@
+backend :
+
+[dotenv@17.2.3] injecting env (4) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+✅ VishwaSetu Backend running on http://localhost:3000
+📡 Health check: http://localhost:3000/health       
+🧪 Test Gemini: http://localhost:3000/api/test-gemini
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Created new session
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Creating new Gemini Live connection
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Received 10144 bytes of m4a audio
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] FFMPEG MODE: Starting conversion of 10144 bytes...
+[AUDIO] Converting 10144 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-6004d2a8.m4a (10144 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-6004d2a8.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-6004d2a8.pcm  
+[AUDIO] Conversion finished. Output size: 18432 bytes
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] ✅ Conversion successful: 18432 PCM bytes produced      
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] 📤 Sending CONVERTED PCM buffer (18432 bytes) to Gemini
+[BACKEND] Cannot send audio: Session not active
+✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
+[BACKEND] Broadcasting SSE event: status
+📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+[BACKEND] Broadcasting SSE event: status
+📤 [BACKEND] Sending initial audio nudge...
+[BACKEND] Sending 3200 bytes of PCM to Gemini...
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Received 10912 bytes of m4a audio
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] FFMPEG MODE: Starting conversion of 10912 bytes...
+[AUDIO] Converting 10912 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-eb426cc4.m4a (10912 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-eb426cc4.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-eb426cc4.pcm  
+[AUDIO] Conversion finished. Output size: 20480 bytes
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] ✅ Conversion successful: 20480 PCM bytes produced
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] 📤 Sending CONVERTED PCM buffer (20480 bytes) to Gemini
+[BACKEND] Sending 20480 bytes of PCM to Gemini...
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Received 10912 bytes of m4a audio
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] FFMPEG MODE: Starting conversion of 10912 bytes...
+[AUDIO] Converting 10912 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-9b3fe25c.m4a (10912 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-9b3fe25c.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-9b3fe25c.pcm  
+[AUDIO] Conversion finished. Output size: 20480 bytes
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] ✅ Conversion successful: 20480 PCM bytes produced
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] 📤 Sending CONVERTED PCM buffer (20480 bytes) to Gemini
+[BACKEND] Sending 20480 bytes of PCM to Gemini...
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Received 10912 bytes of m4a audio
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] FFMPEG MODE: Starting conversion of 10912 bytes...
+[AUDIO] Converting 10912 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-2b596108.m4a (10912 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-2b596108.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-2b596108.pcm  
+[AUDIO] Conversion finished. Output size: 20480 bytes
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] ✅ Conversion successful: 20480 PCM bytes produced
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] 📤 Sending CONVERTED PCM buffer (20480 bytes) to Gemini
+[BACKEND] Sending 20480 bytes of PCM to Gemini...
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Received 10912 bytes of m4a audio
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] FFMPEG MODE: Starting conversion of 10912 bytes...
+[AUDIO] Converting 10912 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-c960f628.m4a (10912 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-c960f628.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-c960f628.pcm  
+[AUDIO] Conversion finished. Output size: 20480 bytes
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] ✅ Conversion successful: 20480 PCM bytes produced
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] 📤 Sending CONVERTED PCM buffer (20480 bytes) to Gemini
+[BACKEND] Sending 20480 bytes of PCM to Gemini...
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Received 10912 bytes of m4a audio
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] FFMPEG MODE: Starting conversion of 10912 bytes...
+[AUDIO] Converting 10912 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-62f1efec.m4a (10912 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-62f1efec.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-62f1efec.pcm  
+[AUDIO] Conversion finished. Output size: 20480 bytes
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] ✅ Conversion successful: 20480 PCM bytes produced
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] 📤 Sending CONVERTED PCM buffer (20480 bytes) to Gemini
+[BACKEND] Sending 20480 bytes of PCM to Gemini...
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] Received 3232 bytes of m4a audio
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] FFMPEG MODE: Starting conversion of 3232 bytes...
+[AUDIO] Converting 3232 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-9c4a2e06.m4a (3232 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-9c4a2e06.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-9c4a2e06.pcm  
+[FFMPEG ERROR] ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-9c4a2e06.pcm.
+Error opening output files: Invalid argument
+
+[SESSION 45178afd-662a-46bb-b809-40770d2d0d02] ❌ Conversion failed: FFmpeg error: ffmpeg exited with code 4294967274: Error opening output
+ file C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-9c4a2e06.pcm.
+Error opening output files: Invalid argument
+
+[BACKEND] Disconnecting Gemini Live session...
+[BACKEND] Broadcasting SSE event: status
+✅ [BACKEND] Gemini session disconnected successfully
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] Created new session
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] Creating new Gemini Live connection
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
+[BACKEND] Broadcasting SSE event: status
+📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+[BACKEND] Broadcasting SSE event: status
+📤 [BACKEND] Sending initial audio nudge...
+[BACKEND] Sending 3200 bytes of PCM to Gemini...
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] Received 10144 bytes of m4a audio
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] FFMPEG MODE: Starting conversion of 10144 bytes...
+[AUDIO] Converting 10144 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-da80e7fe.m4a (10144 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-da80e7fe.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-da80e7fe.pcm  
+[AUDIO] Conversion finished. Output size: 18432 bytes
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] ✅ Conversion successful: 18432 PCM bytes produced
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] 📤 Sending CONVERTED PCM buffer (18432 bytes) to Gemini
+[BACKEND] Sending 18432 bytes of PCM to Gemini...
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] Received 3232 bytes of m4a audio
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] FFMPEG MODE: Starting conversion of 3232 bytes...
+[AUDIO] Converting 3232 bytes from m4a to PCM...
+[AUDIO] Wrote temp input file: C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-25a8f4e2.m4a (3232 bytes)
+[FFMPEG] Command: ffmpeg -f mp4 -i C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/in-25a8f4e2.m4a -y -ar 16000 -ac 1 -acodec pcm_s16le -f s16le -y -loglevel error -probesize 1000000 -analyzeduration 1000000 C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-25a8f4e2.pcm  
+[FFMPEG ERROR] ffmpeg exited with code 4294967274: Error opening output file C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-25a8f4e2.pcm.
+Error opening output files: Invalid argument
+
+[SESSION 75c559e0-05e0-42d1-bb55-5797e18d338a] ❌ Conversion failed: FFmpeg error: ffmpeg exited with code 4294967274: Error opening output
+ file C:/Users/ES/Desktop/2025/vishwasetu/backend/temp/out-25a8f4e2.pcm.
+Error opening output files: Invalid argument
+
+[BACKEND] Disconnecting Gemini Live session...
+[BACKEND] Broadcasting SSE event: status
+✅ [BACKEND] Gemini session disconnected successfully
+
+froontend :
+
+Android Bundled 237ms node_modules\expo-router\entry.js (1 module)
+ WARN  Route "./types/classroom.ts" is missing the required default export. Ensure a React component is exported as default.
+ WARN  Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+ LOG  EXISTING USER DETECTED - Activating session
+ LOG  [FRONTEND] Microphone permission status: granted granted: true
+ LOG  [FRONTEND] Resetting playback state on session start
+ LOG  Connecting to SSE: http://192.168.1.6:3000/api/classroom/session/45178afd-662a-46bb-b809-40770d2d0d02/events
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Event [sse_connected]: {"sessionId": "45178afd-662a-46bb-b809-40770d2d0d02", "timestamp": 1769180926478}
+ LOG  [FRONTEND] SSE Connected Event
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Recorder stopped successfully
+ LOG  [FRONTEND] Sending audio chunk: 13528 bytes, format: m4a, fileSize: 10144
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Sent complete audio chunk (13528 bytes)
+ LOG  [FRONTEND] Event [status]: {"connected": true}
+ LOG  [FRONTEND] Event [status]: {"connected": false}
+ LOG  [FRONTEND] Recorder stopped successfully
+ LOG  [FRONTEND] Sending audio chunk: 14552 bytes, format: m4a, fileSize: 10912
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Sent complete audio chunk (14552 bytes)
+ LOG  [FRONTEND] Recorder stopped successfully
+ LOG  [FRONTEND] Sending audio chunk: 14552 bytes, format: m4a, fileSize: 10912
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Sent complete audio chunk (14552 bytes)
+ LOG  [FRONTEND] Recorder stopped successfully
+ LOG  [FRONTEND] Sending audio chunk: 14552 bytes, format: m4a, fileSize: 10912
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Sent complete audio chunk (14552 bytes)
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Recorder stopped successfully
+ LOG  [FRONTEND] Sending audio chunk: 14552 bytes, format: m4a, fileSize: 10912
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Sent complete audio chunk (14552 bytes)
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Recorder stopped successfully
+ LOG  [FRONTEND] Sending audio chunk: 14552 bytes, format: m4a, fileSize: 10912
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Sent complete audio chunk (14552 bytes)
+ LOG  [FRONTEND] Event [status]: {"connected": false}
+ LOG  [FRONTEND] Resetting playback state on session start
+ LOG  Connecting to SSE: http://192.168.1.6:3000/api/classroom/session/75c559e0-05e0-42d1-bb55-5797e18d338a/events
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Event [sse_connected]: {"sessionId": "75c559e0-05e0-42d1-bb55-5797e18d338a", "timestamp": 1769180938565}
+ LOG  [FRONTEND] SSE Connected Event
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Event [status]: {"connected": true}
+ LOG  [FRONTEND] Event [status]: {"connected": false}
+ LOG  [FRONTEND] Recorder stopped successfully
+ LOG  [FRONTEND] Sending audio chunk: 13528 bytes, format: m4a, fileSize: 10144
+ LOG  [FRONTEND] Preparing recorder...
+ LOG  [FRONTEND] Starting 800ms audio chunk
+ LOG  [FRONTEND] Sent complete audio chunk (13528 bytes)
+ LOG  [FRONTEND] Event [status]: {"connected": false}
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Event [heartbeat]: {"alive": true}
