@@ -1,106 +1,351 @@
-● ✅ Implementation Complete - Stage 1 & 2
+frontedn :
 
-  I've successfully implemented the critical fixes for VishwaSetu AI voice. Here's what was done:
+Android Bundled 113790ms node_modules\expo-router\entry.js (1657 modules)
+ WARN  Route "./types/classroom.ts" is missing the required default export. Ensure a React component is exported as default.
+ WARN  Clerk: Clerk has been loaded with development keys. Development instances have strict usage limits and should not be used when deploying your application to production. Learn more: https://clerk.com/docs/deployments/overview
+ LOG  EXISTING USER DETECTED - Activating session
+ LOG  [FRONTEND] Microphone permission: granted granted: true
+ LOG  [FRONTEND] Connecting to WebSocket: ws://192.168.1.6:3000
+ LOG  [FRONTEND] WebSocket connected
+ LOG  [FRONTEND] WebSocket event [connected]: {"timestamp": 1769237333878}
+ LOG  [FRONTEND] WebSocket connected
+ ERROR  [FRONTEND] Start session error: [TypeError: Cannot read property 'init' of null]
 
-  Stage 1: Backend Dual-Mode Support ✅
+Call Stack
+  AudioRecord.init (node_modules\react-native-live-audio-stream\index.js)
+  startSession (hooks\useClassroom.ts)
+  next (<native>)
+  asyncGeneratorStep (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  _next (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  Promise$argument_0 (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  tryCallTwo (address at (InternalBytecode.js:1:1222)
+  doResolve (address at (InternalBytecode.js:1:2541)
+  Promise (address at (InternalBytecode.js:1:1318)
+  <anonymous> (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  apply (<native>)
+  useClassroom (hooks\useClassroom.ts)
+  _performTransitionSideEffects (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  _receiveSignal (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  responderEventHandlers.onResponderRelease (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  executeDispatch (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  runWithFiberInDEV (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  executeDispatchesAndReleaseTopLevel (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  forEach (<native>)
+  forEachAccumulated (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdates$1$argument_0 (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdatesImpl (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdates$1 (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  dispatchEvent (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
 
-  1. PCM Passthrough Mode (backend/src/routes/classroom.ts:151-182)
-  - Added dual-mode audio handling:
-    - format === 'pcm' → Direct passthrough (no FFmpeg)
-    - format === 'm4a'/'caf' → FFmpeg conversion (fallback)
-  - Added PCM validation (alignment, size checks)
-  - Enhanced logging with emojis for easy tracking
+Call Stack
+  RCTView (<anonymous>)
+  View (node_modules\react-native\Libraries\Components\View\View.js)
+  AnimatedComponent (node_modules\react-native\Libraries\Animated\createAnimatedComponent.js)
+  render (node_modules\react-native\Libraries\Components\Touchable\TouchableOpacity.js)
+  Touchable (node_modules\react-native\Libraries\Components\Touchable\TouchableOpacity.js)
+  ClassroomScreen (app\(tabs)\classroom.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  NativeStackNavigator (node_modules\expo-router\build\fork\native-stack\createNativeStackNavigator.js)
+  <anonymous> (node_modules\expo-router\build\layouts\withLayoutContext.js)
+  Object.assign$argument_0 (node_modules\expo-router\build\layouts\StackClient.js)
+  TabLayout (app\(tabs)\_layout.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  NativeStackNavigator (node_modules\expo-router\build\fork\native-stack\createNativeStackNavigator.js)
+  <anonymous> (node_modules\expo-router\build\layouts\withLayoutContext.js)
+  Object.assign$argument_0 (node_modules\expo-router\build\layouts\StackClient.js)
+  RootLayout (app\_layout.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  Content (node_modules\expo-router\build\ExpoRoot.js)
+  ContextNavigator (node_modules\expo-router\build\ExpoRoot.js)
+  ExpoRoot (node_modules\expo-router\build\ExpoRoot.js)
+  App (node_modules\expo-router\build\qualified-entry.js)
+  WithDevTools (node_modules\expo\src\launch\withDevTools.tsx)
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": true}
+ LOG  [FRONTEND] WebSocket event [session_started]: {"sessionId": "5368d456-b145-438a-b3d4-f0eb0cbfb3d5"}
+ LOG  [FRONTEND] Session started: 5368d456-b145-438a-b3d4-f0eb0cbfb3d5
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": true}
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": false}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] Connecting to WebSocket: ws://192.168.1.6:3000
+ LOG  [FRONTEND] WebSocket connected
+ ERROR  [FRONTEND] Start session error: [TypeError: Cannot read property 'init' of null] 
 
-  2. Enhanced Debug Logging (backend/src/services/geminiLiveService.ts:48-54)
-  - Added detailed logging when Gemini sends audio chunks
-  - Shows base64 length and estimated PCM bytes
-  - Easier to verify Gemini is actually responding
+Call Stack
+  AudioRecord.init (node_modules\react-native-live-audio-stream\index.js)
+  startSession (hooks\useClassroom.ts)
+  next (<native>)
+  asyncGeneratorStep (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  _next (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  Promise$argument_0 (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  tryCallTwo (address at (InternalBytecode.js:1:1222)
+  doResolve (address at (InternalBytecode.js:1:2541)
+  Promise (address at (InternalBytecode.js:1:1318)
+  <anonymous> (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  apply (<native>)
+  useClassroom (hooks\useClassroom.ts)
+  _performTransitionSideEffects (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  _receiveSignal (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  responderEventHandlers.onResponderRelease (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  executeDispatch (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  runWithFiberInDEV (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  executeDispatchesAndReleaseTopLevel (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  forEach (<native>)
+  forEachAccumulated (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdates$1$argument_0 (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdatesImpl (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdates$1 (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  dispatchEvent (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
 
-  3. SSE Broadcasting (Already Working)
-  - Verified the onEvent callback broadcasts all events generically
-  - audioChunk events will automatically reach frontend
+Call Stack
+  RCTView (<anonymous>)
+  View (node_modules\react-native\Libraries\Components\View\View.js)
+  AnimatedComponent (node_modules\react-native\Libraries\Animated\createAnimatedComponent.js)
+  render (node_modules\react-native\Libraries\Components\Touchable\TouchableOpacity.js)
+  Touchable (node_modules\react-native\Libraries\Components\Touchable\TouchableOpacity.js)
+  ClassroomScreen (app\(tabs)\classroom.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  NativeStackNavigator (node_modules\expo-router\build\fork\native-stack\createNativeStackNavigator.js)
+  <anonymous> (node_modules\expo-router\build\layouts\withLayoutContext.js)
+  Object.assign$argument_0 (node_modules\expo-router\build\layouts\StackClient.js)
+  TabLayout (app\(tabs)\_layout.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  NativeStackNavigator (node_modules\expo-router\build\fork\native-stack\createNativeStackNavigator.js)
+  <anonymous> (node_modules\expo-router\build\layouts\withLayoutContext.js)
+  Object.assign$argument_0 (node_modules\expo-router\build\layouts\StackClient.js)
+  RootLayout (app\_layout.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  Content (node_modules\expo-router\build\ExpoRoot.js)
+  ContextNavigator (node_modules\expo-router\build\ExpoRoot.js)
+  ExpoRoot (node_modules\expo-router\build\ExpoRoot.js)
+  App (node_modules\expo-router\build\qualified-entry.js)
+  WithDevTools (node_modules\expo\src\launch\withDevTools.tsx)
+ LOG  [FRONTEND] WebSocket event [connected]: {"timestamp": 1769237358436}
+ LOG  [FRONTEND] WebSocket connected
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": true}
+ LOG  [FRONTEND] WebSocket event [session_started]: {"sessionId": "00e36e42-1ff3-4adc-bea9-a44e8c39320f"}
+ LOG  [FRONTEND] Session started: 00e36e42-1ff3-4adc-bea9-a44e8c39320f
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": true}
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": false}
+ LOG  [FRONTEND] Connecting to WebSocket: ws://192.168.1.6:3000
+ LOG  [FRONTEND] WebSocket connected
+ ERROR  [FRONTEND] Start session error: [TypeError: Cannot read property 'init' of null] 
 
-  4. PCM Validation Utility (backend/src/services/audioUtils.ts:136-158)
-  - New validatePcm16() function
-  - Checks: 16-bit alignment, minimum size, silence detection
-  - Provides clear error messages for debugging
+Call Stack
+  AudioRecord.init (node_modules\react-native-live-audio-stream\index.js)
+  startSession (hooks\useClassroom.ts)
+  next (<native>)
+  asyncGeneratorStep (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  _next (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  Promise$argument_0 (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  tryCallTwo (address at (InternalBytecode.js:1:1222)
+  doResolve (address at (InternalBytecode.js:1:2541)
+  Promise (address at (InternalBytecode.js:1:1318)
+  <anonymous> (node_modules\@babel\runtime\helpers\asyncToGenerator.js)
+  apply (<native>)
+  useClassroom (hooks\useClassroom.ts)
+  _performTransitionSideEffects (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  _receiveSignal (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  responderEventHandlers.onResponderRelease (node_modules\react-native\Libraries\Pressability\Pressability.js)
+  executeDispatch (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  runWithFiberInDEV (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  executeDispatchesAndReleaseTopLevel (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  forEach (<native>)
+  forEachAccumulated (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdates$1$argument_0 (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdatesImpl (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  batchedUpdates$1 (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
+  dispatchEvent (node_modules\react-native\Libraries\Renderer\implementations\ReactFabric-dev.js)
 
-  Stage 2: Frontend 16kHz Recording ✅
+Call Stack
+  RCTView (<anonymous>)
+  View (node_modules\react-native\Libraries\Components\View\View.js)
+  AnimatedComponent (node_modules\react-native\Libraries\Animated\createAnimatedComponent.js)
+  render (node_modules\react-native\Libraries\Components\Touchable\TouchableOpacity.js)
+  Touchable (node_modules\react-native\Libraries\Components\Touchable\TouchableOpacity.js)
+  ClassroomScreen (app\(tabs)\classroom.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  NativeStackNavigator (node_modules\expo-router\build\fork\native-stack\createNativeStackNavigator.js)
+  <anonymous> (node_modules\expo-router\build\layouts\withLayoutContext.js)
+  Object.assign$argument_0 (node_modules\expo-router\build\layouts\StackClient.js)
+  TabLayout (app\(tabs)\_layout.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  NativeStackNavigator (node_modules\expo-router\build\fork\native-stack\createNativeStackNavigator.js)
+  <anonymous> (node_modules\expo-router\build\layouts\withLayoutContext.js)
+  Object.assign$argument_0 (node_modules\expo-router\build\layouts\StackClient.js)
+  RootLayout (app\_layout.tsx)
+  BaseRoute (node_modules\expo-router\build\useScreens.js)
+  SceneView (node_modules\@react-navigation\core\lib\module\SceneView.js)
+  render (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  routes.reduce$argument_0 (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  reduce (<native>)
+  useDescriptors (node_modules\@react-navigation\core\lib\module\useDescriptors.js)
+  useNavigationBuilder (node_modules\@react-navigation\core\lib\module\useNavigationBuilder.js)
+  Content (node_modules\expo-router\build\ExpoRoot.js)
+  ContextNavigator (node_modules\expo-router\build\ExpoRoot.js)
+  ExpoRoot (node_modules\expo-router\build\ExpoRoot.js)
+  App (node_modules\expo-router\build\qualified-entry.js)
+  WithDevTools (node_modules\expo\src\launch\withDevTools.tsx)
+ LOG  [FRONTEND] WebSocket event [connected]: {"timestamp": 1769237361056}
+ LOG  [FRONTEND] WebSocket connected
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": true}
+ LOG  [FRONTEND] WebSocket event [session_started]: {"sessionId": "ce749b96-60fb-4863-863c-6937ecfd2915"}
+ LOG  [FRONTEND] Session started: ce749b96-60fb-4863-863c-6937ecfd2915
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": true}
+ LOG  [FRONTEND] WebSocket event [status]: {"connected": false}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
+ LOG  [FRONTEND] WebSocket event [heartbeat]: {"alive": true}
 
-  5. Gemini-Optimized Recording Preset (hooks/useClassroom.ts:1-50)
-  - Created GEMINI_RECORDING_PRESET with:
-    - Sample rate: 16kHz (matches Gemini's expected input)
-    - Channels: Mono
-    - Format: M4A/AAC (platform-native)
-  - Platform-specific configurations for Android/iOS/Web
-  - Should reduce file sizes by ~30%
-  - Eliminates resampling corruption (the main issue)
+backend :
 
-  ---
-  🧪 Testing Instructions
-
-  Now you need to test the implementation:
-
-  1. Restart the Backend
-
-  cd backend
-  npm run dev
-
-  2. Restart the Frontend
-
-  npm start
-
-  3. Test the Live Classroom
-
-  1. Open the app and navigate to the Classroom screen
-  2. Start a session and speak into the microphone
-  3. Watch the backend logs carefully
-
-  4. Expected Backend Log Output
-
-  Before (Broken):
-  [SESSION xxx] Received 10784 bytes of m4a audio
-  [AUDIO] Converting 10784 bytes from m4a to PCM...
-  [AUDIO] Conversion finished. Output size: 20062 bytes
-  📥 [BACKEND] Message from Gemini: {"setupComplete":{}}...
-  (NO AUDIO, NO TRANSCRIPTS)
-
-  After (Fixed):
-  [SESSION xxx] Received 8000 bytes of m4a audio  ← Smaller files!
-  [AUDIO] Converting 8000 bytes from m4a to PCM...
-  [AUDIO] Conversion finished. Output size: 19200 bytes
-  📥 [BACKEND] Message from Gemini: {"setupComplete":{}}...
-  📥 [BACKEND] Message from Gemini: {"serverContent":{"inputTranscription":...
-  🔊 [BACKEND] Gemini audio chunk received: 15000 base64 chars (~11250 bytes PCM)  ← NEW!
-  [BACKEND] Broadcasting SSE event: audioChunk  ← NEW!
-  📥 [BACKEND] Message from Gemini: {"serverContent":{"outputTranscription":...
-
-  5. Expected Frontend Log Output
-
-  Look for these new logs:
-  LOG [FRONTEND] Event [audioChunk]: {"audioData":"...","mimeType":"audio/pcm;rate=24000"}
-  LOG [FRONTEND] PCM buffer size: 15360 bytes - triggering playback
-  LOG [FRONTEND] Converting PCM to WAV...
-  LOG [FRONTEND] Playing audio file: file:///.../vishwa-audio-123456.wav
-
-  6. Success Criteria
-
-  ✅ PRIMARY GOAL: You hear Vishwa speaking back (AI voice)
-  ✅ Backend logs show 🔊 Gemini audio chunk received
-  ✅ Frontend logs show Event [audioChunk] and Playing audio file
-  ✅ Both input and output transcripts appear
-  ✅ Smaller M4A file sizes (~8KB vs ~11KB per chunk)
-
-  ---
-  🚨 If It Still Doesn't Work
-
-  If Gemini is still silent after this:
-
-  1. Check file sizes: Are M4A chunks smaller now (~8KB instead of ~11KB)?
-    - If YES → 16kHz recording is working
-    - If NO → expo-audio might not support 16kHz (rare)
-  2. Check FFmpeg output: Look for the conversion quality in logs
-    - The conversion should be faster and produce consistent ~19-20KB PCM
-  3. Manual PCM test: Try sending a synthetic 16kHz PCM file via Postman to test backend dual-mode
-
-  Let me know what you see in the logs, and we can troubleshoot from there!
+[dotenv@17.2.3] injecting env (4) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+✅ VishwaSetu Backend running on http://localhost:3000
+📡 Health check: http://localhost:3000/health       
+🧪 Test Gemini: http://localhost:3000/api/test-gemini
+🔌 WebSocket server ready on ws://localhost:3000    
+🔌 [WEBSOCKET] New client connected from: ::ffff:192.168.1.2
+[WEBSOCKET] Received message type: start_session
+[SESSION 5368d456-b145-438a-b3d4-f0eb0cbfb3d5] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
+[SESSION 5368d456-b145-438a-b3d4-f0eb0cbfb3d5] Successfully started and connected to Gemini
+📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+📤 [BACKEND] Sending initial audio nudge...
+[BACKEND] Sending 3200 bytes of PCM to Gemini...
+🔌 [WEBSOCKET] New client connected from: ::ffff:192.168.1.2
+[WEBSOCKET] Received message type: start_session
+[SESSION 00e36e42-1ff3-4adc-bea9-a44e8c39320f] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+🔌 [WEBSOCKET] New client connected from: ::ffff:192.168.1.2
+[WEBSOCKET] Received message type: start_session
+[SESSION 5368d456-b145-438a-b3d4-f0eb0cbfb3d5] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
+[SESSION 5368d456-b145-438a-b3d4-f0eb0cbfb3d5] Successfully started and connected to Gemini
+📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+📤 [BACKEND] Sending initial audio nudge...
+[BACKEND] Sending 3200 bytes of PCM to Gemini...
+🔌 [WEBSOCKET] New client connected from: ::ffff:192.168.1.2
+[WEBSOCKET] Received message type: start_session
+[SESSION 00e36e42-1ff3-4adc-bea9-a44e8c39320f] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+[SESSION 5368d456-b145-438a-b3d4-f0eb0cbfb3d5] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
+[SESSION 5368d456-b145-438a-b3d4-f0eb0cbfb3d5] Successfully started and connected to Gemini
+📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+📤 [BACKEND] Sending initial audio nudge...
+[BACKEND] Sending 3200 bytes of PCM to Gemini...
+🔌 [WEBSOCKET] New client connected from: ::ffff:192.168.1.2
+[WEBSOCKET] Received message type: start_session
+[SESSION 00e36e42-1ff3-4adc-bea9-a44e8c39320f] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
+[SESSION 5368d456-b145-438a-b3d4-f0eb0cbfb3d5] Successfully started and connected to Gemini
+📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+📤 [BACKEND] Sending initial audio nudge...
+[BACKEND] Sending 3200 bytes of PCM to Gemini...
+🔌 [WEBSOCKET] New client connected from: ::ffff:192.168.1.2
+[WEBSOCKET] Received message type: start_session
+[SESSION 00e36e42-1ff3-4adc-bea9-a44e8c39320f] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+🔌 [WEBSOCKET] New client connected from: ::ffff:192.168.1.2
+[WEBSOCKET] Received message type: start_session
+[SESSION 00e36e42-1ff3-4adc-bea9-a44e8c39320f] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+[SESSION 00e36e42-1ff3-4adc-bea9-a44e8c39320f] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
+[SESSION 00e36e42-1ff3-4adc-bea9-a44e8c39320f] Successfully started and connected to Gemini
+📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+📤 [BACKEND] Sending initial audio nudge...
+[BACKEND] Sending 3200 bytes of PCM to Gemini...
+🔌 [WEBSOCKET] New client connected from: ::ffff:192.168.1.2
+[WEBSOCKET] Received message type: start_session
+[SESSION ce749b96-60fb-4863-863c-6937ecfd2915] Creating new session
+🔌 Attempting Gemini Live connection with model: gemini-2.5-flash-native-audio-preview-12-2025...
+✅ [BACKEND] Gemini Live Session Connected (gemini-2.5-flash-native-audio-preview-12-2025)
+[SESSION ce749b96-60fb-4863-863c-6937ecfd2915] Successfully started and connected to Gemini
+📡 [BACKEND] Gemini Live Session Closed (gemini-2.5-flash-native-audio-preview-12-2025)
+📤 [BACKEND] Sending initial audio nudge...
+[BACKEND] Sending 3200 bytes of PCM to Gemini...
