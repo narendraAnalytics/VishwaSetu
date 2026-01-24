@@ -23,12 +23,14 @@ const App: React.FC = () => {
   const sourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
   const streamRef = useRef<MediaStream | null>(null);
   const scriptProcessorRef = useRef<ScriptProcessorNode | null>(null);
+  const sessionRef = useRef<any>(null);
 
   const addMessage = useCallback((role: 'user' | 'vishwa', text: string) => {
     setMessages(prev => [...prev, { role, text, timestamp: new Date() }]);
   }, []);
 
   const stopSession = useCallback(() => {
+    console.log("Stopping VishwaSetu Session...");
     setIsActive(false);
     isActiveRef.current = false;
     
@@ -44,12 +46,12 @@ const App: React.FC = () => {
     }
 
     if (inputAudioContextRef.current) {
-      inputAudioContextRef.current.close().catch(console.error);
+      inputAudioContextRef.current.close().catch(() => {});
       inputAudioContextRef.current = null;
     }
 
     if (outputAudioContextRef.current) {
-      outputAudioContextRef.current.close().catch(console.error);
+      outputAudioContextRef.current.close().catch(() => {});
       outputAudioContextRef.current = null;
     }
 
@@ -58,6 +60,11 @@ const App: React.FC = () => {
     });
     sourcesRef.current.clear();
     
+    if (sessionRef.current) {
+      try { sessionRef.current.close(); } catch (e) {}
+      sessionRef.current = null;
+    }
+
     nextStartTimeRef.current = 0;
     setCurrentInputText('');
     setCurrentOutputText('');
@@ -65,9 +72,16 @@ const App: React.FC = () => {
 
   const startSession = async () => {
     try {
+      const apiKey = process.env.API_KEY;
+      if (!apiKey) {
+        alert("API Key is missing. Please ensure process.env.API_KEY is set.");
+        return;
+      }
+
       if (isActiveRef.current) stopSession();
 
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+      console.log("Initializing VishwaSetu Session...");
+      const ai = new GoogleGenAI({ apiKey });
       
       const inputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
       const outputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
@@ -78,8 +92,9 @@ const App: React.FC = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       streamRef.current = stream;
 
-      if (inputCtx.state === 'suspended') await inputCtx.resume();
-      if (outputCtx.state === 'suspended') await outputCtx.resume();
+      // Crucial: Resume contexts to satisfy browser security/power policies
+      await inputCtx.resume();
+      await outputCtx.resume();
 
       const sessionPromise = ai.live.connect({
         model: 'gemini-2.5-flash-native-audio-preview-12-2025',
@@ -94,7 +109,7 @@ const App: React.FC = () => {
         },
         callbacks: {
           onopen: () => {
-            console.log('VishwaSetu Session Connected');
+            console.log('Gemini Live: WebSocket Connection Established');
             setIsActive(true);
             isActiveRef.current = true;
 
@@ -103,30 +118,32 @@ const App: React.FC = () => {
             scriptProcessorRef.current = processor;
             
             processor.onaudioprocess = (e) => {
-              // Use Ref to avoid stale closure issues during long sessions
               if (isActiveRef.current) {
-                // Ensure context hasn't been suspended by browser
+                // Keep context alive
                 if (inputCtx.state === 'suspended') inputCtx.resume();
                 
                 const inputData = e.inputBuffer.getChannelData(0);
                 const pcmBlob = createBlob(inputData);
+                
                 sessionPromise.then(session => {
+                  sessionRef.current = session;
                   try {
                     session.sendRealtimeInput({ media: pcmBlob });
                   } catch (err) {
-                    console.error("Audio pipe error:", err);
+                    console.error("Transmission Error:", err);
                   }
-                }).catch(console.error);
+                }).catch(err => {
+                  console.error("Session Promise Error:", err);
+                });
               }
             };
 
             source.connect(processor);
             processor.connect(inputCtx.destination);
             
-            // Initial nudge
+            // Initial nudge to trigger model response
             sessionPromise.then(session => {
-              const nudge = new Float32Array(1600).fill(0);
-              session.sendRealtimeInput({ media: createBlob(nudge) });
+              session.sendRealtimeInput({ media: createBlob(new Float32Array(1600).fill(0)) });
             });
           },
           onmessage: async (message: LiveServerMessage) => {
@@ -147,12 +164,10 @@ const App: React.FC = () => {
             }
 
             if (message.serverContent?.inputTranscription) {
-              const text = message.serverContent.inputTranscription.text;
-              setCurrentInputText(prev => prev + text);
+              setCurrentInputText(prev => prev + message.serverContent!.inputTranscription!.text);
             }
             if (message.serverContent?.outputTranscription) {
-              const text = message.serverContent.outputTranscription.text;
-              setCurrentOutputText(prev => prev + text);
+              setCurrentOutputText(prev => prev + message.serverContent!.outputTranscription!.text);
             }
 
             if (message.serverContent?.turnComplete) {
@@ -167,24 +182,25 @@ const App: React.FC = () => {
             }
 
             if (message.serverContent?.interrupted) {
-              sourcesRef.current.forEach(s => {
-                try { s.stop(); } catch (e) {}
-              });
+              sourcesRef.current.forEach(s => { try { s.stop(); } catch (e) {} });
               sourcesRef.current.clear();
               nextStartTimeRef.current = 0;
             }
           },
           onerror: (e) => {
-            console.error('VishwaSetu Session Error:', e);
+            console.error('Gemini Live Callback Error:', e);
           },
           onclose: (e) => {
-            console.log('VishwaSetu Session Closed');
-            stopSession();
+            console.warn('Gemini Live: WebSocket Closed', e);
+            if (isActiveRef.current) {
+              stopSession();
+            }
           },
         },
       });
     } catch (err) {
-      console.error('Start failure:', err);
+      console.error('Session Start Failure:', err);
+      alert('Failed to connect to teacher. Check your internet and API key.');
       stopSession();
     }
   };
@@ -287,7 +303,7 @@ const App: React.FC = () => {
             {isActive && (
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white px-6 py-2 rounded-full shadow-lg border border-orange-100">
                 <div className="pulse-ring w-3 h-3 bg-orange-500 rounded-full"></div>
-                <span className="text-orange-600 font-bold text-sm tracking-wide">CLASS IS LIVE</span>
+                <span className="text-orange-600 font-bold text-sm tracking-wide uppercase">Teacher is Listening</span>
               </div>
             )}
           </div>

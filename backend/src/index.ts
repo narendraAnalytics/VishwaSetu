@@ -2,7 +2,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
-import classroomRoutes from './routes/classroom';
+import { createServer } from 'http';
+import { WebSocketServer } from 'ws';
+import { handleWebSocketConnection } from './routes/classroom';
 import { GeminiService } from './services/geminiService';
 
 dotenv.config();
@@ -45,10 +47,26 @@ app.get('/api/test-gemini', async (req, res) => {
     }
 });
 
-app.use('/api/classroom', classroomRoutes);
+// Create HTTP server from Express app
+const server = createServer(app);
 
-app.listen(PORT, () => {
+// Create WebSocket server on the same HTTP server
+const wss = new WebSocketServer({ server });
+
+// Handle WebSocket connections
+wss.on('connection', (ws, req) => {
+    console.log('🔌 [WEBSOCKET] New client connected from:', req.socket.remoteAddress);
+    handleWebSocketConnection(ws);
+});
+
+wss.on('error', (error) => {
+    console.error('❌ [WEBSOCKET] Server error:', error);
+});
+
+// Start HTTP server (handles both Express and WebSocket)
+server.listen(PORT, () => {
     console.log(`✅ VishwaSetu Backend running on http://localhost:${PORT}`);
     console.log(`📡 Health check: http://localhost:${PORT}/health`);
     console.log(`🧪 Test Gemini: http://localhost:${PORT}/api/test-gemini`);
+    console.log(`🔌 WebSocket server ready on ws://localhost:${PORT}`);
 });
