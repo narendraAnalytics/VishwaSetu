@@ -6,7 +6,13 @@ import {
 import { File, Paths } from 'expo-file-system';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert } from 'react-native';
-import { useAudioRecorder, type RecordingConfig } from '@siteed/expo-audio-studio';
+import {
+    initialize,
+    toggleRecording,
+    playPCMData,
+    tearDown,
+    addExpoTwoWayAudioEventListener
+} from '@speechmatics/expo-two-way-audio';
 import { ClassroomMessage, ClassroomSession } from '../app/types/classroom';
 import { pcmToWav } from '../services/audioUtils';
 import { classroomApi } from '../services/classroomApi';
@@ -18,9 +24,6 @@ export function useClassroom() {
     const [error, setError] = useState<string | null>(null);
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
-
-    // Audio recorder hook from expo-audio-studio
-    const audioRecorder = useAudioRecorder();
 
     // WebSocket connection
     const wsRef = useRef<WebSocket | null>(null);
@@ -260,16 +263,13 @@ export function useClassroom() {
                 break;
 
             case 'audioChunk':
-                // Decode and add to byte buffer
+                // Receive audio from Gemini and play via two-way audio
                 const chunkBytes = base64ToUint8Array(data.audioData);
-                pcmBufferRef.current = concatUint8Arrays(pcmBufferRef.current, chunkBytes);
 
-                if (pcmBufferRef.current.length >= BUFFER_THRESHOLD) {
-                    console.log('[FRONTEND] Buffer threshold reached:', pcmBufferRef.current.length);
-                    audioQueueRef.current.push(pcmBufferRef.current);
-                    pcmBufferRef.current = new Uint8Array(0);
-                    playNextAudioChunk();
-                }
+                // Play through two-way audio output (function API)
+                playPCMData(chunkBytes);
+
+                console.log('[FRONTEND] Playing Gemini audio chunk:', chunkBytes.length, 'bytes');
                 break;
 
             case 'turnComplete':
@@ -349,29 +349,30 @@ export function useClassroom() {
                 setIsConnected(false);
             };
 
-            // Configure real-time PCM streaming with expo-audio-studio
-            const recordingConfig: RecordingConfig = {
-                sampleRate: 16000,         // 16kHz for Gemini API
-                channels: 1,               // Mono
-                encoding: 'pcm_16bit',     // 16-bit PCM
-                interval: 100,             // Stream every 100ms for low latency
-                onAudioStream: async (event) => {
-                    // event.data contains base64-encoded PCM audio
-                    if (ws.readyState === WebSocket.OPEN) {
-                        ws.send(JSON.stringify({
-                            type: 'audio_chunk',
-                            data: {
-                                audioData: event.data,  // Already base64 encoded
-                                format: 'pcm'
-                            }
-                        }));
-                    }
-                }
-            };
+            // Initialize two-way audio module (function-based API)
+            await initialize();
 
-            // Start recording with new API
-            await audioRecorder.startRecording(recordingConfig);
+            // Set up event listener for microphone data
+            addExpoTwoWayAudioEventListener('onMicrophoneData', (event) => {
+                if (ws.readyState === WebSocket.OPEN) {
+                    // event.data is Uint8Array - convert to base64
+                    const base64 = btoa(String.fromCharCode(...event.data));
+
+                    ws.send(JSON.stringify({
+                        type: 'audio_chunk',
+                        data: {
+                            audioData: base64,
+                            format: 'pcm'
+                        }
+                    }));
+                }
+            });
+
+            // Start recording (bidirectional audio with echo cancellation enabled by default)
+            toggleRecording(true);
             isRecordingRef.current = true;
+
+            console.log('[FRONTEND] Started bidirectional audio streaming (16kHz PCM)');
 
             setSession({ sessionId: 'pending', status: 'active', messages: [] });
             setIsSessionActive(true);
@@ -387,13 +388,15 @@ export function useClassroom() {
 
     // Stop session
     const stopSession = useCallback(async () => {
-        // Stop recording
+        // Stop two-way audio (function-based API)
         if (isRecordingRef.current) {
             try {
-                await audioRecorder.stopRecording();
+                toggleRecording(false);  // Stop recording
+                tearDown();              // Clean up module
                 isRecordingRef.current = false;
+                console.log('[FRONTEND] Stopped bidirectional audio');
             } catch (e) {
-                console.error('[FRONTEND] Error stopping recording:', e);
+                console.error('[FRONTEND] Error stopping two-way audio:', e);
             }
         }
 
@@ -423,7 +426,7 @@ export function useClassroom() {
         setIsConnected(false);
         setIsSessionActive(false);
 
-    }, [audioRecorder]);
+    }, []); // No dependencies needed - twoWayAudioRef is a ref
 
     return {
         session,

@@ -13,7 +13,9 @@
       "mcp__ide__getDiagnostics",
       "WebFetch(domain:googleapis.github.io)",
       "WebFetch(domain:github.com)",
-      "Bash(npx react-native config)"
+      "Bash(npx react-native config)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:discuss.ai.google.dev)"
     ]
   }
 }

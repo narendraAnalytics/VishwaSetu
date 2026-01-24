@@ -22,7 +22,8 @@
       "predictiveBackGestureEnabled": false,
       "package": "com.saasaideveloper.vishwasetu",
       "permissions": [
-        "RECORD_AUDIO"
+        "RECORD_AUDIO",
+        "MODIFY_AUDIO_SETTINGS"
       ]
     },
     "web": {
