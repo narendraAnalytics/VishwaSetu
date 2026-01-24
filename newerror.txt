@@ -6,3 +6,1123 @@ Sources
   - https://github.com/google-gemini/cookbook/issues/766
   - https://docs.swmansion.com/react-native-audio-api/docs/fundamentals/getting-started/
   - https://docs.swmansion.com/react-native-audio-api/docs/other/audio-api-plugin/
+
+
+  Detailed Flow Diagram:
+
+    User Speaks $\rightarrow$ expo-two-way-audio captures PCM buffer.
+    Frontend $\rightarrow$ Sends Base64 chunk via WebSocket.send().
+    Backend $\rightarrow$ Wraps chunk in { "realtime_input": { "media_chunks": [...] } }.
+    Gemini $\rightarrow$ Processes audio and streams back { "server_content": { "model_turn": { "parts": [...] } } }.
+    Backend $\rightarrow$ Extracts Base64 audio part and sends to App.
+    Frontend $\rightarrow$ Pushes Base64 to expo-two-way-audio playback queue.
+
+================================================================================
+           COMPREHENSIVE VISHWASETU LIVE CLASSROOM AUDIO FLOW
+                         TECHNICAL DOCUMENTATION
+================================================================================
+
+Last Updated: 2026-01-24
+Android-Only Build (iOS microphonePermission not required)
+
+
+## TABLE OF CONTENTS
+
+1. Executive Summary
+2. Architecture Overview
+3. Frontend Audio Capture
+4. WebSocket Communication Protocol
+5. Backend WebSocket Handling
+6. Gemini Live API Integration
+7. Audio Format Conversions
+8. Frontend Audio Playback
+9. Complete End-to-End Flow Diagram
+10. Audio Specifications Summary
+11. Latency Analysis
+12. Error Handling & Resilience
+13. Dependency Tree
+14. Implementation Notes
+15. File Reference Map
+
+
+================================================================================
+## 1. EXECUTIVE SUMMARY
+================================================================================
+
+VishwaSetu's Live Classroom implements a bidirectional, low-latency audio
+streaming system connecting users to the Gemini 2.5 Flash Native Audio model.
+
+Key Technologies:
+- Frontend: @speechmatics/expo-two-way-audio + expo-audio
+- Transport: WebSocket (ws://localhost:3000)
+- Backend: Express + WebSocket Server
+- AI: Gemini 2.5 Flash Native Audio (voice: Zephyr)
+- Audio: PCM 16kHz (input) → PCM 24kHz (output)
+
+
+================================================================================
+## 2. ARCHITECTURE OVERVIEW
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      USER DEVICE (React Native)                          │
+│  ┌────────────────────────────────────────────────────────────────┐    │
+│  │  @speechmatics/expo-two-way-audio                               │    │
+│  │  Native audio capture & playback                                │    │
+│  │  PCM 16kHz, 16-bit, Mono                                        │    │
+│  └──────────────────────┬───────────────────────────────────────────┘    │
+│                         │                                                │
+│                         ▼                                                │
+│  ┌────────────────────────────────────────────────────────────────┐    │
+│  │  hooks/useClassroom.ts                                          │    │
+│  │  - WebSocket client                                             │    │
+│  │  - Base64 encoding/decoding                                     │    │
+│  │  - Audio playback queue                                         │    │
+│  │  - Message handling                                             │    │
+│  └──────────────────────┬───────────────────────────────────────────┘    │
+└─────────────────────────┼────────────────────────────────────────────────┘
+                          │
+                    WebSocket JSON
+                (ws://localhost:3000)
+                          │
+┌─────────────────────────▼────────────────────────────────────────────────┐
+│                   BACKEND SERVER (Express + WS)                          │
+│  ┌────────────────────────────────────────────────────────────────┐    │
+│  │  backend/src/routes/classroom.ts                                │    │
+│  │  - WebSocket message router                                     │    │
+│  │  - Session management                                           │    │
+│  │  - Audio chunk validation                                       │    │
+│  │  - Event broadcasting                                           │    │
+│  └──────────────────────┬───────────────────────────────────────────┘    │
+│                         │                                                │
+│                         ▼                                                │
+│  ┌────────────────────────────────────────────────────────────────┐    │
+│  │  backend/src/services/geminiLiveService.ts                      │    │
+│  │  - Gemini Live API WebSocket                                    │    │
+│  │  - Audio format: audio/pcm;rate=16000                           │    │
+│  │  - Voice: Zephyr (prebuilt)                                     │    │
+│  │  - Real-time transcription                                      │    │
+│  └──────────────────────┬───────────────────────────────────────────┘    │
+└─────────────────────────┼────────────────────────────────────────────────┘
+                          │
+                  Gemini Live API
+                          │
+┌─────────────────────────▼────────────────────────────────────────────────┐
+│              GEMINI 2.5 FLASH NATIVE AUDIO MODEL                         │
+│  - Real-time speech recognition + synthesis                              │
+│  - Voice output: 24kHz PCM                                               │
+│  - Streaming transcriptions                                              │
+│  - VishwaSetu pedagogy system instruction                                │
+└──────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+## 3. FRONTEND AUDIO CAPTURE
+================================================================================
+
+Location: hooks/useClassroom.ts (Lines 1-112, 351-387)
+
+### 3.1 Audio Initialization & Permissions
+
+```typescript
+// Lines 94-112: Request microphone permission
+const status = await AudioModule.requestRecordingPermissionsAsync();
+
+await setAudioModeAsync({
+    playsInSilentMode: true,          // Play during silent mode
+    allowsRecording: true,            // Enable mic
+    interruptionMode: 'doNotMix',     // Exclusive audio
+    shouldPlayInBackground: true,     // Continue in background
+    shouldRouteThroughEarpiece: false,// Use speaker
+    interruptionModeAndroid: 'doNotMix'
+});
+
+// Lines 352-353: Initialize two-way audio module
+await initialize();
+```
+
+### 3.2 Audio Capture Specifications
+
+- Source: @speechmatics/expo-two-way-audio (native module)
+- Sample Rate: 16 kHz
+- Bit Depth: 16-bit signed PCM
+- Channels: Mono (1)
+- Frame Size: ~1600 samples per frame (~100ms)
+- Echo Cancellation: Enabled by default
+
+### 3.3 Real-Time Audio Streaming
+
+```typescript
+// Lines 356-369: Set up microphone data listener
+addExpoTwoWayAudioEventListener('onMicrophoneData', (event) => {
+    if (ws.readyState === WebSocket.OPEN) {
+        // event.data is Uint8Array - convert to base64
+        const base64 = btoa(String.fromCharCode(...event.data));
+
+        ws.send(JSON.stringify({
+            type: 'audio_chunk',
+            data: {
+                audioData: base64,
+                format: 'pcm'
+            }
+        }));
+    }
+});
+
+// Line 372: Start recording
+toggleRecording(true);
+```
+
+
+================================================================================
+## 4. WEBSOCKET COMMUNICATION PROTOCOL
+================================================================================
+
+### 4.1 Connection Setup
+
+Frontend (Lines 320-330):
+```typescript
+const wsUrl = classroomApi.getWebSocketUrl();
+// Converts http://localhost:3000 → ws://localhost:3000
+
+const ws = new WebSocket(wsUrl);
+
+ws.onopen = () => {
+    ws.send(JSON.stringify({
+        type: 'start_session',
+        data: {}
+    }));
+};
+```
+
+### 4.2 Message Types & Formats
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      FRONTEND → BACKEND MESSAGES                        │
+└─────────────────────────────────────────────────────────────────────────┘
+
+[1] START SESSION
+{
+  "type": "start_session",
+  "data": {}
+}
+
+[2] AUDIO CHUNK (streaming, continuous)
+{
+  "type": "audio_chunk",
+  "data": {
+    "audioData": "<base64-encoded PCM 16kHz>",
+    "format": "pcm"
+  }
+}
+
+[3] STOP SESSION
+{
+  "type": "stop_session",
+  "data": {}
+}
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      BACKEND → FRONTEND MESSAGES                        │
+└─────────────────────────────────────────────────────────────────────────┘
+
+[1] SESSION STARTED
+{
+  "type": "session_started",
+  "data": { "sessionId": "<uuid>" }
+}
+
+[2] CONNECTION STATUS
+{
+  "type": "status",
+  "data": { "connected": true }
+}
+
+[3] INPUT TRANSCRIPTION (user speech, streaming)
+{
+  "type": "inputTranscript",
+  "data": { "text": "partial or complete user speech" }
+}
+
+[4] AUDIO CHUNK (Gemini output, streaming)
+{
+  "type": "audioChunk",
+  "data": {
+    "audioData": "<base64-encoded PCM 24kHz>",
+    "mimeType": "audio/pcm;rate=24000"
+  }
+}
+
+[5] OUTPUT TRANSCRIPTION (Gemini response, streaming)
+{
+  "type": "outputTranscript",
+  "data": { "text": "Gemini response text" }
+}
+
+[6] TURN COMPLETE (signals end of Gemini's turn)
+{
+  "type": "turnComplete",
+  "data": { "timestamp": <milliseconds> }
+}
+
+[7] HEARTBEAT (every 15 seconds)
+{
+  "type": "heartbeat",
+  "data": { "alive": true }
+}
+
+[8] ERROR
+{
+  "type": "error",
+  "data": { "message": "error description" }
+}
+
+### 4.3 Frontend Message Handler
+
+Location: hooks/useClassroom.ts (Lines 234-298)
+
+```typescript
+const handleWebSocketMessage = (event: string, data: any) => {
+    switch (event) {
+        case 'inputTranscript':
+            setInputText(prev => prev + data.text);
+            break;
+
+        case 'outputTranscript':
+            setOutputText(prev => prev + data.text);
+            break;
+
+        case 'audioChunk':
+            const chunkBytes = base64ToUint8Array(data.audioData);
+            playPCMData(chunkBytes);  // Native playback
+            break;
+
+        case 'turnComplete':
+            // Finalize messages
+            if (inputText.trim()) addMessage('user', inputText);
+            if (outputText.trim()) addMessage('vishwa', outputText);
+            setInputText('');
+            setOutputText('');
+            break;
+
+        case 'error':
+            setError(data.message);
+            setIsConnected(false);
+            break;
+    }
+};
+```
+
+
+================================================================================
+## 5. BACKEND WEBSOCKET HANDLING
+================================================================================
+
+Location: backend/src/routes/classroom.ts
+
+### 5.1 Session Management
+
+```typescript
+// Lines 5-13: Session data structure
+interface SessionData {
+    sessionId: string;
+    geminiSession: GeminiLiveSession;  // Gemini connection
+    ws: WebSocket;                      // Client connection
+    lastActivity: number;               // For timeout tracking
+}
+
+const sessions = new Map<string, SessionData>();
+
+// Lines 16-29: Automatic timeout cleanup (5 minutes)
+setInterval(() => {
+    const now = Date.now();
+    const TIMEOUT = 5 * 60 * 1000;
+
+    for (const [sessionId, data] of sessions.entries()) {
+        if (now - data.lastActivity > TIMEOUT) {
+            data.geminiSession.disconnect();
+            sessions.delete(sessionId);
+        }
+    }
+}, 60 * 1000);
+```
+
+### 5.2 Message Routing
+
+```typescript
+// Lines 49-76: WebSocket message handler
+ws.on('message', async (rawMessage: Buffer) => {
+    const message = JSON.parse(rawMessage.toString());
+
+    switch (message.type) {
+        case 'start_session':
+            await handleStartSession(ws, send);
+            break;
+
+        case 'audio_chunk':
+            await handleAudioChunk(message.data, currentSessionId, send);
+            break;
+
+        case 'stop_session':
+            await handleStopSession(currentSessionId);
+            break;
+    }
+});
+```
+
+### 5.3 Audio Chunk Processing
+
+```typescript
+// Lines 120-162: handleAudioChunk
+async function handleAudioChunk(data, sessionId, send) {
+    const { audioData, format } = data;
+
+    // Convert base64 to Buffer
+    const pcmBuffer = Buffer.from(audioData, 'base64');
+
+    // Validation
+    if (pcmBuffer.length === 0) {
+        console.warn('Empty audio buffer');
+        return;
+    }
+
+    if (pcmBuffer.length % 2 !== 0) {
+        console.warn('PCM buffer not 16-bit aligned');
+    }
+
+    // Send to Gemini (both use 16kHz PCM - no conversion needed)
+    sessionData.geminiSession.sendAudioChunk(pcmBuffer);
+    sessionData.lastActivity = Date.now();
+}
+```
+
+### 5.4 Event Broadcasting
+
+```typescript
+// Lines 42-46: Helper function
+const send = (type: string, data: any) => {
+    if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type, data }));
+    }
+};
+
+// Lines 92-94: Relay Gemini events to frontend
+const onGeminiEvent = (event: string, data: any) => {
+    send(event, data);
+};
+```
+
+
+================================================================================
+## 6. GEMINI LIVE API INTEGRATION
+================================================================================
+
+Location: backend/src/services/geminiLiveService.ts
+
+### 6.1 Session Connection
+
+```typescript
+// Lines 16-103: connect() method
+async connect() {
+    const model = 'gemini-2.5-flash-native-audio-preview-12-2025';
+
+    this.session = await this.ai.live.connect({
+        model: model,
+
+        config: {
+            responseModalities: [Modality.TEXT, Modality.AUDIO],
+
+            // Generation parameters
+            temperature: 0.8,
+            maxOutputTokens: 1024,
+            topP: 0.95,
+            topK: 40,
+
+            // Voice configuration
+            speechConfig: {
+                voiceConfig: {
+                    prebuiltVoiceConfig: {
+                        voiceName: 'Zephyr'
+                    }
+                }
+            },
+
+            // System instruction (VishwaSetu pedagogy)
+            systemInstruction: SYSTEM_INSTRUCTION,
+
+            // Enable transcription
+            inputAudioTranscription: { model: 'default' },
+            outputAudioTranscription: { model: 'default' },
+        },
+
+        callbacks: {
+            onopen: () => { /* connected */ },
+            onmessage: (message) => { /* process response */ },
+            onerror: (error) => { /* handle error */ },
+            onclose: () => { /* disconnected */ }
+        }
+    });
+}
+```
+
+### 6.2 Input Audio Specification
+
+```typescript
+// Lines 105-122: sendAudioChunk()
+sendAudioChunk(buffer: Buffer) {
+    const base64 = buffer.toString('base64');
+
+    this.session.sendRealtimeInput({
+        media: {
+            data: base64,
+            mimeType: 'audio/pcm;rate=16000'
+        }
+    });
+}
+```
+
+Input Format:
+- Sample Rate: 16 kHz
+- Bit Depth: 16-bit signed PCM
+- Channels: Mono
+- Encoding: Base64
+- MIME Type: audio/pcm;rate=16000
+
+### 6.3 Output Processing
+
+```typescript
+// Lines 58-83: onmessage callback
+onmessage: (message: LiveServerMessage) => {
+    // Audio output (PCM 24kHz)
+    if (message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data) {
+        const audioData = message.serverContent.modelTurn.parts[0].inlineData.data;
+
+        this.onEvent('audioChunk', {
+            audioData,
+            mimeType: 'audio/pcm;rate=24000'
+        });
+    }
+
+    // Input transcription
+    if (message.serverContent?.inputTranscription) {
+        this.onEvent('inputTranscript', {
+            text: message.serverContent.inputTranscription.text
+        });
+    }
+
+    // Output transcription
+    if (message.serverContent?.outputTranscription) {
+        this.onEvent('outputTranscript', {
+            text: message.serverContent.outputTranscription.text
+        });
+    }
+
+    // Turn complete
+    if (message.serverContent?.turnComplete) {
+        this.onEvent('turnComplete', { timestamp: Date.now() });
+    }
+}
+```
+
+Output Format:
+- Sample Rate: 24 kHz
+- Bit Depth: 16-bit signed PCM
+- Channels: Mono
+- Encoding: Base64
+- MIME Type: audio/pcm;rate=24000
+
+### 6.4 Initial Audio Nudge
+
+```typescript
+// Lines 49-56: Trigger greeting
+setTimeout(() => {
+    const nudge = new Int16Array(1600).fill(0);  // 100ms silence
+    this.sendAudioChunk(Buffer.from(nudge.buffer));
+}, 500);
+```
+
+
+================================================================================
+## 7. AUDIO FORMAT CONVERSIONS
+================================================================================
+
+Location: services/audioUtils.ts
+
+### 7.1 PCM to WAV Conversion
+
+```typescript
+export function pcmToWav(
+    pcmData: string | Uint8Array,
+    sampleRate: number,
+    channels: number = 1
+): string {
+    // Decode base64 if needed
+    let pcmBytes = (pcmData instanceof Uint8Array)
+        ? pcmData
+        : base64ToUint8Array(pcmData);
+
+    // Pad to 16-bit alignment
+    if (pcmBytes.length % 2 !== 0) {
+        const padded = new Uint8Array(pcmBytes.length + 1);
+        padded.set(pcmBytes);
+        padded[pcmBytes.length] = 0;
+        pcmBytes = padded;
+    }
+
+    // Create 44-byte WAV header
+    const wavHeader = new ArrayBuffer(44);
+    const view = new DataView(wavHeader);
+
+    const byteRate = sampleRate * channels * 2;
+    const blockAlign = channels * 2;
+
+    // RIFF Chunk (bytes 0-11)
+    view.setUint32(0,  0x46464952, false);  // "RIFF"
+    view.setUint32(4,  36 + pcmBytes.length, true);
+    view.setUint32(8,  0x45564157, false);  // "WAVE"
+
+    // fmt Sub-chunk (bytes 12-35)
+    view.setUint32(12, 0x20746d66, false);  // "fmt "
+    view.setUint32(16, 16, true);           // PCM = 16
+    view.setUint16(20, 1, true);            // Audio format
+    view.setUint16(22, channels, true);     // Channels
+    view.setUint32(24, sampleRate, true);   // Sample rate
+    view.setUint32(28, byteRate, true);     // Byte rate
+    view.setUint16(32, blockAlign, true);   // Block align
+    view.setUint16(34, 16, true);           // Bits per sample
+
+    // data Sub-chunk (bytes 36-43)
+    view.setUint32(36, 0x61746164, false);  // "data"
+    view.setUint32(40, pcmBytes.length, true);
+
+    // Combine header + PCM
+    const wavBytes = new Uint8Array(44 + pcmBytes.length);
+    wavBytes.set(new Uint8Array(wavHeader), 0);
+    wavBytes.set(pcmBytes, 44);
+
+    return uint8ArrayToBase64(wavBytes);
+}
+```
+
+### 7.2 Base64 Encoding/Decoding
+
+Custom implementation for React Native compatibility (btoa/atob not always available):
+
+```typescript
+// Manual base64 decoder
+function base64ToUint8Array(base64: string): Uint8Array {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    const lookup = new Uint8Array(256);
+    for (let i = 0; i < chars.length; i++) {
+        lookup[chars.charCodeAt(i)] = i;
+    }
+
+    // Decode base64 to bytes
+    const len = base64.length;
+    let bufferLength = len * 0.75;
+    if (base64[len - 1] === '=') bufferLength--;
+    if (base64[len - 2] === '=') bufferLength--;
+
+    const bytes = new Uint8Array(bufferLength);
+    for (let i = 0, j = 0; i < len; i += 4) {
+        const e1 = lookup[base64.charCodeAt(i)];
+        const e2 = lookup[base64.charCodeAt(i + 1)];
+        const e3 = lookup[base64.charCodeAt(i + 2)];
+        const e4 = lookup[base64.charCodeAt(i + 3)];
+
+        bytes[j++] = (e1 << 2) | (e2 >> 4);
+        bytes[j++] = ((e2 & 15) << 4) | (e3 >> 2);
+        bytes[j++] = ((e3 & 3) << 6) | (e4 & 63);
+    }
+    return bytes;
+}
+
+// Manual base64 encoder
+function uint8ArrayToBase64(bytes: Uint8Array): string {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    let base64 = '';
+    const len = bytes.length;
+
+    for (let i = 0; i < len; i += 3) {
+        base64 += chars[bytes[i] >> 2];
+        base64 += chars[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)];
+        base64 += chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
+        base64 += chars[bytes[i + 2] & 63];
+    }
+
+    // Add padding
+    if (len % 3 === 2) base64 = base64.slice(0, -1) + '=';
+    else if (len % 3 === 1) base64 = base64.slice(0, -2) + '==';
+
+    return base64;
+}
+```
+
+
+================================================================================
+## 8. FRONTEND AUDIO PLAYBACK
+================================================================================
+
+Location: hooks/useClassroom.ts (Lines 34-231)
+
+### 8.1 Playback Queue Management
+
+```typescript
+const audioQueueRef = useRef<Uint8Array[]>([]);
+const pcmBufferRef = useRef<Uint8Array>(new Uint8Array(0));
+const isPlayingRef = useRef(false);
+const currentSoundRef = useRef<any>(null);
+const BUFFER_THRESHOLD = 15360;  // ~300ms at 24kHz
+```
+
+### 8.2 Playback Process
+
+STEP 1: Receive Audio Chunk
+```typescript
+case 'audioChunk':
+    const chunkBytes = base64ToUint8Array(data.audioData);
+    playPCMData(chunkBytes);  // Native playback via two-way audio
+    break;
+```
+
+STEP 2: File-Based Fallback Playback
+```typescript
+const playNextAudioChunk = async () => {
+    if (isPlayingRef.current || audioQueueRef.current.length === 0) {
+        return;
+    }
+
+    isPlayingRef.current = true;
+    const pcmBytes = audioQueueRef.current.shift()!;
+
+    // Convert PCM to WAV
+    const base64Wav = pcmToWav(pcmBytes, 24000, 1);
+
+    // Decode to binary
+    const binaryString = atob(base64Wav);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    // Write to cache file
+    const audioFile = new File(Paths.cache, `vishwa-audio-${Date.now()}.wav`);
+    await audioFile.write(bytes);
+
+    // Play via expo-audio
+    const player = createAudioPlayer({ uri: audioFile.uri }, { updateInterval: 50 });
+    player.play();
+
+    // Clean up when finished
+    player.addListener('playbackStatusUpdate', (status) => {
+        if (status.didJustFinish) {
+            player.remove();
+            audioFile.delete();
+            isPlayingRef.current = false;
+            playNextAudioChunk();  // Play next chunk
+        }
+    });
+};
+```
+
+STEP 3: Turn Complete & Message Finalization
+```typescript
+case 'turnComplete':
+    // Flush remaining buffer
+    if (pcmBufferRef.current.length > 0) {
+        audioQueueRef.current.push(pcmBufferRef.current);
+        pcmBufferRef.current = new Uint8Array(0);
+        playNextAudioChunk();
+    }
+
+    // Finalize transcriptions
+    if (inputText.trim()) addMessage('user', inputText);
+    if (outputText.trim()) addMessage('vishwa', outputText);
+    setInputText('');
+    setOutputText('');
+    break;
+```
+
+
+================================================================================
+## 9. COMPLETE END-TO-END FLOW DIAGRAM
+================================================================================
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                      USER SPEAKS INTO MICROPHONE                         │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ @speechmatics/expo-two-way-audio: Native PCM Capture                     │
+│ ├─ Sample Rate: 16 kHz                                                  │
+│ ├─ Bit Depth: 16-bit signed                                             │
+│ ├─ Channels: Mono (1)                                                   │
+│ ├─ Echo Cancellation: ON                                                │
+│ └─ Output: Uint8Array (event.data)                                      │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Frontend: Encode PCM → Base64                                            │
+│ ├─ btoa(String.fromCharCode(...pcmBytes))                               │
+│ └─ Result: Base64 string                                                │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ WebSocket Send: JSON Message                                             │
+│ {                                                                        │
+│   "type": "audio_chunk",                                                │
+│   "data": {                                                              │
+│     "audioData": "<base64-encoded PCM>",                                │
+│     "format": "pcm"                                                     │
+│   }                                                                      │
+│ }                                                                        │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                    ws://localhost:3000
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Backend: WebSocket Message Handler                                       │
+│ ├─ Parse JSON message                                                   │
+│ ├─ Extract audioData (base64)                                           │
+│ ├─ Decode Base64 → Buffer (PCM bytes)                                   │
+│ ├─ Validate: length % 2 === 0 (16-bit aligned)                          │
+│ └─ Lookup session: GeminiLiveSession                                    │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Backend: Send to Gemini Live API                                         │
+│ ├─ Encode Buffer → Base64                                               │
+│ ├─ Wrap in payload:                                                     │
+│ │  {                                                                    │
+│ │    "media": {                                                        │
+│ │      "data": "<base64>",                                            │
+│ │      "mimeType": "audio/pcm;rate=16000"                            │
+│ │    }                                                                │
+│ │  }                                                                  │
+│ └─ Send via session.sendRealtimeInput()                                 │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                    ≈ 100-200ms latency
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ GEMINI 2.5 FLASH NATIVE AUDIO MODEL                                     │
+│ ├─ Model: gemini-2.5-flash-native-audio-preview-12-2025                 │
+│ ├─ Processing: Real-time speech recognition + synthesis                 │
+│ ├─ Voice: Zephyr (prebuilt)                                             │
+│ ├─ System: VishwaSetu pedagogy                                          │
+│ ├─ Temperature: 0.8                                                     │
+│ └─ Modalities: TEXT + AUDIO                                             │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Gemini Responses (Streaming via WebSocket)                               │
+│                                                                          │
+│ 1. Input Transcription (partial, streaming)                             │
+│    { "serverContent": { "inputTranscription": { "text": "..." } } }     │
+│                                                                          │
+│ 2. Audio Chunks (PCM 24kHz, streaming)                                  │
+│    { "serverContent": { "modelTurn": { "parts": [{                      │
+│      "inlineData": { "data": "<base64 PCM 24kHz>" }                     │
+│    }] } } }                                                              │
+│                                                                          │
+│ 3. Output Transcription (complete)                                      │
+│    { "serverContent": { "outputTranscription": { "text": "..." } } }    │
+│                                                                          │
+│ 4. Turn Complete (final)                                                │
+│    { "serverContent": { "turnComplete": true } }                         │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Backend: Process Gemini Events                                           │
+│ ├─ Extract audio (base64, PCM 24kHz)                                    │
+│ ├─ Extract transcriptions                                               │
+│ ├─ Call onEvent() callback                                              │
+│ └─ Relay via WebSocket to frontend                                      │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ WebSocket: Backend → Frontend Events                                     │
+│                                                                          │
+│ Event: inputTranscript                                                   │
+│ { "type": "inputTranscript", "data": { "text": "..." } }                │
+│                                                                          │
+│ Event: audioChunk (streaming)                                            │
+│ { "type": "audioChunk", "data": {                                        │
+│     "audioData": "<base64 PCM 24kHz>",                                  │
+│     "mimeType": "audio/pcm;rate=24000" } }                              │
+│                                                                          │
+│ Event: outputTranscript                                                  │
+│ { "type": "outputTranscript", "data": { "text": "..." } }               │
+│                                                                          │
+│ Event: turnComplete                                                      │
+│ { "type": "turnComplete", "data": { "timestamp": <ms> } }               │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Frontend: WebSocket Message Handler                                      │
+│ ├─ inputTranscript → Accumulate in inputText state                      │
+│ ├─ audioChunk → playPCMData(bytes) [native playback]                    │
+│ ├─ outputTranscript → Accumulate in outputText state                    │
+│ ├─ turnComplete → Finalize messages, clear state                        │
+│ └─ Display with "Listening..." and "Speaking..." indicators             │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Frontend: Audio Playback Queue (Fallback)                                │
+│ ├─ Receive: Base64 PCM 24kHz                                            │
+│ ├─ Decode: Base64 → Uint8Array                                          │
+│ ├─ Convert: PCM → WAV (add 44-byte header)                              │
+│ ├─ Write: Binary WAV file to cache                                      │
+│ └─ Play: expo-audio player, sequential queue                            │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│ AUDIO PLAYBACK TO USER (Speaker/Headphones)                             │
+│ ├─ Sample Rate: 24 kHz (from Gemini)                                    │
+│ ├─ Bit Depth: 16-bit signed                                             │
+│ ├─ Channels: Mono (1)                                                   │
+│ └─ No resampling needed                                                 │
+└──────────────────────────────────────────────────────────────────────────┘
+
+                     LOOP: User continues speaking
+
+
+================================================================================
+## 10. AUDIO SPECIFICATIONS SUMMARY
+================================================================================
+
+┌──────────────────────────┬──────────────────────────────────────────────┐
+│ Stage                    │ Specification                                │
+├──────────────────────────┼──────────────────────────────────────────────┤
+│ Frontend Capture         │ 16 kHz, 16-bit, Mono PCM                     │
+│ Frontend → Backend       │ Base64-encoded PCM via WebSocket JSON        │
+│ Backend → Gemini         │ audio/pcm;rate=16000 (base64)                │
+│ Gemini Processing        │ Real-time streaming (low-latency)            │
+│ Gemini → Backend         │ audio/pcm;rate=24000 (base64)                │
+│ Backend → Frontend       │ Base64-encoded PCM via WebSocket JSON        │
+│ Frontend Playback        │ WAV container (24 kHz, 16-bit, Mono)         │
+│ Gemini Model             │ gemini-2.5-flash-native-audio-preview        │
+│ Gemini Voice             │ Zephyr (prebuilt)                            │
+│ Echo Cancellation        │ Enabled (default)                            │
+│ Response Modalities      │ TEXT + AUDIO                                 │
+│ Temperature              │ 0.8                                          │
+│ Max Output Tokens        │ 1024                                         │
+│ Top-P                    │ 0.95                                         │
+│ Top-K                    │ 40                                           │
+└──────────────────────────┴──────────────────────────────────────────────┘
+
+
+================================================================================
+## 11. LATENCY ANALYSIS
+================================================================================
+
+┌─────────────────────────────────┬─────────────────────────────┐
+│ Segment                         │ Typical Latency             │
+├─────────────────────────────────┼─────────────────────────────┤
+│ Frontend PCM capture            │ ~20-50ms per frame          │
+│ WebSocket transmission (up)     │ ~10-50ms                    │
+│ Gemini processing               │ ~100-300ms                  │
+│ Audio chunk generation          │ Streaming (real-time)       │
+│ WebSocket transmission (down)   │ ~10-50ms                    │
+│ Frontend playback queue         │ ~50-200ms per chunk         │
+│ ────────────────────────────────┼─────────────────────────────┤
+│ TOTAL END-TO-END                │ ~200-600ms typical          │
+└─────────────────────────────────┴─────────────────────────────┘
+
+
+================================================================================
+## 12. ERROR HANDLING & RESILIENCE
+================================================================================
+
+### 12.1 Frontend Error Handling
+
+WebSocket Connection Errors:
+```typescript
+ws.onerror = (error) => {
+    console.error('[FRONTEND] WebSocket error:', error);
+    setError('WebSocket connection error');
+    setIsConnected(false);
+};
+
+ws.onclose = () => {
+    setIsConnected(false);
+};
+```
+
+Playback Timeout (10 seconds):
+```typescript
+timeoutId = setTimeout(() => {
+    console.warn('[FRONTEND] Playback timeout - forcing reset');
+    isPlayingRef.current = false;
+    playNextAudioChunk();
+}, 10000);
+```
+
+Playback Error:
+```typescript
+if (status.error) {
+    console.error('[FRONTEND] Playback error:', status.error);
+    isPlayingRef.current = false;
+    playNextAudioChunk();
+}
+```
+
+### 12.2 Backend Error Handling
+
+Audio Buffer Validation:
+```typescript
+if (pcmBuffer.length === 0) {
+    console.warn('Empty audio buffer');
+    return;
+}
+
+if (pcmBuffer.length % 2 !== 0) {
+    console.warn('PCM buffer not 16-bit aligned');
+}
+```
+
+Session Timeout (5 minutes):
+```typescript
+const TIMEOUT = 5 * 60 * 1000;
+if (now - data.lastActivity > TIMEOUT) {
+    data.geminiSession.disconnect();
+    sessions.delete(sessionId);
+}
+```
+
+Gemini Connection Errors:
+```typescript
+onerror: (error) => {
+    console.error('Gemini Live Error:', error);
+    this.onEvent('error', { message: error.message });
+}
+```
+
+
+================================================================================
+## 13. DEPENDENCY TREE
+================================================================================
+
+### Frontend Dependencies
+- @speechmatics/expo-two-way-audio (v0.1.2) - Native audio capture/playback
+- expo-audio (v1.1.1) - Audio playback control
+- expo-file-system (v19.0.21) - Temp WAV file management
+- react-native-worklets (0.5.1) - Native thread processing
+
+### Backend Dependencies
+- @google/genai - Gemini Live API SDK
+- ws - WebSocket server
+- express - HTTP server
+- cors - Cross-origin requests
+- body-parser - Request parsing
+- uuid - Session ID generation
+- dotenv - Environment variables
+
+### Platform Requirements
+- Android: RECORD_AUDIO, MODIFY_AUDIO_SETTINGS permissions (in app.json)
+- iOS: NOT REQUIRED (Android-only build confirmed)
+
+
+================================================================================
+## 14. IMPLEMENTATION NOTES
+================================================================================
+
+### Critical Gotchas
+
+1. Base64 Encoding
+   - React Native: Custom btoa/atob implementation required
+   - Native atob/btoa may not be available in all RN versions
+
+2. WAV Header Required
+   - expo-audio needs WAV container format
+   - Raw PCM playback fails on some devices
+
+3. Sample Rate Mismatch
+   - Input: 16 kHz (frontend capture)
+   - Output: 24 kHz (Gemini synthesis)
+   - No resampling needed - expo-audio handles it
+
+4. 16-bit Alignment
+   - PCM buffers MUST be even-length
+   - Odd-length buffers cause playback issues
+
+5. Session Timeout
+   - 5-minute inactivity limit
+   - Long silences may disconnect session
+
+6. Streaming vs Complete
+   - Transcriptions arrive as streams (incremental)
+   - Frontend must accumulate text chunks
+
+### Best Practices
+
+✓ Always validate PCM buffer alignment before sending to Gemini
+✓ Queue audio chunks sequentially (no parallel playback)
+✓ Use WebSocket heartbeat (15s) to keep connection alive
+✓ Implement per-session tracking to prevent memory leaks
+✓ Clean up temp WAV files immediately after playback
+✓ Handle network interruptions with reconnection logic
+✓ Monitor session activity and implement automatic cleanup
+
+### No Buffer Module Needed
+Per user confirmation, the `buffer` module is NOT required.
+Custom base64 encoding/decoding functions handle all conversions.
+
+
+================================================================================
+## 15. FILE REFERENCE MAP
+================================================================================
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ File Path                                        │ Purpose                │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ hooks/useClassroom.ts                            │ Audio capture,         │
+│                                                  │ WebSocket mgmt,        │
+│                                                  │ Playback queue         │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ app/(tabs)/classroom.tsx                         │ Live Classroom UI      │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ backend/src/routes/classroom.ts                  │ WebSocket routing,     │
+│                                                  │ Session management     │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ backend/src/services/geminiLiveService.ts        │ Gemini Live API        │
+│                                                  │ integration            │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ services/audioUtils.ts                           │ PCM → WAV conversion   │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ services/classroomApi.ts                         │ Frontend API client    │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ backend/src/config/constants.ts                  │ System instruction,    │
+│                                                  │ Configuration          │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ app/types/classroom.ts                           │ TypeScript types       │
+├──────────────────────────────────────────────────┼────────────────────────┤
+│ app.json                                         │ Android permissions:   │
+│                                                  │ RECORD_AUDIO,          │
+│                                                  │ MODIFY_AUDIO_SETTINGS  │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+                           END OF DOCUMENTATION
+================================================================================
+
+Generated: 2026-01-24
+Build Target: Android only
+No iOS microphonePermission required
+No buffer module installation required
+
+For questions or updates, refer to CLAUDE.md in the project root.
