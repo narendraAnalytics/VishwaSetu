@@ -6,7 +6,7 @@ import {
 import { File, Paths } from 'expo-file-system';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert } from 'react-native';
-import LiveAudioStream from 'react-native-live-audio-stream';
+import { useAudioRecorder, type RecordingConfig } from '@siteed/expo-audio-studio';
 import { ClassroomMessage, ClassroomSession } from '../app/types/classroom';
 import { pcmToWav } from '../services/audioUtils';
 import { classroomApi } from '../services/classroomApi';
@@ -18,6 +18,9 @@ export function useClassroom() {
     const [error, setError] = useState<string | null>(null);
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
+
+    // Audio recorder hook from expo-audio-studio
+    const audioRecorder = useAudioRecorder();
 
     // WebSocket connection
     const wsRef = useRef<WebSocket | null>(null);
@@ -346,30 +349,28 @@ export function useClassroom() {
                 setIsConnected(false);
             };
 
-            // Configure native PCM recording
-            const options = {
-                sampleRate: 16000,      // 16kHz for Gemini
-                channels: 1,            // Mono
-                bitsPerSample: 16,      // 16-bit PCM
-                audioSource: 6,         // VOICE_COMMUNICATION on Android
-                wavFile: ''             // Required: empty string = streaming only, no file save
+            // Configure real-time PCM streaming with expo-audio-studio
+            const recordingConfig: RecordingConfig = {
+                sampleRate: 16000,         // 16kHz for Gemini API
+                channels: 1,               // Mono
+                encoding: 'pcm_16bit',     // 16-bit PCM
+                interval: 100,             // Stream every 100ms for low latency
+                onAudioStream: async (event) => {
+                    // event.data contains base64-encoded PCM audio
+                    if (ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({
+                            type: 'audio_chunk',
+                            data: {
+                                audioData: event.data,  // Already base64 encoded
+                                format: 'pcm'
+                            }
+                        }));
+                    }
+                }
             };
 
-            LiveAudioStream.init(options);
-
-            // Handle audio data from microphone
-            LiveAudioStream.on('data', (data: string) => {
-                if (ws.readyState === WebSocket.OPEN) {
-                    // data is already base64 PCM from native module
-                    ws.send(JSON.stringify({
-                        type: 'audio_chunk',
-                        data: { audioData: data, format: 'pcm' }
-                    }));
-                }
-            });
-
-            // Start recording
-            LiveAudioStream.start();
+            // Start recording with new API
+            await audioRecorder.startRecording(recordingConfig);
             isRecordingRef.current = true;
 
             setSession({ sessionId: 'pending', status: 'active', messages: [] });
@@ -389,7 +390,7 @@ export function useClassroom() {
         // Stop recording
         if (isRecordingRef.current) {
             try {
-                LiveAudioStream.stop();
+                await audioRecorder.stopRecording();
                 isRecordingRef.current = false;
             } catch (e) {
                 console.error('[FRONTEND] Error stopping recording:', e);
@@ -422,7 +423,7 @@ export function useClassroom() {
         setIsConnected(false);
         setIsSessionActive(false);
 
-    }, []);
+    }, [audioRecorder]);
 
     return {
         session,

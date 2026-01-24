@@ -12,7 +12,8 @@
       "Bash(xargs cat:*)",
       "mcp__ide__getDiagnostics",
       "WebFetch(domain:googleapis.github.io)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(npx react-native config)"
     ]
   }
 }
