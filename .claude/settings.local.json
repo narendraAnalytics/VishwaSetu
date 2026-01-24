@@ -15,7 +15,9 @@
       "WebFetch(domain:github.com)",
       "Bash(npx react-native config)",
       "WebFetch(domain:www.npmjs.com)",
-      "WebFetch(domain:discuss.ai.google.dev)"
+      "WebFetch(domain:discuss.ai.google.dev)",
+      "Bash(if exist .expo rmdir /s /q .expo)",
+      "Bash(rm:*)"
     ]
   }
 }

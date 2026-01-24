@@ -13,7 +13,7 @@ import {
     tearDown,
     addExpoTwoWayAudioEventListener
 } from '@speechmatics/expo-two-way-audio';
-import { ClassroomMessage, ClassroomSession } from '../app/types/classroom';
+import { ClassroomMessage, ClassroomSession } from '../types/classroom';
 import { pcmToWav } from '../services/audioUtils';
 import { classroomApi } from '../services/classroomApi';
 
